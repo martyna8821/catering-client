@@ -10,7 +10,7 @@ import { User } from '../User';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  model: User = {username: '', password: ''};
+  model: User = {username: 'qa', password: ''};
  
   constructor(
       private route: ActivatedRoute,
