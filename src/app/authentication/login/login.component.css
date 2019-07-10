@@ -11,5 +11,7 @@
   }
 
   .card-layout{
-    align-items: center
+    align-items: center;
+    width: 100%;
+    align-self: center;
   }
