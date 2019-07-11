@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginRequest } from '../model/LoginRequest';
-import { JwtResponse } from '../model/JwtResponse';
+import { LoginResponse } from '../model/LoginResponse';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -27,8 +27,8 @@ export class AuthenticationService {
 
 
 
-  login(userLogin: LoginRequest): Observable<JwtResponse>{
+  login(userLogin: LoginRequest): Observable<LoginResponse>{
 
-    return this.http.post<JwtResponse>(this.apiUrl+'/login', userLogin);
+    return this.http.post<LoginResponse>(this.apiUrl+'/login', userLogin);
   }
 }
