@@ -11,7 +11,7 @@ import { TokenStorageService } from '../service/token-storage.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  model: LoginRequest = {userName: '', password: ''};
+  model: LoginRequest = {username: '', password: ''};
   isLoggedIn = false;
   roles: string[] = [];
 
