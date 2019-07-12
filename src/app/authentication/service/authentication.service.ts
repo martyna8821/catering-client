@@ -4,10 +4,7 @@ import { LoginRequest } from '../model/LoginRequest';
 import { LoginResponse } from '../model/LoginResponse';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-
-const USER_ROLE = 'user_role';
-const AUTH_TOKEN = 'auth_token';
-const IDENTITY_ID = 'identity_id';
+import { RegisterRequest } from '../model/RegisterRequest';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type:': 'application/json'})
@@ -25,10 +22,12 @@ export class AuthenticationService {
       private router: Router
     ){}
 
-
-
   login(userLogin: LoginRequest): Observable<LoginResponse>{
 
     return this.http.post<LoginResponse>(this.apiUrl+'/login', userLogin);
+  }
+
+  register(registerRequest: RegisterRequest): Observable<LoginResponse>{
+    return this.http.post<LoginResponse>(this.apiUrl+'/register', registerRequest);
   }
 }

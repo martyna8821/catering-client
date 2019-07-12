@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { RegisterComponent } from './register/register.component';
 
 
 
@@ -14,6 +15,6 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule,
     SharedModule
   ],
-  declarations: [LoginComponent]
+  declarations: [LoginComponent, RegisterComponent]
 })
 export class AuthenticationModule { }

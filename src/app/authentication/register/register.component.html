@@ -1,0 +1,40 @@
+
+<mat-card class="card-layout"> 
+    <div class="container">
+      <div class="row">
+          <div class="col-sm"></div>
+          <div class="col-sm">
+            <h2>Załóż konto</h2>
+          </div>
+          <div class="col-sm"></div>    
+      </div>
+      <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm">
+          <form   class="example-form">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Nazwa użytkownika" required [(ngModel)]="model.username" name="userName">
+            </mat-form-field> 
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Hasło" type="password" required [(ngModel)]="model.password" 
+                name="password">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Imię" required [(ngModel)]="model.firstName" name="firstName">
+              </mat-form-field> 
+            <mat-form-field>
+                <input matInput placeholder="Nazwisko" required [(ngModel)]="model.lastName" name="lastName">
+            </mat-form-field> 
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Email" required [(ngModel)]="model.email" name="email">
+              </mat-form-field> 
+
+          </form>
+          <button mat-button (click)="register()"> Zarejestruj</button>
+        </div>
+        <div class="col-sm"></div>
+      </div>
+    </div>
+  </mat-card>
+  
+    
