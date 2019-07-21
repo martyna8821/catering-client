@@ -30,4 +30,9 @@ export class AuthenticationService {
   register(registerRequest: RegisterRequest): Observable<LoginResponse>{
     return this.http.post<LoginResponse>(this.apiUrl+'/register', registerRequest);
   }
+
+  retrievePassword(userEmail: string): Observable<string>{
+    console.log("service");
+      return this.http.post<string>(this.apiUrl+'/retrieve-password', userEmail);
+  }
 }
