@@ -15,7 +15,7 @@ const httpOptions = {
 })
 export class AuthenticationService {
 
-  private apiUrl = 'http://localhost:8080/api/auth';
+  private apiUrl = 'http://localhost:8080/api/';
 
   constructor( 
       private http: HttpClient,
@@ -24,15 +24,15 @@ export class AuthenticationService {
 
   login(userLogin: LoginRequest): Observable<LoginResponse>{
 
-    return this.http.post<LoginResponse>(this.apiUrl+'/login', userLogin);
+    return this.http.post<LoginResponse>(this.apiUrl+'auth/login', userLogin);
   }
 
   register(registerRequest: RegisterRequest): Observable<LoginResponse>{
-    return this.http.post<LoginResponse>(this.apiUrl+'/register', registerRequest);
+    return this.http.post<LoginResponse>(this.apiUrl+'users/register', registerRequest);
   }
 
   retrievePassword(userEmail: string): Observable<string>{
-    console.log("service");
-      return this.http.post<string>(this.apiUrl+'/retrieve-password', userEmail);
+ 
+      return this.http.post<string>(this.apiUrl+'auth/password-token', userEmail);
   }
 }
