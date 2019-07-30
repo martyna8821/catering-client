@@ -6,6 +6,7 @@ import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { RegisterComponent } from './register/register.component';
 import { RetrievePasswordComponent } from './retrieve-password/retrieve-password.component';
+import { ChangePasswordComponent, PasswordChangedDialog } from './change-password/change-password.component';
 
 
 
@@ -16,6 +17,18 @@ import { RetrievePasswordComponent } from './retrieve-password/retrieve-password
     FormsModule,
     SharedModule
   ],
-  declarations: [LoginComponent, RegisterComponent, RetrievePasswordComponent]
-})
+  declarations: [
+    LoginComponent, 
+    RegisterComponent, 
+    RetrievePasswordComponent, 
+    ChangePasswordComponent,
+    PasswordChangedDialog
+  ],
+
+
+    entryComponents: [
+      PasswordChangedDialog
+    ],
+
+  })
 export class AuthenticationModule { }

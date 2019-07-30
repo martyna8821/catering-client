@@ -35,4 +35,8 @@ export class AuthenticationService {
  
       return this.http.post<string>(this.apiUrl+'auth/password-token', userEmail);
   }
+
+  changePassword(newPassword: string, userId: string):Observable<string> {
+    return this.http.patch<string>(this.apiUrl + 'users/'+userId+'/password', newPassword);
+  }
 }
