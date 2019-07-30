@@ -39,4 +39,12 @@ export class AuthenticationService {
   changePassword(newPassword: string, userId: string):Observable<string> {
     return this.http.patch<string>(this.apiUrl + 'users/'+userId+'/password', newPassword);
   }
+
+  validateToken(token: string) {
+    return this.http.get<string>(this.apiUrl+'auth/password-token/'+token+'/user/id');
+  }
+
+  deletePasswordToken(token: string){
+    return this.http.delete(this.apiUrl+'auth/password-token/'+token);
+  }
 }

@@ -7,7 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { RegisterComponent } from './register/register.component';
 import { RetrievePasswordComponent } from './retrieve-password/retrieve-password.component';
 import { ChangePasswordComponent, PasswordChangedDialog } from './change-password/change-password.component';
-
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 @NgModule({
@@ -22,7 +22,8 @@ import { ChangePasswordComponent, PasswordChangedDialog } from './change-passwor
     RegisterComponent, 
     RetrievePasswordComponent, 
     ChangePasswordComponent,
-    PasswordChangedDialog
+    PasswordChangedDialog,
+    ResetPasswordComponent,
   ],
 
 

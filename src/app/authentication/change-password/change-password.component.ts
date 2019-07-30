@@ -17,7 +17,7 @@ export class ChangePasswordComponent implements OnInit {
     private authenticationService: AuthenticationService) { }
 
   @Input() userId: string;
-  //@Input() : string;
+  @Input() token: string;
   ngOnInit() {
   }
 
@@ -26,21 +26,20 @@ export class ChangePasswordComponent implements OnInit {
     if(this.checkPassword()){
         this.authenticationService.changePassword(this.password, this.userId).subscribe(
           data =>{  
-            
-           }
+            this.authenticationService.deletePasswordToken(this.token).subscribe();
+            const dialogRef = this.dialog.open(PasswordChangedDialog, {
+            });
+  
+        
+            dialogRef.afterClosed().subscribe(result => {
+              console.log('The dialog was closed');
+              this.router.navigate(['login']);
+            });
+          }
         );
     }
     else{
-      const dialogRef = this.dialog.open(PasswordChangedDialog, {
-
-
-      });
-  
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-        this.router.navigate(['']);
-      }
-      );
+      
     }
   }
 
