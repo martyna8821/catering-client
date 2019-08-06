@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: '', children: [
-    { path: 'login', loadChildren: './authentication/authentication.module#AuthenticationModule'}
+    { path: '', loadChildren: './authentication/authentication.module#AuthenticationModule'}
   ]}
 
 ];
