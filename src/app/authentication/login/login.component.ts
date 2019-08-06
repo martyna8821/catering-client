@@ -5,6 +5,7 @@ import { LoginRequest } from '../model/LoginRequest';
 import { AuthenticationService } from '../service/authentication.service';
 import { TokenStorageService } from '../service/token-storage.service';
 
+
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
@@ -18,7 +19,6 @@ export class LoginComponent implements OnInit {
   constructor(
       private route: ActivatedRoute,
       private router: Router,
-      private http: HttpClient,
       private authenticationService: AuthenticationService,
       private tokenStorage: TokenStorageService
   ) { }
@@ -34,11 +34,6 @@ export class LoginComponent implements OnInit {
          this.tokenStorage.saveUsername(data.username);
          this.tokenStorage.saveAuthorities(data.authorities);
          this.tokenStorage.saveUserId(data.userId);
-         console.log(this.tokenStorage.getUserName());
-         console.log(this.tokenStorage.getUserId());
-         console.log(this.tokenStorage.getToken());
-         
-
          this.isLoggedIn = true;
          this.roles = this.tokenStorage.getAuthorities();
          this.router.navigate(['']);

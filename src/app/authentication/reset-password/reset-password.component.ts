@@ -21,7 +21,6 @@ export class ResetPasswordComponent implements OnInit {
     this.authenticationService.validateToken(this.token).subscribe(
       id => {
         this.userId = id;
-        
       }
      
     );

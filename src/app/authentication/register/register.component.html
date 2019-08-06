@@ -1,40 +1,49 @@
-
-<mat-card class="card-layout"> 
-    <div class="container">
+<div class="col-sm"></div>
+<div class="col-sm">
+<mat-horizontal-stepper [linear]=true #stepper>
+  <mat-step [stepControl]="personalDetailsGroup">
+    <form [formGroup]="personalDetailsGroup">
+      <ng-template matStepLabel>Dane osobowe</ng-template>
       <div class="row">
-          <div class="col-sm"></div>
-          <div class="col-sm">
-            <h2>Załóż konto</h2>
-          </div>
-          <div class="col-sm"></div>    
+      <mat-form-field class="example-full-width">
+          <input matInput placeholder="Nazwa użytkownika" required [(ngModel)]="model.username" formControlName="userName">
+      </mat-form-field>
       </div>
       <div class="row">
-        <div class="col-sm"></div>
-        <div class="col-sm">
-          <form   class="example-form">
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Nazwa użytkownika" required [(ngModel)]="model.username" name="userName">
-            </mat-form-field> 
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Hasło" type="password" required [(ngModel)]="model.password" 
-                name="password">
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder="Imię" required [(ngModel)]="model.firstName" name="firstName">
-              </mat-form-field> 
-            <mat-form-field>
-                <input matInput placeholder="Nazwisko" required [(ngModel)]="model.lastName" name="lastName">
-            </mat-form-field> 
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="Email" required [(ngModel)]="model.email" name="email">
-              </mat-form-field> 
-
-          </form>
-          <button mat-button (click)="register()"> Zarejestruj</button>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Hasło" type="password" required [(ngModel)]="model.password" 
+          formControlName="password">
+        </mat-form-field>
         </div>
-        <div class="col-sm"></div>
+        <div class="row">
+        <mat-form-field>
+            <input matInput placeholder="Imię" required [(ngModel)]="model.firstName" formControlName="firstName" >
+          </mat-form-field>
+          <div class="col-1"></div>
+        <mat-form-field>
+            <input matInput placeholder="Nazwisko" required [(ngModel)]="model.lastName" formControlName="lastName">
+        </mat-form-field> 
+        </div>
+        <div class="row">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Email" required [(ngModel)]="model.email" formControlName="email">
+        </mat-form-field>
+        </div> 
+      <div>
+        <button mat-raised-button color="basic" matStepperNext>Next</button>
       </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Gotowe</ng-template>
+    Gotowe
+    <div>
+      <button mat-raised-button color="basic" matStepperPrevious>Back</button>
+      <button mat-raised-button color="basic" (click)="stepper.reset()">Reset</button>
+      <button mat-raised-button color="basic" (click)="register()"> Zarejestruj</button>
     </div>
-  </mat-card>
-  
-    
+  </mat-step>
+</mat-horizontal-stepper>
+</div>
+<div class="col-sm"></div>
+
