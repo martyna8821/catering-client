@@ -4,9 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
 import { HttpClient } from 'selenium-webdriver/http';
 import { HttpClientModule } from '@angular/common/http';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [NavbarComponent],
   imports: [
     MaterialModule,
     CommonModule,
@@ -18,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     HttpClientModule, 
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NavbarComponent
   ]
 })
 export class SharedModule { }

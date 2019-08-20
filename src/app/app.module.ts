@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthenticationModule } from './authentication/authentication.module';
 import 'hammerjs';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   imports: [
     BrowserAnimationsModule,
     AppRoutingModule,
-    AuthenticationModule
+    AuthenticationModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

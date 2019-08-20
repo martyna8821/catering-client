@@ -6,6 +6,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule} from '@angular/material/dialog'; 
 import {MatStepperModule} from '@angular/material/stepper'; 
+import {MatIconModule} from '@angular/material/icon'; 
+
 @NgModule({
   declarations: [],
   imports: [
@@ -15,7 +17,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatToolbarModule,
     MatFormFieldModule,
     MatDialogModule,
-    MatStepperModule
+    MatStepperModule,
+    MatIconModule
   ],
   exports: [
     MatInputModule,
@@ -24,7 +27,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatToolbarModule,
     MatFormFieldModule,
     MatDialogModule,
-    MatStepperModule
+    MatStepperModule,
+    MatIconModule
   ]
 })
 export class MaterialModule { }
