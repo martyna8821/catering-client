@@ -36,7 +36,8 @@ export class LoginComponent implements OnInit {
          this.tokenStorage.saveUserId(data.userId);
          this.isLoggedIn = true;
          this.roles = this.tokenStorage.getAuthorities();
-         this.router.navigate(['']);
+         this.router.navigate([this.roles[0].toLowerCase().substring(5)]);
+         
        },
        error => {
          console.log("login error");

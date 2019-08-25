@@ -10,8 +10,10 @@ const routes: Routes = [
   { path: '', children: [
     { path: '', loadChildren: './authentication/authentication.module#AuthenticationModule'}
   ]},
-  { path: 'client', children: [
-    { path: '', loadChildren: './client/client.module#ClientModule'}
+  { path: '', children: [
+    { path: 'client', loadChildren: './client/client.module#ClientModule'},
+    { path: 'dietician', loadChildren: './dietician/dietician.module#DieticianModule'},
+    { path: 'admin', loadChildren: './admin/admin.module#AdminModule'}
   ]}
 
 ];
