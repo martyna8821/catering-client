@@ -1,12 +1,15 @@
+
+<nav class="nav">
 <a mat-mini-fab href="home">
     <mat-icon>favorite</mat-icon>
 </a>
-
-<div  *ngIf="isLogged()">
+<div  *ngIf="isLogged()" class="justify-content-end">
 <a mat-mini-fab href="user-details">
     <mat-icon>person</mat-icon>    
 </a>
 <a mat-mini-fab href="home" (click)="logOut()">
         <mat-icon>power_settings_new</mat-icon>    
     </a>
-</div>>
+</div>
+
+</nav>

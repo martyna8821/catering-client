@@ -19,7 +19,9 @@ export class RegisterComponent implements OnInit {
 
 
 model: RegisterRequest = {username: '', password: '', firstName: '', lastName: '', 
-                            email: '', roles: ['ROLE_CLIENT']};
+                            email: '', phoneNumber: '123456', addressDTO: {
+                              city: 'New York', zipCode: '12-123', street: 'Funny 123'
+                            }, roles: ['ROLE_CLIENT']};
 
   constructor(private authenticationService: AuthenticationService,
               private tokenStorage: TokenStorageService,
@@ -41,7 +43,7 @@ model: RegisterRequest = {username: '', password: '', firstName: '', lastName: '
   }
 
   register(){
-
+    
     this.authenticationService.register(this.model).subscribe(
       data => {
         this.tokenStorage.saveToken(data.token);

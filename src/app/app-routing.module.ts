@@ -6,16 +6,12 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 
 
 const routes: Routes = [ 
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: '', children: [
-    { path: '', loadChildren: './authentication/authentication.module#AuthenticationModule'}
-  ]},
-  { path: '', children: [
+    { path: '', loadChildren: './authentication/authentication.module#AuthenticationModule'},
     { path: 'client', loadChildren: './client/client.module#ClientModule'},
     { path: 'dietician', loadChildren: './dietician/dietician.module#DieticianModule'},
-    { path: 'admin', loadChildren: './admin/admin.module#AdminModule'}
-  ]},
+    { path: 'admin', loadChildren: './admin/admin.module#AdminModule'}]},
   { path: 'user-details', component: UserDetailsComponent}
 
 ];
