@@ -3,47 +3,53 @@ import { RegisterRequest } from '../model/RegisterRequest';
 import { AuthenticationService } from '../service/authentication.service';
 import { TokenStorageService } from '../service/token-storage.service';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
+import { UserService } from 'src/app/shared/service/UserService';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
+
 })
 export class RegisterComponent implements OnInit {
 
-  isLinear = false;
   personalDetailsGroup: FormGroup;
-  secondFormGroup: FormGroup;
-
-
+  hide = true;
+  reapetedPassword = '';
 
 model: RegisterRequest = {username: '', password: '', firstName: '', lastName: '', 
-                            email: '', phoneNumber: '123456', address: {
-                              city: 'New York', zipCode: '12-123', street: 'Funny 123'
+                            email: '', phoneNumber: '', address: {
+                              city: '', zipCode: '', street: ''
                             }, roles: ['ROLE_CLIENT']};
 
   constructor(private authenticationService: AuthenticationService,
               private tokenStorage: TokenStorageService,
               private router: Router,
-              private _formBuilder: FormBuilder) { }
+              private _formBuilder: FormBuilder,
+              private userService: UserService) { 
+                this.personalDetailsGroup = this._formBuilder.group({
+                  userName: ['', Validators.required],
+                  password: ['', Validators.minLength(7)],
+                  firstName: [''],
+                  lastName: [''],
+                  email: ['', Validators.email],
+                  phoneNumber: [''],
+                  city: [''],
+                  zipCode: [''],
+                  street: ['']
+                });
+      
+              
+              }
 
   ngOnInit() {
-    this.personalDetailsGroup = this._formBuilder.group({
-      userName: ['', Validators.required],
-      password: ['', Validators.minLength(7)],
-      firstName: [''],
-      lastName: [''],
-      email: ['']
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
-  
+    
   }
 
+  
   register(){
-    
+    console.log("register");
     this.authenticationService.register(this.model).subscribe(
       data => {
         this.tokenStorage.saveToken(data.token);

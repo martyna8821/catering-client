@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
@@ -29,7 +29,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 
     entryComponents: [
       PasswordChangedDialog
-    ],
-
+    ]
   })
 export class AuthenticationModule { }

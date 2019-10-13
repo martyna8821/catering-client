@@ -23,4 +23,15 @@ export class UserService {
   getUsers(): Observable<User[]>{
     return this.http.get<User[]>(this.apiUrl+'users');
   }
+
+  checkIfUsernameTaken(username: string): boolean{
+      var user = this.http.get<User>(this.apiUrl+'users/'+username);
+      if(user != null){
+        return true;
+      }
+      else{
+        return false;
+      }
+
+  }
 }

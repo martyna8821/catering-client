@@ -1,0 +1,11 @@
+
+  .card-layout{
+    align-items: center;
+    width: 100%;
+    display:flex;
+    justify-content:center;
+}
+
+.div-class{
+  padding-bottom: 10%;
+}

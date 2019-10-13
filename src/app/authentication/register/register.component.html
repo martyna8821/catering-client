@@ -1,49 +1,93 @@
-<div class="col-sm"></div>
-<div class="col-sm">
-<mat-horizontal-stepper [linear]=false #stepper>
-  <mat-step [stepControl]="personalDetailsGroup">
-    <form [formGroup]="personalDetailsGroup">
-      <ng-template matStepLabel>Dane osobowe</ng-template>
+<div class="row">
+<div class="col-3"></div>
+<div class="col">
+  <mat-card >  
+      <mat-card-header class="card-layout">
+
+          <mat-card-title>Zarejestruj się!</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-layout">
+        <form [formGroup]="personalDetailsGroup">
       <div class="row">
-      <mat-form-field class="example-full-width">
+      <mat-form-field class="example-full-width" appearance="outline">
           <input matInput placeholder="Nazwa użytkownika" required [(ngModel)]="model.username" formControlName="userName">
       </mat-form-field>
+      
       </div>
-      <div class="row">
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Hasło" type="password" required [(ngModel)]="model.password" 
-          formControlName="password">
+      <div class="row div-class" >
+        <mat-form-field class="example-full-width" appearance="outline">
+          <input matInput placeholder="Hasło"  required [(ngModel)]="model.password" 
+          formControlName="password" [type]="hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-hint>Hasło powinno zawierać minimum 7 znaków</mat-hint>
         </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="outline">
+            <input matInput placeholder="Powtórz hasło"  required [(ngModel)]="reapetedPassword" 
+            formControlName="password" [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+          </mat-form-field>
         </div>
         <div class="row">
-        <mat-form-field>
-            <input matInput placeholder="Imię" required [(ngModel)]="model.firstName" formControlName="firstName" >
+        <mat-form-field  appearance="outline">
+            <input matInput placeholder="Imię" required [(ngModel)]="model.firstName" 
+            formControlName="firstName" >
           </mat-form-field>
           <div class="col-1"></div>
-        <mat-form-field>
-            <input matInput placeholder="Nazwisko" required [(ngModel)]="model.lastName" formControlName="lastName">
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="Nazwisko" required [(ngModel)]="model.lastName" 
+             formControlName="lastName">
         </mat-form-field> 
         </div>
         <div class="row">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Email" required [(ngModel)]="model.email" formControlName="email">
+          <mat-form-field class="example-full-width" appearance="outline" >
+            <input matInput placeholder="Email" required [(ngModel)]="model.email" 
+            formControlName="email">
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error *ngIf="personalDetailsGroup.controls['email'].hasError('email')">
+              Niepoprawny format!
+            </mat-error>
+
         </mat-form-field>
         </div> 
-      <div>
-        <button mat-raised-button color="basic" matStepperNext>Next</button>
-      </div>
+        <div class="row">
+            <mat-form-field class="example-full-width"  appearance="outline">
+              <input matInput placeholder="Numer telefonu" required [(ngModel)]="model.phoneNumber" 
+              formControlName="phoneNumber">
+              <mat-icon matSuffix>phone</mat-icon>
+
+          </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <input matInput placeholder="ulica" required [(ngModel)]="model.address.street" 
+               formControlName="street">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="miasto" required [(ngModel)]="model.address.city" 
+               formControlName="city">
+               <mat-icon matSuffix>location_city</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field class="example-full-width"  appearance="outline">
+              <input matInput placeholder="kod pocztowy" required [(ngModel)]="model.address.zipCode" 
+              formControlName="zipCode">
+          </mat-form-field>
+        </div>
+
     </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Gotowe</ng-template>
-    Gotowe
+  </mat-card-content>
+    <mat-card-actions class="card-layout">
     <div>
-      <button mat-raised-button color="basic" matStepperPrevious>Back</button>
-      <button mat-raised-button color="basic" (click)="stepper.reset()">Reset</button>
       <button mat-raised-button color="basic" (click)="register()"> Zarejestruj</button>
     </div>
-  </mat-step>
-</mat-horizontal-stepper>
+</mat-card-actions>
+    </mat-card>
 </div>
-<div class="col-sm"></div>
+<div class="col-3"></div>
+</div>
 
