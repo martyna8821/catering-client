@@ -5,6 +5,7 @@ import { MaterialModule } from './material/material.module';
 import { HttpClient } from 'selenium-webdriver/http';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [NavbarComponent],
@@ -14,6 +15,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule
+
   ],
   exports: [
     MaterialModule,
@@ -21,6 +23,6 @@ import { NavbarComponent } from './navbar/navbar.component';
     FormsModule,
     ReactiveFormsModule,
     NavbarComponent
-  ]
+    ]
 })
 export class SharedModule { }

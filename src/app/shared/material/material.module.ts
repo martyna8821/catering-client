@@ -7,6 +7,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule} from '@angular/material/dialog'; 
 import {MatStepperModule} from '@angular/material/stepper'; 
 import {MatIconModule} from '@angular/material/icon'; 
+import {MatTableModule} from '@angular/material/table';
+import {MatCheckboxModule} from '@angular/material/checkbox';  
+import {MatPaginatorModule} from '@angular/material/paginator'; 
+import {MatSortModule} from '@angular/material/sort'; 
 
 @NgModule({
   declarations: [],
@@ -18,7 +22,12 @@ import {MatIconModule} from '@angular/material/icon';
     MatFormFieldModule,
     MatDialogModule,
     MatStepperModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatPaginatorModule,
+    MatSortModule
+    
   ],
   exports: [
     MatInputModule,
@@ -28,7 +37,11 @@ import {MatIconModule} from '@angular/material/icon';
     MatFormFieldModule,
     MatDialogModule,
     MatStepperModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatPaginatorModule,
+    MatSortModule
   ]
 })
 export class MaterialModule { }

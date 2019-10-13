@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
 
 
 model: RegisterRequest = {username: '', password: '', firstName: '', lastName: '', 
-                            email: '', phoneNumber: '123456', addressDTO: {
+                            email: '', phoneNumber: '123456', address: {
                               city: 'New York', zipCode: '12-123', street: 'Funny 123'
                             }, roles: ['ROLE_CLIENT']};
 
