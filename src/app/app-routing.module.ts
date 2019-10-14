@@ -7,6 +7,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 
 const routes: Routes = [ 
   { path: 'home', component: HomeComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '', children: [
     { path: '', loadChildren: './authentication/authentication.module#AuthenticationModule'},
     { path: 'client', loadChildren: './client/client.module#ClientModule'},
