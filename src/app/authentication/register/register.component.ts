@@ -5,6 +5,7 @@ import { TokenStorageService } from '../service/token-storage.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { UserService } from 'src/app/shared/service/UserService';
+import { Address } from 'src/app/authentication/model/Address';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,7 @@ export class RegisterComponent implements OnInit {
 
 model: RegisterRequest = {username: '', password: '', firstName: '', lastName: '', 
                             email: '', phoneNumber: '', address: {
-                              city: '', zipCode: '', street: ''
+                              city: '',  houseNumber: '', zipCode: '', street: ''
                             }, roles: ['ROLE_CLIENT']};
 
   constructor(private authenticationService: AuthenticationService,
@@ -36,6 +37,7 @@ model: RegisterRequest = {username: '', password: '', firstName: '', lastName: '
                   email: ['', Validators.email],
                   phoneNumber: [''],
                   city: [''],
+                  houseNumber: [''],
                   zipCode: [''],
                   street: ['']
                 });

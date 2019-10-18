@@ -14,12 +14,13 @@
           <div class="col-sm"></div>
           <div class="col-sm">
             <form   class="example-form">
-              <mat-form-field class="example-full-width" appearance="outline">
-                <input matInput placeholder="Nazwa" required [(ngModel)]="model.username" name="userName">
+              <mat-form-field class="example-full-width" appearance="outline" >
+                <input matInput placeholder="Nazwa" required [(ngModel)]="model.username" 
+                [ngModelOptions]="{standalone: true}">
               </mat-form-field> 
               <mat-form-field class="example-full-width" appearance="outline">
                 <input matInput placeholder="Hasło"  required [(ngModel)]="model.password"  (keydown.enter)="login()"
-                formControlName="password" [type]="hide ? 'password' : 'text'">
+                [type]="hide ? 'password' : 'text'" [ngModelOptions]="{standalone: true}">
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>

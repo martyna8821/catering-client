@@ -67,12 +67,16 @@
                formControlName="street">
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <input matInput placeholder="miasto" required [(ngModel)]="model.address.city" 
-               formControlName="city">
-               <mat-icon matSuffix>location_city</mat-icon>
-          </mat-form-field>
+                <input matInput placeholder="numer domu/mieszkania" required 
+                [(ngModel)]="model.address.houseNumber" formControlName="houseNumber">
+            </mat-form-field>
         </div>
         <div class="row">
+            <mat-form-field appearance="outline">
+                <input matInput placeholder="miasto" required [(ngModel)]="model.address.city" 
+                 formControlName="city">
+                 <mat-icon matSuffix>location_city</mat-icon>
+            </mat-form-field>
             <mat-form-field class="example-full-width"  appearance="outline">
               <input matInput placeholder="kod pocztowy" required [(ngModel)]="model.address.zipCode" 
               formControlName="zipCode">
