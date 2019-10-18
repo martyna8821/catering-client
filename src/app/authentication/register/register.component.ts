@@ -19,10 +19,14 @@ export class RegisterComponent implements OnInit {
   hide = true;
   reapetedPassword = '';
 
+  roleAdmin = false;
+  roleClient = false;
+  roleDietitian = false;
+
 model: RegisterRequest = {username: '', password: '', firstName: '', lastName: '', 
                             email: '', phoneNumber: '', address: {
                               city: '',  houseNumber: '', zipCode: '', street: ''
-                            }, roles: ['ROLE_CLIENT']};
+                            }, roles: []};
 
   constructor(private authenticationService: AuthenticationService,
               private tokenStorage: TokenStorageService,
@@ -51,7 +55,18 @@ model: RegisterRequest = {username: '', password: '', firstName: '', lastName: '
 
   
   register(){
-    console.log("register");
+    if(this.roleAdmin){
+      this.model.roles.push("ROLE_ADMIN");
+    }
+
+    if(this.roleDietitian){
+      this.model.roles.push("ROLE_DIETITIAN");
+    }
+
+    if(this.roleClient){
+      this.model.roles.push("ROLE_CLIENT");
+    }
+
     this.authenticationService.register(this.model).subscribe(
       data => {
         this.tokenStorage.saveToken(data.token);
@@ -65,6 +80,16 @@ model: RegisterRequest = {username: '', password: '', firstName: '', lastName: '
         console.log("register error");
       }
     );
+  }
+
+
+  checkIfLoggedAdmin(): boolean{
+    if(this.tokenStorage.getToken() === null){
+      return false;
+    }
+    else{
+      return true;
+    }
   }
 
 }

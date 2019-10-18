@@ -4,11 +4,20 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { User } from 'src/app/shared/model/User';
 import { UserService } from 'src/app/shared/service/UserService';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
+  styleUrls: ['./user-list.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ]
 })
 export class UserListComponent implements OnInit {
 
@@ -29,7 +38,8 @@ export class UserListComponent implements OnInit {
     {name: 'username', display: 'Nazwa użytkownika'},
     {name: 'email', display: 'Email'   
   }];
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+    public dialog: MatDialog) { }
 
   getData(){
   //  var statusQuery = this.buildStatusQuery();
@@ -49,7 +59,6 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("init");
     this.getData();
   }
 
@@ -60,4 +69,5 @@ export class UserListComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
 }

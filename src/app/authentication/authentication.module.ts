@@ -17,6 +17,10 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     FormsModule,
     SharedModule
   ],
+  exports:[
+    RegisterComponent
+  ],
+
   declarations: [
     LoginComponent, 
     RegisterComponent, 

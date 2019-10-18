@@ -2,9 +2,17 @@
 <div class="col-3"></div>
 <div class="col">
   <mat-card >  
-      <mat-card-header class="card-layout">
-
-          <mat-card-title>Zarejestruj się!</mat-card-title>
+      <mat-card-header class="card-layout">   
+        <div *ngIf="checkIfLoggedAdmin(); then admin else client"></div>
+            <ng-template #admin>     
+              <mat-card-title >Dodaj nowego użytownika</mat-card-title>
+            </ng-template>
+            <ng-template #client>     
+                <mat-card-title >Zarejestruj się!</mat-card-title>
+            </ng-template>
+      
+     
+       
         </mat-card-header>
         <mat-card-content class="card-layout">
         <form [formGroup]="personalDetailsGroup">
@@ -82,6 +90,15 @@
               formControlName="zipCode">
           </mat-form-field>
         </div>
+
+        <div *ngIf="checkIfLoggedAdmin(); then adminRoles else clientRoles"></div>
+            <ng-template #adminRoles>     
+                <mat-checkbox class="my-checkbox"  [(ngModel)]="roleClient">Klient</mat-checkbox>
+                <mat-checkbox class="my-checkbox"  [(ngModel)]="roleDietitian">Dietetyk</mat-checkbox>
+                <mat-checkbox class="my-checkbox"  [(ngModel)]="roleAdmin">Administrator</mat-checkbox>
+            </ng-template>
+            <ng-template #clientRoles   ng-init="roleClient=true"></ng-template>
+      
 
     </form>
   </mat-card-content>
