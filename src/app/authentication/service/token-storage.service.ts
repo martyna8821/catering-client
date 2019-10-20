@@ -50,7 +50,7 @@ export class TokenStorageService {
     }
 
     public getAuthorities(): string[]{
-        this.roles = [];
+        var roles = [''];
 
         if(localStorage.getItem(TOKEN_KEY)){
             JSON.parse(localStorage.getItem(AUTHORITIES_KEY)).forEach(authority => {
@@ -58,6 +58,6 @@ export class TokenStorageService {
             });
         }
         
-        return this.roles;
+        return roles;
     }
 }

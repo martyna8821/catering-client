@@ -31,12 +31,13 @@ export class UserListComponent implements OnInit {
   showDietitians = true;
   showAdmins = true;
 
-  displayedColumns = ['firstName', 'lastName','username', 'email'];
+  displayedColumns = ['firstName', 'lastName','username', 'email', 'phoneNumber'];
   columnsToDisplayMap = [  
     {name: 'firstName', display: 'Imię'}, 
     {name: 'lastName', display: 'Nazwisko'},
     {name: 'username', display: 'Nazwa użytkownika'},
-    {name: 'email', display: 'Email'   
+    {name: 'email', display: 'Email'},
+    {name: 'phoneNumber', display: 'Numer telefonu'   
   }];
   constructor(private userService: UserService,
     public dialog: MatDialog) { }
@@ -68,6 +69,10 @@ export class UserListComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  deleteUserByEmail(userEmail: string){
+    this.userService.dleteUserByEmail(userEmail).subscribe();
   }
 
 }

@@ -19,9 +19,9 @@ export class RegisterComponent implements OnInit {
   hide = true;
   reapetedPassword = '';
 
-  roleAdmin = false;
-  roleClient = false;
-  roleDietitian = false;
+  roleAdmin: boolean;
+  roleClient: boolean;
+  roleDietitian: boolean;
 
 model: RegisterRequest = {username: '', password: '', firstName: '', lastName: '', 
                             email: '', phoneNumber: '', address: {
@@ -50,31 +50,40 @@ model: RegisterRequest = {username: '', password: '', firstName: '', lastName: '
               }
 
   ngOnInit() {
-    
+    if(!this.checkIfLoggedAdmin()){
+      this.roleClient = true;
+    }
   }
 
   
   register(){
-    if(this.roleAdmin){
+    if(this.roleAdmin === true){
       this.model.roles.push("ROLE_ADMIN");
     }
 
-    if(this.roleDietitian){
+    if(this.roleDietitian === true){
       this.model.roles.push("ROLE_DIETITIAN");
     }
 
-    if(this.roleClient){
+    if(this.roleClient ===true){
       this.model.roles.push("ROLE_CLIENT");
     }
 
     this.authenticationService.register(this.model).subscribe(
       data => {
-        this.tokenStorage.saveToken(data.token);
-        this.tokenStorage.saveUsername(data.username);
-        this.tokenStorage.saveAuthorities(data.authorities);
-        this.tokenStorage.saveUserId(data.userId);
+    
      //   this.roles = this.tokenStorage.getAuthorities();
-        this.router.navigate(['']);
+     if(this.checkIfLoggedAdmin()){
+        this.router.navigate(['admin/user-list']);
+     }
+     else{
+      this.tokenStorage.saveToken(data.token);
+      this.tokenStorage.saveUsername(data.username);
+      this.tokenStorage.saveAuthorities(data.authorities);
+      this.tokenStorage.saveUserId(data.userId);
+      this.router.navigate(['']);
+     }
+       
       },
       error => {
         console.log("register error");
@@ -84,11 +93,11 @@ model: RegisterRequest = {username: '', password: '', firstName: '', lastName: '
 
 
   checkIfLoggedAdmin(): boolean{
-    if(this.tokenStorage.getToken() === null){
-      return false;
+    if(this.tokenStorage.getToken() != null && this.tokenStorage.getAuthorities().includes("ROLE_ADMIN")){
+      return true;
     }
     else{
-      return true;
+      return false;
     }
   }
 

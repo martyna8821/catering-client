@@ -34,4 +34,10 @@ export class UserService {
       }
 
   }
+
+  dleteUserByEmail(userEmail: string):  Observable<{}>{
+    var url = this.apiUrl+'users/'+userEmail;
+    console.log(url);
+   return  this.http.delete(url);
+  }
 }

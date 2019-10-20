@@ -93,11 +93,11 @@
 
         <div *ngIf="checkIfLoggedAdmin(); then adminRoles else clientRoles"></div>
             <ng-template #adminRoles>     
-                <mat-checkbox class="my-checkbox"  [(ngModel)]="roleClient">Klient</mat-checkbox>
-                <mat-checkbox class="my-checkbox"  [(ngModel)]="roleDietitian">Dietetyk</mat-checkbox>
-                <mat-checkbox class="my-checkbox"  [(ngModel)]="roleAdmin">Administrator</mat-checkbox>
+                <mat-checkbox class="my-checkbox"  [(ngModel)]="roleClient"  [ngModelOptions]="{standalone: true}">Klient</mat-checkbox>
+                <mat-checkbox class="my-checkbox"  [(ngModel)]="roleDietitian"  [ngModelOptions]="{standalone: true}">Dietetyk</mat-checkbox>
+                <mat-checkbox class="my-checkbox"  [(ngModel)]="roleAdmin"  [ngModelOptions]="{standalone: true}">Administrator</mat-checkbox>
             </ng-template>
-            <ng-template #clientRoles   ng-init="roleClient=true"></ng-template>
+            <ng-template #clientRoles ng-init="roleClient=true"></ng-template>
     </form>
   </mat-card-content>
     <mat-card-actions class="card-layout">
