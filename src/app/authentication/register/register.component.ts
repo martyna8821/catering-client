@@ -93,6 +93,9 @@ model: RegisterRequest = {username: '', password: '', firstName: '', lastName: '
 
 
   checkIfLoggedAdmin(): boolean{
+
+    console.log(this.tokenStorage.getToken() != null)
+    console.log(this.tokenStorage.getAuthorities())
     if(this.tokenStorage.getToken() != null && this.tokenStorage.getAuthorities().includes("ROLE_ADMIN")){
       return true;
     }
