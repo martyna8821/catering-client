@@ -98,13 +98,11 @@
                 <mat-checkbox class="my-checkbox"  [(ngModel)]="roleAdmin">Administrator</mat-checkbox>
             </ng-template>
             <ng-template #clientRoles   ng-init="roleClient=true"></ng-template>
-      
-
     </form>
   </mat-card-content>
     <mat-card-actions class="card-layout">
     <div>
-      <button mat-raised-button color="basic" (click)="register()"> Zarejestruj</button>
+      <button mat-raised-button  class="button-color" (click)="register()"> Zarejestruj</button>
     </div>
 </mat-card-actions>
     </mat-card>
