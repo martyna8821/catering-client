@@ -72,7 +72,7 @@ export class UserListComponent implements OnInit {
   }
 
   deleteUserByEmail(userEmail: string){
-    this.userService.dleteUserByEmail(userEmail).subscribe();
+    this.userService.deleteUserByEmail(userEmail).subscribe();
   }
 
 }

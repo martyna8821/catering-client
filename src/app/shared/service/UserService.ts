@@ -13,7 +13,7 @@ const httpOptions = {
 })
 export class UserService {
 
-  private apiUrl = 'http://localhost:8080/api/';
+  private apiUrl = 'http://localhost:8080/api/users/';
 
   constructor( 
       private http: HttpClient,
@@ -21,11 +21,11 @@ export class UserService {
     ){}
 
   getUsers(): Observable<User[]>{
-    return this.http.get<User[]>(this.apiUrl+'users');
+    return this.http.get<User[]>(this.apiUrl);
   }
 
   checkIfUsernameTaken(username: string): boolean{
-      var user = this.http.get<User>(this.apiUrl+'users/'+username);
+      var user = this.http.get<User>(this.apiUrl+username);
       if(user != null){
         return true;
       }
@@ -35,9 +35,14 @@ export class UserService {
 
   }
 
-  dleteUserByEmail(userEmail: string):  Observable<{}>{
-    var url = this.apiUrl+'users/'+userEmail;
+  deleteUserByEmail(userEmail: string):  Observable<{}>{
+    var url = this.apiUrl+userEmail;
     console.log(url);
    return  this.http.delete(url);
+  }
+
+  getUserById(userId: string): Observable<User>{
+    console.log(userId);
+    return this.http.get<User>(this.apiUrl+userId);
   }
 }

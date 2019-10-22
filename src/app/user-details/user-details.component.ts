@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../shared/model/User';
+import { UserService } from '../shared/service/UserService';
+import { TokenStorageService } from '../authentication/service/token-storage.service';
 
 @Component({
   selector: 'app-user-details',
@@ -7,9 +10,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserDetailsComponent implements OnInit {
 
-  constructor() { }
+
+  editMode=false;
+  user: User;
+  constructor(private userService: UserService,
+              private tokenStorageService: TokenStorageService) { }
 
   ngOnInit() {
+    this.userService.getUserById(this.tokenStorageService.getUserId()).subscribe(
+     user => { 
+      this.user = user;
+      console.log("user:");
+      console.log(user.username);
+      }
+    );
+  }
+
+  enableEditMode(){
+    this.editMode = true;
+  }
+
+  disableEditMode(){
+    this.editMode = false;
+  }
+
+  isEditModeEnabled(): boolean{
+    return this.editMode;
+  }
+
+  isEditModeDisabled(): boolean{
+    return !this.editMode;
   }
 
 }
