@@ -8,6 +8,13 @@
       <mat-card-subtitle></mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
+        <div *ngIf="isEditModeEnabled(); then editionMode else viewMode"></div>
+        <ng-template #editionMode>     
+            edycja
+        </ng-template>
+        <ng-template #viewMode>     
+            Imię: {{user.firstName}} Nazwisko: {{user.lastName}}
+        </ng-template>
     </mat-card-content>
     <mat-card-actions>
       <button mat-button *ngIf="isEditModeDisabled()" (click)="enableEditMode()">Edytuj profil</button>
@@ -17,3 +24,6 @@
 <div class="col-3"></div>
   </div>
   </div>
+
+
+

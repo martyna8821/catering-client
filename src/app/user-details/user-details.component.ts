@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../shared/model/User';
 import { UserService } from '../shared/service/UserService';
 import { TokenStorageService } from '../authentication/service/token-storage.service';
+import { UserDTO } from '../shared/model/UserDTO';
 
 @Component({
   selector: 'app-user-details',
@@ -13,6 +14,7 @@ export class UserDetailsComponent implements OnInit {
 
   editMode=false;
   user: User;
+  userDto: UserDTO;
   constructor(private userService: UserService,
               private tokenStorageService: TokenStorageService) { }
 
