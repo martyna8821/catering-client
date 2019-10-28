@@ -1,0 +1,10 @@
+.mat-icon {
+    outline: 2px;
+    text-align: center;
+ font-size: 200px;
+}
+.my-div{
+    text-align: center;
+    align-self: center;
+    vertical-align: center;
+}
