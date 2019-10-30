@@ -8,3 +8,7 @@
     align-self: center;
     vertical-align: center;
 }
+
+.row-details{
+    line-height: 50px;
+}
