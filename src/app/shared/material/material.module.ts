@@ -14,6 +14,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatListModule} from '@angular/material/list'; 
 import {MatTooltipModule} from '@angular/material/tooltip'; 
 import {MatGridListModule} from '@angular/material/grid-list'; 
+import {MatMenuModule} from '@angular/material/menu'; 
 
 @NgModule({
   declarations: [],
@@ -32,7 +33,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatSortModule,
     MatListModule,
     MatTooltipModule,
-    MatGridListModule
+    MatGridListModule,
+    MatMenuModule
     
   ],
   exports: [
@@ -50,7 +52,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatSortModule,
     MatListModule,
     MatTooltipModule,
-    MatGridListModule
+    MatGridListModule,
+    MatMenuModule
   ]
 })
 export class MaterialModule { }

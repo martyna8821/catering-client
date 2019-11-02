@@ -9,8 +9,10 @@ import { TokenStorageService } from 'src/app/authentication/service/token-storag
 export class NavbarComponent implements OnInit {
 
   constructor(private tokenStorage: TokenStorageService) { }
-
+  userRoles: string[];
   ngOnInit() {
+      this.userRoles  = this.tokenStorage.getAuthorities();
+    
   }
 
   isLogged(): boolean{
@@ -21,8 +23,31 @@ export class NavbarComponent implements OnInit {
    return true;
   }
 
+  hasRole(role: string): boolean{
+   // console.log("role: "+role);
+    console.log(this.containsElement(this.userRoles, role));
+
+    if(this.containsElement(this.userRoles, role)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
   logOut(){
     this.tokenStorage.logOut();
+  }
+
+  containsElement(list: string[], element: string): boolean{
+
+  var  contains = false; 
+    list.forEach(
+          e =>{ if(e === element){ 
+            contains= true;}
+          });
+
+      return contains;    
   }
 
 }
