@@ -35,10 +35,8 @@ export class UserService {
 
   }
 
-  deleteUserByEmail(userEmail: string):  Observable<{}>{
-    var url = this.apiUrl+userEmail;
-    console.log(url);
-   return  this.http.delete(url);
+  deleteUserByEmail(userEmail: string){
+    return this.http.delete(this.apiUrl+userEmail);
   }
 
   getUserById(userId: string): Observable<User>{

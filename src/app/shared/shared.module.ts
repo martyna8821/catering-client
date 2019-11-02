@@ -6,9 +6,10 @@ import { HttpClient } from 'selenium-webdriver/http';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 @NgModule({
-  declarations: [NavbarComponent],
+  declarations: [NavbarComponent, ConfirmationComponent],
   imports: [
     MaterialModule,
     CommonModule,

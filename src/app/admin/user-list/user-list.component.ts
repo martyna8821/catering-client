@@ -6,6 +6,7 @@ import { User } from 'src/app/shared/model/User';
 import { UserService } from 'src/app/shared/service/UserService';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ConfirmationComponent } from 'src/app/shared/components/confirmation/confirmation.component';
 
 @Component({
   selector: 'app-user-list',
@@ -71,8 +72,22 @@ export class UserListComponent implements OnInit {
     }
   }
 
-  deleteUserByEmail(userEmail: string){
-    this.userService.deleteUserByEmail(userEmail).subscribe();
+  deleteUserByEmail(userEmail: string, username: string){
+   // const dialogRef = this.dialog.open(ConfirmationComponent, {
+  //    data: {header: `Jesteś pewny, że chcesz usunąć użytkownika ${username}?`}
+  //  });
+
+   // dialogRef.afterClosed().subscribe(result => {
+    //  if (result && result.confirmed) {
+        this.userService.deleteUserByEmail(userEmail).subscribe(
+            res => {   this.getData()},
+            err =>{ this.getData()}
+
+        );
+      
+    //  }
+   // });
+   
   }
 
 }
