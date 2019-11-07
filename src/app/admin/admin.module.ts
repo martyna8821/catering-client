@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AuthenticationModule } from '../authentication/authentication.module';
 import { AddUserComponent } from './add-user/add-user.component';
+import { CreateDietComponent } from './create-diet/create-diet.component';
 
 
 
@@ -12,7 +13,9 @@ import { AddUserComponent } from './add-user/add-user.component';
   declarations: [
     UserListComponent,
 
-    AddUserComponent],
+    AddUserComponent,
+
+    CreateDietComponent],
   imports: [
     AdminRoutingModule,
     SharedModule,

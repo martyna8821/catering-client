@@ -1,0 +1,68 @@
+<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+  </button> -->
+
+<mat-card-title><h2>Kreator diet</h2></mat-card-title>
+
+<mat-vertical-stepper [linear]="true" #stepper>
+  <mat-step [stepControl]="basicDietInfo">
+    <form [formGroup]="basicDietInfo">
+        <ng-template matStepLabel>Podstawowe informacje</ng-template>
+        <div class="row material-container">
+            <mat-form-field  appearance="outline">
+                <mat-label>Nazwa</mat-label>  
+                <input matInput formControlName="name"  [(ngModel)]="dietToCreate.name" required>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field  appearance="outline">
+                <mat-label>Krótki opis</mat-label>  
+                <textarea matInput formControlName="description"  [(ngModel)]="dietToCreate.description"
+                          required></textarea>
+            </mat-form-field>
+        </div>
+        <div class="row">
+                <mat-form-field  appearance="outline">
+                    <mat-label>Cena tygodniowa</mat-label>  
+                    <input matInput formControlName="price" class="input-right-align full-width"
+                           [(ngModel)]="dietToCreate.price">
+                    <span matSuffix>.00 zł</span>
+                </mat-form-field>
+            </div>
+        <div>
+            <button mat-raised-button matStepperNext>Dalej</button>
+        </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="dietDetails">
+    <form [formGroup]="dietDetails">
+        <ng-template matStepLabel>Szczegóły diety</ng-template>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <input matInput  formControlName="secondCtrl" required>
+            </mat-form-field>
+        </div>
+        <div>
+            <button mat-raised-button matStepperPrevious>Wróć</button>
+            <button mat-raised-button matStepperNext>Dalej</button>
+        </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Podsumowanie</ng-template>
+    <div class = "row">
+        Nazwa: {{dietToCreate.name}}
+    </div>
+    <div class="row">
+        Opis: {{dietToCreate.description}}
+    </div>
+    <div class="row">
+        Cena: {{dietToCreate.price}}
+    </div>    
+    <div>
+      <button mat-raised-button matStepperPrevious>Wróć</button>
+      <button mat-raised-button (click)="createDiet()">Zapisz</button>
+      <button mat-raised-button (click)="stepper.reset()">Zacznij od nowa</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
