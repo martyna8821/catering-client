@@ -14,6 +14,7 @@ import { TokenStorageService } from '../service/token-storage.service';
 export class LoginComponent implements OnInit {
   model: LoginRequest = {username: '', password: ''};
   isLoggedIn = false;
+  hide = true;
   roles: string[] = [];
 
   constructor(

@@ -1,86 +1,72 @@
+<mat-card-title>Użytkownicy</mat-card-title>
+<a mat-raised-button class="button-color" href="admin/add-user" >Dodaj nowego użytkownika</a>
+<div class="row">
+  <div class="col-sm">
+    <mat-form-field class="example-full-width">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Szukaj">
+    </mat-form-field>
+  </div>
+  <div class="col-sm " *ngIf="false">
+    <mat-checkbox class="my-checkbox"  (change)="onCheckboxChange($event)" [(ngModel)]="showClients">Klienci</mat-checkbox>
+    <mat-checkbox class="my-checkbox" (change)="onCheckboxChange($event)" [(ngModel)]="showDietitians">Dietetycy</mat-checkbox>
+    <mat-checkbox class="my-checkbox" (change)="onCheckboxChange($event)" [(ngModel)]="showAdmins">Administratorzy</mat-checkbox>
+  </div>
+</div>
+<div class="mat-elevation-z8">
+  <table mat-table class="full-width-table" [dataSource]="dataSource"
+         matSort multiTemplateDataRows >    
 
-<mat-card>
-    <mat-card-title>Użytkownicy</mat-card-title>
-    <a mat-raised-button class="button-color" href="admin/add-user" >Dodaj nowego użytkownika</a>
-
-    <div class="row">
-      <div class="col-sm">
-        <mat-form-field class="example-full-width">
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Szukaj">
-        </mat-form-field>
-      </div>
-      <div class="col-sm " *ngIf="false">
-        <mat-checkbox class="my-checkbox"  (change)="onCheckboxChange($event)" [(ngModel)]="showClients">Klienci</mat-checkbox>
-        <mat-checkbox class="my-checkbox" (change)="onCheckboxChange($event)" [(ngModel)]="showDietitians">Dietetycy</mat-checkbox>
-        <mat-checkbox class="my-checkbox" (change)="onCheckboxChange($event)" [(ngModel)]="showAdmins">Administratorzy</mat-checkbox>
-      </div>
-    </div>
-
-  
-    <div class="mat-elevation-z8">
-      <table mat-table class="full-width-table" [dataSource]="dataSource"
-       matSort multiTemplateDataRows >    
-    
-       <ng-container>
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>aaa </th>
-            <td mat-cell *matCellDef="let element"> delete </td>
-        </ng-container>
-
-
+    <ng-container>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>aaa </th>
+      <td mat-cell *matCellDef="let element"> delete </td>
+    </ng-container>
     <ng-container matColumnDef="{{column.name}}" *ngFor="let column of columnsToDisplayMap">
-        <th class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header> {{column.display}} </th>
-        <td mat-cell *matCellDef="let element"> {{element[column.name]}} </td>
-      </ng-container>
-
+      <th class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header> {{column.display}} </th>
+      <td mat-cell *matCellDef="let element"> {{element[column.name]}} </td>
+    </ng-container>
     <ng-container matColumnDef="expandedDetail">
-        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-          <div class="example-element-detail"
-               [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-               <mat-list>
-                  <h3 mat-subheader>Adres:</h3>
-                  <mat-list-item >
-                    <mat-icon mat-list-icon>location_city</mat-icon>
-                    <p mat-line>ul.{{element.address.street}} {{element.address.houseNumber}} </p>
-                    <p mat-line> {{element.address.zipCode}} {{element.address.city}} </p>
-                  </mat-list-item>
-                  <h3 mat-subheader>Role użytkownika</h3>
-                  <mat-list-item >
-                  <div *ngFor="let role of element.roles" [ngSwitch]="role">
-                        <button class="button-color" mat-mini-fab  matTooltip="klient" *ngSwitchCase="'ROLE_CLIENT'" > K </button>
-                        <button class="button-color" mat-mini-fab matTooltip="dietetyk" *ngSwitchCase="'ROLE_DIETITIAN'"> D </button>
-                        <button class="button-color" mat-mini-fab matTooltip="administrator" *ngSwitchCase="'ROLE_ADMIN'"> A </button>
-                  </div>        
-                  </mat-list-item>
-                  <h3 mat-subheader>Dostępne modyfikacje:</h3>
-                  <mat-list-item>
-                      
-                      <button  mat-raised-button class="button-color" (click)="deleteUserByEmail(element.email, element.userame)">
-                        usuń</button>
-                        <button mat-raised-button class="button-color">
-                            zmień role</button>
-      
-                      </mat-list-item> 
-                </mat-list>   
-                
-          </div>
-        </td>
-      </ng-container>
-
-  
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let element; columns: displayedColumns;"
-            class="example-element-row"
-            [class.example-expanded-row]="expandedElement === element"
-            (click)="expandedElement = expandedElement === element ? null : element">
-        </tr>
-        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-       
-      </table>
-  
-      <mat-paginator #paginator
-          [pageIndex]="0"
-          [pageSize]="5"
-          [pageSizeOptions]="[ 5, 10, 20, 50]">
-      </mat-paginator>
-    </div>  
-  </mat-card>
+      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+        <div class="example-element-detail"
+              [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <mat-list>
+            <h3 mat-subheader>Adres:</h3>
+            <mat-list-item >
+              <mat-icon mat-list-icon>location_city</mat-icon>
+              <p mat-line>ul.{{element.address.street}} {{element.address.houseNumber}} </p>
+              <p mat-line> {{element.address.zipCode}} {{element.address.city}} </p>
+            </mat-list-item>
+            <h3 mat-subheader>Role użytkownika</h3>
+            <mat-list-item >
+              <div *ngFor="let role of element.roles" [ngSwitch]="role">
+                <button class="button-color" mat-mini-fab  matTooltip="klient" *ngSwitchCase="'ROLE_CLIENT'" > K </button>
+                <button class="button-color" mat-mini-fab matTooltip="dietetyk" *ngSwitchCase="'ROLE_DIETITIAN'"> D </button>
+                <button class="button-color" mat-mini-fab matTooltip="administrator" *ngSwitchCase="'ROLE_ADMIN'"> A </button>
+              </div>        
+            </mat-list-item>
+            <h3 mat-subheader>Dostępne modyfikacje:</h3>
+            <mat-list-item>     
+              <button  mat-raised-button class="button-color" (click)="deleteUserByEmail(element.email, element.userame)">
+                usuń
+              </button>
+              <button mat-raised-button class="button-color">
+                zmień role
+              </button>
+            </mat-list-item> 
+          </mat-list>    
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+        class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
+  <mat-paginator #paginator
+                 [pageIndex]="0"
+                 [pageSize]="5"
+                 [pageSizeOptions]="[ 5, 10, 20, 50]">
+  </mat-paginator>
+</div>  

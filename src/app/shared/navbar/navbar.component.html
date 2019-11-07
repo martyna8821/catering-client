@@ -1,44 +1,42 @@
-
 <nav  class="navbar navbar-dark nav mt-1 navbar-right order-1 order-md-last bg-dark">      
-    <div class="row"> 
-      <a mat-mini-fab href="home">
-                <mat-icon>home</mat-icon>
-        </a>
-        <span class="example-spacer"></span>
-    <div  *ngIf="isLogged()" class="" >
-       
-        <button mat-button [matMenuTriggerFor]="menuClient" 
-            class="button-color" mat-mini-fab  matTooltip="klient" *ngIf="hasRole('ROLE_CLIENT')">
-            K</button>
-            <mat-menu #menuClient="matMenu">
-              <button mat-menu-item>Złóż zamówienie</button>
-              <button mat-menu-item>Przeglądaj swoje zamówienia</button>
-              <button mat-menu-item>Przeglądaj menu</button>
-            </mat-menu>
-       <button mat-button [matMenuTriggerFor]="menuDietitian" 
-         class="button-color" mat-mini-fab matTooltip="dietetyk"  *ngIf="hasRole('ROLE_DIETITIAN')"> D 
-        </button>
-        <mat-menu #menuDietitian="matMenu">
-                <button mat-menu-item>Kreator menu</button>
-                <button mat-menu-item>Zarządzaj przepisami</button>
-                <button mat-menu-item>Zarządzaj składnikami</button>
-              </mat-menu>
-        <button mat-button [matMenuTriggerFor]="menuAdmin" 
-         class="button-color" mat-mini-fab matTooltip="administrator"  *ngIf="hasRole('ROLE_ADMIN')"> A 
-        </button>
-        <mat-menu #menuAdmin="matMenu">
-                <a href="/admin/user-list" mat-menu-item>Zarządzaj użytkownikami</a>
-                <a mat-menu-item>Zarządzaj typami diet</a>
-              </mat-menu>
-
-              <a mat-mini-fab href="user-details">
-                  <mat-icon>person</mat-icon>    
-              </a>
-              
-              <a mat-mini-fab href="home" (click)="logOut()">
-                      <mat-icon>power_settings_new</mat-icon>    
-                  </a>
-      
-</div>
+  <div class="row">    
+    <a mat-mini-fab href="home">
+      <mat-icon>home</mat-icon>
+    </a>
+    <span class="example-spacer"></span>
+    <div  *ngIf="isLogged()"> 
+      <button mat-button [matMenuTriggerFor]="menuClient" class="button-color" mat-mini-fab  
+              matTooltip="klient" *ngIf="hasRole('ROLE_CLIENT')">
+                K
+      </button>
+      <mat-menu #menuClient="matMenu">
+        <button mat-menu-item>Złóż zamówienie</button>
+        <button mat-menu-item>Przeglądaj swoje zamówienia</button>
+        <button mat-menu-item>Przeglądaj menu</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="menuDietitian" class="button-color" mat-mini-fab
+              matTooltip="dietetyk" *ngIf="hasRole('ROLE_DIETITIAN')"> 
+                D 
+      </button>
+      <mat-menu #menuDietitian="matMenu">
+        <button mat-menu-item>Kreator menu</button>
+        <button mat-menu-item>Zarządzaj przepisami</button>
+        <button mat-menu-item>Zarządzaj składnikami</button>
+      </mat-menu>
+      <button mat-button [matMenuTriggerFor]="menuAdmin" class="button-color" mat-mini-fab 
+              matTooltip="administrator"  *ngIf="hasRole('ROLE_ADMIN')"> 
+                A 
+      </button>
+      <mat-menu #menuAdmin="matMenu">
+        <a href="/admin/user-list" mat-menu-item>Zarządzaj użytkownikami</a>
+        <a mat-menu-item>Zarządzaj typami diet</a>
+      </mat-menu>  
+      <a mat-mini-fab href="user-details" >
+        <mat-icon>person</mat-icon>    
+      </a>      
+      <a mat-mini-fab href="home" (click)="logOut()">
+        <mat-icon>power_settings_new</mat-icon>    
+      </a>
     </div>
-  </nav>
+  </div>
+</nav>

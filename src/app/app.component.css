@@ -10,3 +10,7 @@
   .material-container > * {
     width: 100%;
   }
+
+  .right-align {
+    text-align: right;
+  }

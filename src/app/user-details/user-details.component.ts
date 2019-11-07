@@ -3,6 +3,9 @@ import { User } from '../shared/model/User';
 import { UserService } from '../shared/service/UserService';
 import { TokenStorageService } from '../authentication/service/token-storage.service';
 import { UserDTO } from '../shared/model/UserDTO';
+import { MatDialog } from '@angular/material/dialog';
+import { ChangePasswordComponent } from '../authentication/change-password/change-password.component';
+import { CloseScrollStrategyConfig } from '@angular/cdk/overlay/typings/scroll/close-scroll-strategy';
 
 
 export interface Tile {
@@ -21,8 +24,9 @@ export class UserDetailsComponent implements OnInit {
 
 
   editMode=false;
-  user: User;
+  profileOwner: User;
   userDto: UserDTO;
+  userId: string;
   tiles: Tile[] = [
     {text: 'One', cols: 3, rows: 1, color: 'lightblue'},
     {text: 'Two', cols: 1, rows: 2, color: 'lightgreen'},
@@ -30,14 +34,15 @@ export class UserDetailsComponent implements OnInit {
     {text: 'Four', cols: 2, rows: 1, color: '#DDBDF1'},
   ];
   constructor(private userService: UserService,
-              private tokenStorageService: TokenStorageService) { }
+              private tokenStorageService: TokenStorageService,
+              public dialog: MatDialog) 
+              { }
 
   ngOnInit() {
-    this.userService.getUserById(this.tokenStorageService.getUserId()).subscribe(
-     user => { 
-      this.user = user;
-      console.log("user:");
-      console.log(user.username);
+    this.userId = this.tokenStorageService.getUserId();
+    this.userService.getUserById(this.userId).subscribe(
+      user => { 
+        this.profileOwner = user;
       }
     );
   }
@@ -58,4 +63,16 @@ export class UserDetailsComponent implements OnInit {
     return !this.editMode;
   }
 
+  changePasswordDialog(){
+    const dialogRef = this.dialog.open(ChangePasswordComponent, {
+      width: '600px',
+      data: {isDialog: true}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 }
+
+

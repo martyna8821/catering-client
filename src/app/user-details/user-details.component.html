@@ -1,68 +1,57 @@
-<div class='row'>
-  <div class="col-1"></div>
-  <div class="col-sm">
-    <mat-card class="example-card">
-        <div *ngIf="isEditModeEnabled(); then editionMode else viewMode"></div>
-       
-        <div class="container">
-            <div class="row my-2">
-                <div class="col-lg-8 order-lg-2">
-                  <h2>Profil użytkownika</h2>
-                  <mat-divider></mat-divider>
-                   <div class="container" *ngIf="isEditModeDisabled();">
-                    <div class="row row-details">
-                      <div class="col-sm">Imię: {{user.firstName}}</div>
-                      <div class="col-sm">Nazwisko: {{user.lastName}}</div>
-                    </div>
-                    <div class="row row-details">
-                      <div class="col-sm">Numer telefonu: {{user.phoneNumber}}</div>
-                      <div class="col-sm">Adres email: {{user.email}}</div>
-                    </div> 
-                    <div class="row row-details">
-                      <div class="col-sm">Adres: {{user.address.street}} {{user.address.houseNumber}} </div>
-                    </div> 
-                    <div class="row row-details">
-                      <div class="col-sm">{{user.address.zipCode}} {{user.City}}</div>
-                    </div>
-                  </div>     
-                  <div class="container" *ngIf="isEditModeEnabled();">
-                    <div class="row row-details">
-                      <div class="col-sm">       
-                        <mat-form-field class="example-full-width" appearance="outline">
-                          <input matInput placeholder="Jan" enabled=false aria-label="Imię:"  required>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-sm">
-                        <mat-form-field class="example-full-width" appearance="outline">
-                           <input matInput placeholder="Kowalski"   required>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <div class="row row-details">
-                      <div class="col-sm">ENumer telefonu: 123456789</div>
-                      <div class="col-sm">WAdres email: janek@mail.com</div>
-                    </div> 
-                    <div class="row">
-                      <div class="col-sm">EAdres: ul.Funny 123 </div>
-                    </div> 
-                    <div class="row">
-                      <div class="col-sm">E12-345 New York</div>
-                    </div>
-                  </div>
-                </div>    
-                <div class="col-lg-4 order-lg-1 text-center">
-                   <mat-icon>person</mat-icon>
-                    <h6>username</h6>
-                    <button mat-raised-button>zmień hasło</button>
-                </div>
+<div *ngIf="isEditModeEnabled(); then editionMode else viewMode"></div>
+
+<div class="container">
+    <div class="row my-2">
+        <div class="col-lg-8 order-lg-2">
+          <h2>Profil użytkownika</h2>
+          <mat-divider></mat-divider>
+           <div class="container" *ngIf="isEditModeDisabled()">
+            <div class="row row-details">
+              <div class="col-sm">Imię: {{profileOwner.firstName}}</div>
+              <div class="col-sm">Nazwisko: {{profileOwner.lastName}}</div>
             </div>
+            <div class="row row-details">
+              <div class="col-sm">Numer telefonu: {{profileOwner.phoneNumber}}</div>
+              <div class="col-sm">Adres email: {{profileOwner.email}}</div>
+            </div> 
+            <div class="row row-details">
+              <div class="col-sm">Adres: {{profileOwner.address.street}} {{profileOwner.address.houseNumber}} </div>
+            </div> 
+            <div class="row row-details">
+              <div class="col-sm">{{profileOwner.address.zipCode}} {{profileOwner.City}}</div>
+            </div>
+          </div>     
+          <div class="container" *ngIf="isEditModeEnabled();">
+            <div class="row row-details">
+              <div class="col-sm">       
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input matInput placeholder="Jan" enabled=false aria-label="Imię:"  required>
+                </mat-form-field>
+              </div>
+              <div class="col-sm">
+                <mat-form-field class="example-full-width" appearance="outline">
+                   <input matInput placeholder="Kowalski"   required>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row row-details">
+              <div class="col-sm">ENumer telefonu: 123456789</div>
+              <div class="col-sm">WAdres email: janek@mail.com</div>
+            </div> 
+            <div class="row">
+              <div class="col-sm">EAdres: ul.Funny 123 </div>
+            </div> 
+            <div class="row">
+              <div class="col-sm">E12-345 New York</div>
+            </div>
+          </div>
+        </div>    
+        <div class="col-lg-4 order-lg-1 text-center">
+           <mat-icon>person</mat-icon>
+            <h6>username</h6>
+            <button mat-raised-button (click)="changePasswordDialog()">zmień hasło</button>
         </div>
-      <button mat-button *ngIf="isEditModeDisabled()" (click)="enableEditMode()">Edytuj profil</button>
-      <button mat-button *ngIf="isEditModeEnabled()" (click)="disableEditMode()">Zapisz dane</button>
-    </mat-card>
-  </div>
-  <div class="col-1"></div>
+    </div>
 </div>
-
-
-
+<button mat-button *ngIf="isEditModeDisabled()" (click)="enableEditMode()">Edytuj profil</button>
+<button mat-button *ngIf="isEditModeEnabled()" (click)="disableEditMode()">Zapisz dane</button>
