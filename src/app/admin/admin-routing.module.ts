@@ -4,11 +4,13 @@ import { UserListComponent } from './user-list/user-list.component';
 import { HomeComponent } from '../home/home.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { CreateDietComponent } from './create-diet/create-diet.component';
+import { ManageDietComponent } from './manage-diet/manage-diet.component';
 
 const adminRoutes: Routes = [
     { path: 'user-list', component: UserListComponent},
     { path: 'add-user', component: AddUserComponent},
-    { path: 'create-diet', component:CreateDietComponent}
+    { path: 'create-diet', component:CreateDietComponent},
+    { path: 'manage-diet', component: ManageDietComponent}
 ];
 
 @NgModule({

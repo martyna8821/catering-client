@@ -6,6 +6,8 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AuthenticationModule } from '../authentication/authentication.module';
 import { AddUserComponent } from './add-user/add-user.component';
 import { CreateDietComponent } from './create-diet/create-diet.component';
+import { ManageDietComponent } from './manage-diet/manage-diet.component';
+import { DietsListComponent } from '../shared/diets-list/diets-list.component';
 
 
 
@@ -15,7 +17,9 @@ import { CreateDietComponent } from './create-diet/create-diet.component';
 
     AddUserComponent,
 
-    CreateDietComponent],
+    CreateDietComponent,
+
+    ManageDietComponent],
   imports: [
     AdminRoutingModule,
     SharedModule,

@@ -7,9 +7,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+import { DietsListComponent } from './diets-list/diets-list.component';
+import { DietsCardComponent } from './diets-card/diets-card.component';
 
 @NgModule({
-  declarations: [NavbarComponent, ConfirmationComponent],
+  declarations: [NavbarComponent, ConfirmationComponent, DietsListComponent, DietsCardComponent],
   imports: [
     MaterialModule,
     CommonModule,
@@ -24,7 +26,9 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
     HttpClientModule, 
     FormsModule,
     ReactiveFormsModule,
-    NavbarComponent
+    NavbarComponent,
+    DietsListComponent,
+    DietsCardComponent
     ]
 })
 export class SharedModule { }
