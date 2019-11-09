@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Diet } from '../model/Diet';
 
 @Component({
   selector: 'app-diets-card',
@@ -11,5 +12,7 @@ export class DietsCardComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  @Input() diet: Diet;
 
 }

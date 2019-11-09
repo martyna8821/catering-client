@@ -1,1 +1,14 @@
-<p>diets-card works!</p>
+<mat-card  class="mat-card.scrollable-content mat-card-title-group mat-card-content" >
+  <div class ="scrollable" >
+    <mat-card-title>
+        {{diet.name}}
+    </mat-card-title>
+    <img mat-card-image src="../../../assets/medina-catering-AdtqezIqv7c-unsplash.jpg" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+        {{diet.description}}
+    </mat-card-content>
+    <mat-card-footer>
+        {{diet.price}}
+    </mat-card-footer>
+  </div>
+</mat-card>
