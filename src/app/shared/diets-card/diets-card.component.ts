@@ -8,6 +8,8 @@ import { Diet } from '../model/Diet';
 })
 export class DietsCardComponent implements OnInit {
 
+
+  panelOpenState = false;
   constructor() { }
 
   ngOnInit() {

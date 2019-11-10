@@ -15,6 +15,8 @@ import {MatListModule} from '@angular/material/list';
 import {MatTooltipModule} from '@angular/material/tooltip'; 
 import {MatGridListModule} from '@angular/material/grid-list'; 
 import {MatMenuModule} from '@angular/material/menu'; 
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [],
@@ -34,7 +36,9 @@ import {MatMenuModule} from '@angular/material/menu';
     MatListModule,
     MatTooltipModule,
     MatGridListModule,
-    MatMenuModule
+    MatMenuModule,
+    ScrollingModule,
+    MatExpansionModule
     
   ],
   exports: [
@@ -53,7 +57,9 @@ import {MatMenuModule} from '@angular/material/menu';
     MatListModule,
     MatTooltipModule,
     MatGridListModule,
-    MatMenuModule
+    MatMenuModule,
+    ScrollingModule,
+    MatExpansionModule
   ]
 })
 export class MaterialModule { }

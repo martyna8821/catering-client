@@ -14,7 +14,7 @@ export class CreateDietComponent implements OnInit {
   isLinear = false;
   basicDietInfo: FormGroup;
   dietDetails: FormGroup;
-  dietToCreate: Diet = {name: '', description: '', price: 100};
+  dietToCreate: Diet = {name: '', description: '', price: 100, forbiddenIngredientTypes: [], forbiddenIngredients:[], caloricVersions:[], active: false};
 
   constructor(private _formBuilder: FormBuilder,
               private router: Router,

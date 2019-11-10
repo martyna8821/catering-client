@@ -1,14 +1,50 @@
-<mat-card  class="mat-card.scrollable-content mat-card-title-group mat-card-content" >
-  <div class ="scrollable" >
+<mat-card >
     <mat-card-title>
         {{diet.name}}
     </mat-card-title>
-    <img mat-card-image src="../../../assets/medina-catering-AdtqezIqv7c-unsplash.jpg" alt="Photo of a Shiba Inu">
-    <mat-card-content>
+    <img mat-card-image src="../../../assets/medina-catering-AdtqezIqv7c-unsplash.jpg" width="50" height="300">
+    <mat-card-content >
         {{diet.description}}
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+              Składniki wykluczone z diety
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+              <mat-list role="list" dense *ngFor="let ingredient of diet.forbiddenIngredients">
+                  <mat-list-item role="listitem">{{ingredient}}</mat-list-item>
+                </mat-list>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+          <mat-expansion-panel-header>
+              <mat-panel-title>
+             Nieużywane rodzaje składników:
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+              <mat-list role="list" dense *ngFor="let ingredientType of diet.forbiddenIngredientTypes">
+                  <mat-list-item role="listitem">{{ingredientType}}</mat-list-item>
+                </mat-list>
+          </mat-expansion-panel>
+          <mat-expansion-panel> 
+          <mat-expansion-panel-header>
+              <mat-panel-title>
+             Dostępne wersje kaloryczne:
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+              <mat-list role="list" dense *ngFor="let caloricVersion of diet.caloricVersions">
+                  <mat-list-item role="listitem">{{caloricVersion}}</mat-list-item>
+                </mat-list>
+          </mat-expansion-panel>
+        </mat-accordion>      
     </mat-card-content>
     <mat-card-footer>
-        {{diet.price}}
+        Cena za tydzień: {{diet.price}}
     </mat-card-footer>
-  </div>
+    <mat-card-actions>
+        <button mat-raised-button *ngIf="adminView" >Kup</button>
+        <button mat-raised-button *ngIf="!adminView">{{diet.active ? 'Ukryj dietę' : 'Publikuj dietę'}}</button>
+        <button mat-raised-button *ngIf="!adminView">usuń</button>
+        <button mat-raised-button *ngIf="!adminView">edytuj</button>
+    </mat-card-actions>
 </mat-card>
