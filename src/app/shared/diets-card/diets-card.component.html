@@ -43,7 +43,7 @@
     </mat-card-footer>
     <mat-card-actions>
         <button mat-raised-button *ngIf="adminView" >Kup</button>
-        <button mat-raised-button *ngIf="!adminView">{{diet.active ? 'Ukryj dietę' : 'Publikuj dietę'}}</button>
+        <button mat-raised-button *ngIf="!adminView">{{diet.active ? 'Wycofaj dietę' : 'Publikuj dietę'}}</button>
         <button mat-raised-button *ngIf="!adminView">usuń</button>
         <button mat-raised-button *ngIf="!adminView">edytuj</button>
     </mat-card-actions>

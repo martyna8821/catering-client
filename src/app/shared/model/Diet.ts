@@ -1,10 +1,12 @@
 export class Diet{
 
+    id: string;
     name: string;
     description: string;
     price: number;
+    published: boolean;
+    caloricVersions: number[];  
     forbiddenIngredients: string[];
-    forbiddenIngredientTypes: string[];
-    caloricVersions: number[];   
-    active: boolean;
+    labels: string[];
+    dietitianUsername: string;
 }

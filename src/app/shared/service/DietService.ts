@@ -24,4 +24,8 @@ export class DietService {
     add(dietToCreate: Diet): Observable<Diet>{
         return this.http.post<Diet>(this.apiUrl, dietToCreate, httpOptions);        
     }
+
+    getAll(): Observable<Diet[]>{
+      return this.http.get<Diet[]>(this.apiUrl, httpOptions);
+    }
 }
