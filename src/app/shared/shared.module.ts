@@ -9,11 +9,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { DietsListComponent } from './diets-list/diets-list.component';
 import { DietsCardComponent } from './diets-card/diets-card.component';
+import { PrimeModule } from './primeng/prime/prime.module';
 
 @NgModule({
   declarations: [NavbarComponent, ConfirmationComponent, DietsListComponent, DietsCardComponent],
   imports: [
     MaterialModule,
+    PrimeModule,
     CommonModule,
     HttpClientModule,
     FormsModule,
@@ -23,6 +25,7 @@ import { DietsCardComponent } from './diets-card/diets-card.component';
   exports: [
     CommonModule,
     MaterialModule,
+    PrimeModule,
     HttpClientModule, 
     FormsModule,
     ReactiveFormsModule,

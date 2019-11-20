@@ -38,5 +38,10 @@
         <mat-icon>power_settings_new</mat-icon>    
       </a>
     </div>
+  <div *ngIf="!isLogged()">
+      <a mat-raised-button class=" button-color" href="register" >Zarejestruj się</a>
+      <a mat-raised-button class=" button-color" href="login" role="button">Zaloguj się</a> 
+  </div>
+
   </div>
 </nav>

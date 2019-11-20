@@ -9,4 +9,5 @@ export class Diet{
     forbiddenIngredients: string[];
     labels: string[];
     dietitianUsername: string;
+    image: string;
 }

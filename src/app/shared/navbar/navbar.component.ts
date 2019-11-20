@@ -24,8 +24,6 @@ export class NavbarComponent implements OnInit {
   }
 
   hasRole(role: string): boolean{
-   // console.log("role: "+role);
-    console.log(this.containsElement(this.userRoles, role));
 
     if(this.containsElement(this.userRoles, role)){
       return true;

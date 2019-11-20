@@ -4,7 +4,7 @@
 
 <mat-card-title><h2>Kreator diet</h2></mat-card-title>
 
-<mat-vertical-stepper [linear]="true" #stepper>
+<mat-horizontal-stepper [linear]="false" #stepper>
   <mat-step [stepControl]="basicDietInfo">
     <form [formGroup]="basicDietInfo">
         <ng-template matStepLabel>Podstawowe informacje</ng-template>
@@ -48,6 +48,20 @@
         </div>
     </form>
   </mat-step>
+  
+  <mat-step>
+  <ng-template matStepLabel>Zdjęcie</ng-template>
+  <p-fileUpload  name="myFile[]" url="./upload.php"  accept="image/*" 
+  maxFileSize="2000005" chooseLabel="Wybierz zdjęcie" [auto]="true" 
+  customUpload="true" (uploadHandler)="myUploader($event)">
+
+    <ng-template pTemplate="content">
+        <div></div>
+    </ng-template>
+    </p-fileUpload>    
+  </mat-step>
+
+ 
   <mat-step>
     <ng-template matStepLabel>Podsumowanie</ng-template>
     <div class = "row">
@@ -58,6 +72,7 @@
     </div>
     <div class="row">
         Cena: {{dietToCreate.price}}
+        {{myFile}}
     </div>    
     <div>
       <button mat-raised-button matStepperPrevious>Wróć</button>
@@ -65,4 +80,4 @@
       <button mat-raised-button (click)="stepper.reset()">Zacznij od nowa</button>
     </div>
   </mat-step>
-</mat-vertical-stepper>
+</mat-horizontal-stepper>

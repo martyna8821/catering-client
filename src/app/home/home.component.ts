@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from '../authentication/service/token-storage.service';
+import { DietService } from '../shared/service/DietService';
+import { Diet } from '../shared/model/Diet';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +10,39 @@ import { TokenStorageService } from '../authentication/service/token-storage.ser
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private tokenService: TokenStorageService) { }
+  constructor(private tokenService: TokenStorageService,
+              private dietService: DietService) { 
+                this.responsiveOptions = [
+                  {
+                      breakpoint: '1024px',
+                      numVisible: 3,
+                      numScroll: 3
+                  },
+                  {
+                      breakpoint: '768px',
+                      numVisible: 2,
+                      numScroll: 2
+                  },
+                  {
+                      breakpoint: '560px',
+                      numVisible: 1,
+                      numScroll: 1
+                  }
+                ];
+              }
+
+  cars: string[] = ["carA", "carB", "carC"];
+  diets: Diet[];
+
+  responsiveOptions;
 
   ngOnInit() {
   
+    this.dietService.getAll().subscribe(
+      d => this.diets = d
+    );
   console.log(this.tokenService.getUserId());
+  console.log(this.diets.length);
   }
 
 }

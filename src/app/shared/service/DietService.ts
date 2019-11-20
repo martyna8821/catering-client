@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class DietService {
 
-  private apiUrl = 'http://localhost:8080/api/diet/';
+  private apiUrl = 'http://localhost:8080/api/diets';
 
   constructor( 
       private http: HttpClient,
@@ -22,10 +22,16 @@ export class DietService {
     ){}
   
     add(dietToCreate: Diet): Observable<Diet>{
-        return this.http.post<Diet>(this.apiUrl, dietToCreate, httpOptions);        
+      console.log("posting");
+        return this.http.post<Diet>(this.apiUrl+"/xdd", dietToCreate);        
     }
 
     getAll(): Observable<Diet[]>{
-      return this.http.get<Diet[]>(this.apiUrl, httpOptions);
+ 
+      return this.http.get<Diet[]>(this.apiUrl);
+    }
+
+    sendImage(image: any[]): Observable<Diet>{
+      return this.http.post<Diet>(this.apiUrl, image);
     }
 }
