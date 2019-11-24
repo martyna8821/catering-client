@@ -9,23 +9,13 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-              Składniki wykluczone z diety
+              Etykiety:
               </mat-panel-title>
             </mat-expansion-panel-header>
-              <mat-list role="list" dense *ngFor="let ingredient of diet.forbiddenIngredients">
-                  <mat-list-item role="listitem">{{ingredient}}</mat-list-item>
+              <mat-list role="list" dense *ngFor="let label of diet.labels">
+                  <mat-list-item role="listitem">{{label}}</mat-list-item>
                 </mat-list>
-          </mat-expansion-panel>
-          <mat-expansion-panel>
-          <mat-expansion-panel-header>
-              <mat-panel-title>
-             Nieużywane rodzaje składników:
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-              <mat-list role="list" dense *ngFor="let ingredientType of diet.forbiddenIngredientTypes">
-                  <mat-list-item role="listitem">{{ingredientType}}</mat-list-item>
-                </mat-list>
-          </mat-expansion-panel>
+              </mat-expansion-panel>     
           <mat-expansion-panel> 
           <mat-expansion-panel-header>
               <mat-panel-title>

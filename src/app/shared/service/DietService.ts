@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Diet } from '../model/Diet';
+import { DietInput } from '../model/DietInput';
 
 
 const httpOptions = {
@@ -21,9 +22,9 @@ export class DietService {
       private router: Router
     ){}
   
-    add(dietToCreate: Diet): Observable<Diet>{
-      console.log("posting");
-        return this.http.post<Diet>(this.apiUrl+"/xdd", dietToCreate);        
+    add(dietToCreate: DietInput): Observable<Diet>{
+        console.log("posting new diet");
+        return this.http.post<Diet>(this.apiUrl, dietToCreate);        
     }
 
     getAll(): Observable<Diet[]>{

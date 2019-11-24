@@ -10,6 +10,7 @@ export class DietsCardComponent implements OnInit {
 
 
   panelOpenState = false;
+  image: Blob;
   constructor() { }
 
   ngOnInit() {

@@ -10,6 +10,7 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
 import { DietsListComponent } from './diets-list/diets-list.component';
 import { DietsCardComponent } from './diets-card/diets-card.component';
 import { PrimeModule } from './primeng/prime/prime.module';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
   declarations: [NavbarComponent, ConfirmationComponent, DietsListComponent, DietsCardComponent],
@@ -19,7 +20,8 @@ import { PrimeModule } from './primeng/prime/prime.module';
     CommonModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMatSelectSearchModule
 
   ],
   exports: [
@@ -31,7 +33,8 @@ import { PrimeModule } from './primeng/prime/prime.module';
     ReactiveFormsModule,
     NavbarComponent,
     DietsListComponent,
-    DietsCardComponent
+    DietsCardComponent,
+    NgxMatSelectSearchModule
     ]
 })
 export class SharedModule { }

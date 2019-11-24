@@ -1,65 +1,148 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Diet } from 'src/app/shared/model/Diet';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { DietService } from 'src/app/shared/service/DietService';
 import { Router } from '@angular/router';
+import { DietInput } from 'src/app/shared/model/DietInput';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
+import { COMMA, ENTER} from '@angular/cdk/keycodes';
+import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { TokenStorageService } from 'src/app/authentication/service/token-storage.service';
+import {MessageService} from 'primeng/api';
+
+
+export class LabelInput{
+  name: string;
+  checked: boolean;
+}
 
 @Component({
   selector: 'app-create-diet',
   templateUrl: './create-diet.component.html',
-  styleUrls: ['./create-diet.component.css']
+  styleUrls: ['./create-diet.component.css'],
+  providers: [MessageService]
 })
 export class CreateDietComponent implements OnInit {
 
-  isLinear = false;
   basicDietInfo: FormGroup;
-  dietDetails: FormGroup;
-  dietToCreate: Diet = {name: '', description: '', price: 100, labels: [], forbiddenIngredients:[], caloricVersions:[], published: false,
-id: '', dietitianUsername: '', image: 'null'};
-  myFile: string;
+ 
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  caloricVersionsCtrl = new FormControl();
+  filteredCaloricVersions: Observable<string[]>;
+  caloricVersionsList: string[] = [];
+  allCaloricVersionsList = ["1000", "1500", "2000", "2200"];
+  @ViewChild('caloricVersionInput', {static: false}) caloricVersionInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
-  constructor(private _formBuilder: FormBuilder,
+
+  labels: LabelInput[] = [{name: "wegetariańska", checked: false}, 
+                          {name: "wegańska", checked : false}, 
+                          {name: "bezglutenowa", checked: false},
+                          {name: "bez laktozy", checked: false}];
+
+  uploadedImageData: string;
+  imageFilename: string;
+
+  dietToCreate: DietInput = {name: ' ', description: ' ', price: 100, labels: [], forbiddenIngredients:[], caloricVersions:[],
+                             dietitianUsername: '', image: 'null'};
+
+  constructor(private formBuilder: FormBuilder,
               private router: Router,
-              private dietService:DietService) 
-              { }
-
+              private tokenService: TokenStorageService,
+              private messageService: MessageService,
+              private dietService:DietService){  
+                this.filteredCaloricVersions = this.caloricVersionsCtrl.valueChanges.pipe(
+                                                    startWith(null),
+                                                    map((caloricVersion: string | null) => 
+                                                            caloricVersion ? this._filter(caloricVersion) : this.allCaloricVersionsList));
+          }
+              
   ngOnInit() {
-    this.basicDietInfo = this._formBuilder.group({
+
+    this.basicDietInfo = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
       price: [100, Validators.required]
     });
-    this.dietDetails = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
-  }
+}
 
   createDiet(){
-    this.dietToCreate.image = this.myFile;   
+    this.dietToCreate.image = this.uploadedImageData;
+    this.dietToCreate.caloricVersions = this.caloricVersionsList;
+    this.labels.forEach( l => {if(l.checked) this.dietToCreate.labels.push(l.name);} ) ;  
+    this.dietToCreate.dietitianUsername = this.tokenService.getUserName();
     this.dietService.add(this.dietToCreate).subscribe(
-         res => console.log("succ"),
-           err => console.log("err")
+          res =>  this.router.navigateByUrl('/admin/manage-diet').then(() => {
+            this.showSuccess();
+          }),
+          err => console.log("error adding new diet")
        );
-    //  this.router.navigate(['']);
   }
 
  myUploader(event){
 
    let reader = new FileReader();
-   
-      let file =event.files[0];
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-       this.myFile = reader.result.toString().split(',')[1];
-       console.log(this.myFile);
-        }
+   let file =event.files[0];
+   this.imageFilename = file.name;
+   reader.readAsDataURL(file);
+   reader.onload = () => 
+       this.uploadedImageData = reader.result.toString().split(',')[1];
+   }
 
-  // Blob im = new Blob(this,this.m  console.log(this.myFile);
-  // Blob im = new Blob(this.myFile[0]);
-  // this.dietService.sendImage(this.myFile[0]).subscribe();
-
- }
+ 
+ add(event: MatChipInputEvent): void {
   
-//    this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+  if (!this.matAutocomplete.isOpen) {
+    const input = event.input;
+    const value = event.value;
+
+      if ((value || '').trim()) {
+      this.caloricVersionsList.push(value.trim());
+
+    }
+
+    if (input) {
+      input.value = '';
+    }
+
+    this.caloricVersionsCtrl.setValue(null);
+  }
+}
+
+
+remove(caloricVersion: string): void {
+  const index = this.caloricVersionsList.indexOf(caloricVersion);
+
+  if (index >= 0) {
+    this.caloricVersionsList.splice(index, 1);
+    this.allCaloricVersionsList.push(caloricVersion);
+  }
+}
+
+selected(event: MatAutocompleteSelectedEvent): void {
+  this.caloricVersionsList.push(event.option.viewValue);
+  this.caloricVersionInput.nativeElement.value = '';
+  this.caloricVersionsCtrl.setValue(null);
+  
+  this.allCaloricVersionsList = this.allCaloricVersionsList.filter(
+                v => v !== event.option.value
+  );
+}
+
+private _filter(value: string): string[] {
+  const filterValue = value.toLowerCase();
+
+  return this.allCaloricVersionsList.filter(calVersion => calVersion.toLowerCase().indexOf(filterValue) === 0);
+}
+
+showSuccess() {
+  this.messageService.add({severity:'success', summary: 'Sukces', detail:'Pomyślnie dodano dietę'});
+}
+
 }
 

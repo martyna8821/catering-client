@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from 'src/app/authentication/service/token-storage.service';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +10,8 @@ import { TokenStorageService } from 'src/app/authentication/service/token-storag
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private tokenStorage: TokenStorageService) { }
+  constructor(private tokenStorage: TokenStorageService,
+    private router: Router) { }
   userRoles: string[];
   ngOnInit() {
       this.userRoles  = this.tokenStorage.getAuthorities();
@@ -47,5 +50,11 @@ export class NavbarComponent implements OnInit {
 
       return contains;    
   }
+
+
+  navigate(link: string){
+    this.router.navigateByUrl(link);
+  }
+
 
 }

@@ -1,2 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 @import '@angular/material/prebuilt-themes/pink-bluegrey.css';
+@import url("../node_modules/primeicons/primeicons.css");
+@import url("../node_modules/primeng/resources/themes/nova-dark/theme.css");
+@import url("../node_modules/primeng/resources/primeng.min.css");
+.full-width{
+    width: 100%;
+}
+
+.material-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .material-container > * {
+    width: 100%;
+  }
+
+  .right-align {
+    text-align: right;
+  }.full-width{
+    width: 100%
+}

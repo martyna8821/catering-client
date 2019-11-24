@@ -17,6 +17,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatMenuModule} from '@angular/material/menu'; 
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSelectModule} from '@angular/material/select'; 
+import {MatChipsModule} from '@angular/material/chips'; 
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [],
@@ -38,7 +41,10 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatGridListModule,
     MatMenuModule,
     ScrollingModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSelectModule,
+    MatChipsModule,
+    MatAutocompleteModule
     
   ],
   exports: [
@@ -59,7 +65,10 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatGridListModule,
     MatMenuModule,
     ScrollingModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSelectModule,
+    MatChipsModule,
+    MatAutocompleteModule
   ]
 })
 export class MaterialModule { }
