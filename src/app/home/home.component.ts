@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from '../authentication/service/token-storage.service';
 import { DietService } from '../shared/service/DietService';
 import { Diet } from '../shared/model/Diet';
+import { DomSanitizer } from '@angular/platform-browser';
+
+export class DietImageUrl{
+  diet: Diet;
+  imageUrl: string;
+}
 
 @Component({
   selector: 'app-home',
@@ -11,6 +17,7 @@ import { Diet } from '../shared/model/Diet';
 export class HomeComponent implements OnInit {
 
   constructor(private tokenService: TokenStorageService,
+    private sanitizer: DomSanitizer,
               private dietService: DietService) { 
                 this.responsiveOptions = [
                   {
@@ -33,6 +40,7 @@ export class HomeComponent implements OnInit {
 
   cars: string[] = ["carA", "carB", "carC"];
   diets: Diet[];
+  dietsImages: DietImageUrl[];
 
   responsiveOptions;
 
@@ -41,8 +49,6 @@ export class HomeComponent implements OnInit {
     this.dietService.getAll().subscribe(
       d => this.diets = d
     );
-  console.log(this.tokenService.getUserId());
-  console.log(this.diets.length);
   }
 
 }

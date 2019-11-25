@@ -38,6 +38,7 @@ export class NavbarComponent implements OnInit {
 
   logOut(){
     this.tokenStorage.logOut();
+    this.navigate("/home");
   }
 
   containsElement(list: string[], element: string): boolean{

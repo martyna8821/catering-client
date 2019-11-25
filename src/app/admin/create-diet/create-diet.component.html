@@ -1,12 +1,8 @@
-<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-  </button> -->
-
-  <p-toast [style]="{marginTop: '80px'}"></p-toast>
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
 
 <mat-card-title><h2>Kreator diety</h2></mat-card-title>
 
-<mat-horizontal-stepper [linear]="false" #stepper>
+<mat-horizontal-stepper [linear]="true" #stepper>
   <mat-step [stepControl]="basicDietInfo">
     <form [formGroup]="basicDietInfo">
         <ng-template matStepLabel>Podstawowe informacje</ng-template>
@@ -85,7 +81,29 @@
           </tr> 
         </table>
   </mat-step>
-  
+  <mat-step>
+    <ng-template matStepLabel>Dane dietetyka</ng-template>
+    <table>
+      <tr>Wybierz dietetyka odpowiedzialnego za dietę: </tr>
+      <tr>
+        <mat-form-field>
+         
+          <mat-select [(value)]="dietToCreate.dietitian">
+            <mat-option *ngFor="let dietitian of dietitians" [value]="dietitian.username" >
+              {{dietitian.username}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </tr>
+      <tr> </tr>
+      <tr class="spaceUnder">
+          <td colspan="6">
+            <button mat-raised-button matStepperPrevious>Wróć</button>
+            <button mat-raised-button matStepperNext>Dalej</button>
+          </td>
+      </tr>   
+    </table>
+    </mat-step>
   <mat-step>
   <ng-template matStepLabel>Zdjęcie</ng-template>
   <table>

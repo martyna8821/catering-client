@@ -1,3 +1,5 @@
+import { SafeUrl } from '@angular/platform-browser';
+
 export class Diet{
 
     id: string;
@@ -5,9 +7,10 @@ export class Diet{
     description: string;
     price: number;
     published: boolean;
-    caloricVersions: number[];  
+    caloricVersions: string[];  
     forbiddenIngredients: string[];
     labels: string[];
     dietitianUsername: string;
     image: string;
+    imageUrl: SafeUrl;
 }

@@ -28,7 +28,7 @@ export class AuthenticationService {
   }
 
   register(registerRequest: RegisterRequest): Observable<LoginResponse>{
-    return this.http.post<LoginResponse>(this.apiUrl+'users/register', registerRequest);
+    return this.http.post<LoginResponse>(this.apiUrl+'users', registerRequest);
   }
 
   retrievePassword(userEmail: string): Observable<string>{

@@ -1,0 +1,75 @@
+<mat-card-title><h2>Złóż zamówienie</h2></mat-card-title>
+
+<mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-step>
+        <ng-template matStepLabel>Wybierz dietę</ng-template>
+        <mat-radio-group [(ngModel)]="chosenDiet" >
+        <mat-grid-list cols="5"  rowHeight="2:1" [gutterSize]="'5px'" >
+                <mat-grid-tile class="scrollable"
+                    *ngFor="let diet of diets"
+                    [colspan]="1"
+                    [rowspan]="4"
+                    [style.background]="white">
+                    <mat-card>
+                        <mat-card-title>{{diet.name}}  
+                               <mat-icon matTooltip="{{diet.description}}" class="icon">info</mat-icon>
+                        </mat-card-title>
+                        <img  height="200px" width="150px" src="../../../assets/medina-catering-AdtqezIqv7c-unsplash.jpg"/>
+                        <mat-card-content>Cena: {{diet.price}}</mat-card-content>
+                        <mat-card-actions>
+                             <mat-radio-button [value]="diet">
+                                 Wybierz
+                            </mat-radio-button>
+                        </mat-card-actions>
+                    </mat-card>
+            </mat-grid-tile>
+        </mat-grid-list>
+        </mat-radio-group>   
+        <button mat-raised-button matStepperNext>Dalej</button>    
+    </mat-step>
+    <mat-step>
+            <ng-template matStepLabel>Dostosuj</ng-template>
+            <table cellspacing="0">
+                <tr><h4>Dieta: {{chosenDiet.name}}</h4></tr>
+                <tr><td>Wybierz wariant kaloryczny: </td>
+                    <td>
+                        <mat-radio-group [(ngModel)]="orderToCreate.caloricVersion" >
+                            <mat-radio-button *ngFor="let version of chosenDiet.caloricVersions" [value]="version">
+                                {{version}}
+                            </mat-radio-button>
+                        </mat-radio-group> 
+                    </td>
+                </tr>
+                <tr>
+                    
+                    <td>
+                        <mat-form-field class="full-width">
+                            <input matInput [min]="minDate" [matDatepicker]="picker" placeholder="Data rozpoczęcia"
+                            [formControl]="startDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </td>
+               
+                    <td>
+                            <mat-form-field class="full-width">
+                                    <input matInput [min]="startDate" [matDatepicker]="picker1" placeholder="Data zakończenia"
+                                    [formControl]="endDate">
+                                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker1></mat-datepicker>
+                                </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <button mat-raised-button matStepperPrevious>Wróć</button>
+                    <button mat-raised-button matStepperNext>Dalej</button>
+                 </tr>
+            </table>
+    </mat-step>    
+    <mat-step>
+
+            <ng-template matStepLabel>Dostosuj</ng-template>
+    </mat-step>    
+
+</mat-horizontal-stepper>    
+        

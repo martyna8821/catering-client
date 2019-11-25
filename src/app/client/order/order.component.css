@@ -1,0 +1,19 @@
+.icon{
+text-align: right;
+
+}
+
+
+td {
+    padding-right: 10px;
+  }
+
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+
+  tr.spaceUnder>td {
+    padding-top: 15px;
+  }
+  
+  

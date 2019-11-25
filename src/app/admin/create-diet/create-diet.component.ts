@@ -10,6 +10,8 @@ import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material
 import { MatChipInputEvent } from '@angular/material/chips';
 import { TokenStorageService } from 'src/app/authentication/service/token-storage.service';
 import {MessageService} from 'primeng/api';
+import { UserService } from 'src/app/shared/service/UserService';
+import { User } from 'src/app/shared/model/User';
 
 
 export class LabelInput{
@@ -26,7 +28,7 @@ export class LabelInput{
 export class CreateDietComponent implements OnInit {
 
   basicDietInfo: FormGroup;
- 
+  dietitians: User[];
   visible = true;
   selectable = true;
   removable = true;
@@ -55,6 +57,7 @@ export class CreateDietComponent implements OnInit {
               private router: Router,
               private tokenService: TokenStorageService,
               private messageService: MessageService,
+              private userService: UserService,
               private dietService:DietService){  
                 this.filteredCaloricVersions = this.caloricVersionsCtrl.valueChanges.pipe(
                                                     startWith(null),
@@ -69,6 +72,17 @@ export class CreateDietComponent implements OnInit {
       description: ['', Validators.required],
       price: [100, Validators.required]
     });
+
+    this.userService.getUsers().pipe(
+     map( users => { this.dietitians = users;
+        this.dietitians = users.filter(user => user.roles.includes('ROLE_DIETITIAN'))
+      })
+    )
+    .subscribe();
+
+    console.log(this.dietitians);
+
+
 }
 
   createDiet(){

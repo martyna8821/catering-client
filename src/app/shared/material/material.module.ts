@@ -20,6 +20,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSelectModule} from '@angular/material/select'; 
 import {MatChipsModule} from '@angular/material/chips'; 
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatRadioModule} from '@angular/material/radio'; 
+import {MatDatepickerModule} from '@angular/material/datepicker'; 
 
 @NgModule({
   declarations: [],
@@ -44,7 +46,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatExpansionModule,
     MatSelectModule,
     MatChipsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatRadioModule,
+    MatDatepickerModule
     
   ],
   exports: [
@@ -68,7 +72,10 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatExpansionModule,
     MatSelectModule,
     MatChipsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatRadioModule,
+    MatDatepickerModule
+
   ]
 })
 export class MaterialModule { }

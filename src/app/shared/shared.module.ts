@@ -11,6 +11,7 @@ import { DietsListComponent } from './diets-list/diets-list.component';
 import { DietsCardComponent } from './diets-card/diets-card.component';
 import { PrimeModule } from './primeng/prime/prime.module';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { MatNativeDateModule } from '@angular/material';
 
 @NgModule({
   declarations: [NavbarComponent, ConfirmationComponent, DietsListComponent, DietsCardComponent],
@@ -21,7 +22,8 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxMatSelectSearchModule
+    NgxMatSelectSearchModule,
+    MatNativeDateModule
 
   ],
   exports: [
@@ -34,7 +36,8 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     NavbarComponent,
     DietsListComponent,
     DietsCardComponent,
-    NgxMatSelectSearchModule
+    NgxMatSelectSearchModule,
+    MatNativeDateModule
     ]
 })
 export class SharedModule { }

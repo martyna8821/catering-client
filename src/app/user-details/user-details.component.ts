@@ -26,7 +26,7 @@ export class UserDetailsComponent implements OnInit {
   editMode=false;
   profileOwner: User;
   userDto: UserDTO;
-  userId: string;
+  username: string;
   tiles: Tile[] = [
     {text: 'One', cols: 3, rows: 1, color: 'lightblue'},
     {text: 'Two', cols: 1, rows: 2, color: 'lightgreen'},
@@ -39,8 +39,8 @@ export class UserDetailsComponent implements OnInit {
               { }
 
   ngOnInit() {
-    this.userId = this.tokenStorageService.getUserId();
-    this.userService.getUserById(this.userId).subscribe(
+    this.username = this.tokenStorageService.getUserName();
+    this.userService.getUserByUsername(this.username).subscribe(
       user => { 
         this.profileOwner = user;
       }
