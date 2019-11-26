@@ -31,7 +31,7 @@
             <ng-template matStepLabel>Dostosuj</ng-template>
             <table cellspacing="0">
                 <tr><h4>Dieta: {{chosenDiet.name}}</h4></tr>
-                <tr><td>Wybierz wariant kaloryczny: </td>
+                <tr class="spaceUnder"><td>Wybierz wariant kaloryczny: </td>
                     <td>
                         <mat-radio-group [(ngModel)]="orderToCreate.caloricVersion" >
                             <mat-radio-button *ngFor="let version of chosenDiet.caloricVersions" [value]="version">
@@ -40,12 +40,12 @@
                         </mat-radio-group> 
                     </td>
                 </tr>
-                <tr>
+                <tr class="spaceUnder">
                     
                     <td>
                         <mat-form-field class="full-width">
-                            <input matInput [min]="minDate" [matDatepicker]="picker" placeholder="Data rozpoczęcia"
-                            [formControl]="startDate">
+                            <input matInput [matDatepicker]="picker" placeholder="Data rozpoczęcia"
+                            [(ngModel)]="orderToCreate.startDate">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
@@ -54,7 +54,7 @@
                     <td>
                             <mat-form-field class="full-width">
                                     <input matInput [min]="startDate" [matDatepicker]="picker1" placeholder="Data zakończenia"
-                                    [formControl]="endDate">
+                                    [(ngModel)]="orderToCreate.endDate">
                                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                                     <mat-datepicker #picker1></mat-datepicker>
                                 </mat-form-field>
@@ -68,8 +68,77 @@
     </mat-step>    
     <mat-step>
 
-            <ng-template matStepLabel>Dostosuj</ng-template>
+            <ng-template matStepLabel>Dane dostawy</ng-template>
+            <mat-checkbox [(ngModel)]="deliverToHome" (change)="
+            deliverHomeChange()">
+                Użyj adresu zamieszkania</mat-checkbox>
+        
+            <table cellspacing="0" *ngIf="!deliverToHome">  
+                <tr>
+                    <td colspan="2">
+                <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Ulica</mat-label> 
+                  <input matInput  required [(ngModel)]="insertedDeliveryAddress.street" 
+                   >
+                </mat-form-field>
+            </td>
+            <td colspan="1"> 
+                <mat-form-field appearance="outline">
+                        <mat-label>Numer domu</mat-label> 
+                    <input matInput required 
+                    [(ngModel)]="insertedDeliveryAddress.houseNumber" >
+                </mat-form-field>
+                </td>
+            </tr>
+            <tr> 
+                <td colspan="2"> 
+                <mat-form-field appearance="outline">
+                        <mat-label>Miasto</mat-label> 
+                    <input matInput  required [(ngModel)]="insertedDeliveryAddress.city" 
+                     >
+                     <mat-icon matSuffix>location_city</mat-icon>
+                </mat-form-field>
+                </td>
+                <td colspan="1">
+                <mat-form-field class="full-width"  appearance="outline">
+                        <mat-label>Kod pocztowy</mat-label> 
+                  <input matInput placeholder="kod pocztowy" required [(ngModel)]="insertedDeliveryAddress.zipCode" 
+                >
+              </mat-form-field>
+              </td>
+            </tr>
+            </table>
+         <div>
+                    <button mat-raised-button matStepperPrevious>Wróć</button>
+                    <button mat-raised-button matStepperNext>Dalej</button>
+</div>
     </mat-step>    
+    <mat-step>
+        <ng-template matStepLabel>Podsumowanie</ng-template>
+        <table>
+            <tr class="spaceUnder">
+                <h4>{{chosenDiet.name}}</h4>
+            </tr>
+            <tr class="spaceUnder">
+                 Wersja kaloryczna: {{orderToCreate.caloricVersion}}kcal
+                </tr>
+           <tr class="spaceUnder"> Cena: {{chosenDiet.price}}</tr>
+           <tr class="spaceUnder"><td> Data rozpoczęcia: {{orderToCreate.startDate | date:'shortDate'}} </td>
+            <td>Data zakończenia: {{orderToCreate.endDate | date:'shortDate'}}</td></tr>
+       <tr class="spaceUnder">Adres dostawy:</tr>
+       <tr class="spaceUnder">ul. {{orderToCreate.deliveryAddress.street}} {{orderToCreate.deliveryAddress.houseNumber}}</tr>
+       <tr class="spaceUnder">{{orderToCreate.deliveryAddress.zipCode}} {{orderToCreate.deliveryAddress.city}}</tr>
+        
+    <tr class="spaceUnder">
+        <mat-checkbox [(ngModel)]="regulations">Oświadczam, że zapoznałem się z regulaminem</mat-checkbox></tr>
+    <tr class="spaceUnder">
+            <mat-checkbox [(ngModel)]="personalData">Oświadczenie rodo</mat-checkbox>
+    </tr>
+       <button mat-raised-button matStepperPrevious>Wróć</button>
+       <button mat-raised-button (click)="placeOrder()">Wyślij</button>
+       <button mat-raised-button (click)="stepper.reset()">Zacznij od nowa</button>
+    </table>
+    </mat-step>
 
 </mat-horizontal-stepper>    
         
