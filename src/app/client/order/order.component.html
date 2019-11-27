@@ -123,8 +123,8 @@
                  Wersja kaloryczna: {{orderToCreate.caloricVersion}}kcal
                 </tr>
            <tr class="spaceUnder"> Cena: {{chosenDiet.price}}</tr>
-           <tr class="spaceUnder"><td> Data rozpoczęcia: {{orderToCreate.startDate | date:'shortDate'}} </td>
-            <td>Data zakończenia: {{orderToCreate.endDate | date:'shortDate'}}</td></tr>
+           <tr class="spaceUnder"><td> Data rozpoczęcia: {{orderToCreate.startDate | date:'dd/MM/yyyy'}} </td>
+            <td>Data zakończenia: {{orderToCreate.endDate | date:'dd/MM/yyyy'}}</td></tr>
        <tr class="spaceUnder">Adres dostawy:</tr>
        <tr class="spaceUnder">ul. {{orderToCreate.deliveryAddress.street}} {{orderToCreate.deliveryAddress.houseNumber}}</tr>
        <tr class="spaceUnder">{{orderToCreate.deliveryAddress.zipCode}} {{orderToCreate.deliveryAddress.city}}</tr>

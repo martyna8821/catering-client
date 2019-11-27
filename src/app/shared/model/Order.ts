@@ -1,6 +1,6 @@
 import { Diet } from './Diet';
-import { Address } from 'cluster';
 import { User } from './User';
+import { Address } from 'src/app/authentication/model/Address';
 
 export class Order{
 

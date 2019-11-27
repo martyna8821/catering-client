@@ -11,7 +11,7 @@
       </button>
       <mat-menu #menuClient="matMenu">
         <button (click)="navigate('/client/order')"  mat-menu-item>Złóż zamówienie</button>
-        <button mat-menu-item>Przeglądaj swoje zamówienia</button>
+        <button (click)="navigate('/client/order-list')"  mat-menu-item>Przeglądaj swoje zamówienia</button>
         <button mat-menu-item>Przeglądaj menu</button>
       </mat-menu>
       <button mat-button [matMenuTriggerFor]="menuDietitian" class="button-color" mat-mini-fab
