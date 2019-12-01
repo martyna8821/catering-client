@@ -10,17 +10,28 @@
             <mat-checkbox [(ngModel)]="mealType.chosen" >{{mealType.name}}</mat-checkbox>
         </td>
     </tr>
+
     <tr><h5>Składniki:</h5></tr>
-        <button mat-raised-button class="button-color" (click)="addColumn()"   
-         [disabled]="columns.length > 20" style="margin-right: .5em">+</button>
-        <button mat-raised-button class="button-color" (click)="removeColumn()" 
-         [disabled]="columns.length < 2 ">-</button>
+        <button mat-raised-button class="button-color" (click)="addIngredient()"   
+         [disabled]="ingredientsCounter > 100" style="margin-right: .5em">+</button>
+        <button mat-raised-button class="button-color" (click)="removeIngredient()" 
+         [disabled]="ingredientsCounter < 2 ">-</button>
 
         <div class="p-grid p-dir-col" style="margin-top: .5em">
-            <div class="p-col" *ngFor="let col of columns; let i=index" [@animation]="'visible'">
-                <div class="box">{{i + 1}}</div>
+            <div class="p-col" *ngFor="let recipeIngredient of recipeIngredients" [@animation]="'visible'">
+              <form >
+                <mat-form-field class="full-width">
+                  <input type="text" aria-label="Ingredient" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient.name">
+                      {{ingredient.name}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </form>
             </div>
         </div>
     <tr><h5>Sposób przygotowania:</h5></tr>
-
+  <tr>  
+   </tr> 
 </table>

@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeInput } from 'src/app/shared/model/RecipeInput';
 import {trigger,state,style,transition,animate,AnimationEvent} from '@angular/animations';
+import { MealType } from './Mealtype';
+import { RecipeIngredient } from './RecipeIngredient';
+import { Ingredient } from 'src/app/shared/model/Ingredient';
+import { IngredientService } from 'src/app/shared/service/IngredientService';
+import { Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { startWith, map } from 'rxjs/operators';
 
-class MealType{
-  name: string;
-  chosen: boolean;
-}
+
 @Component({
   selector: 'app-add-recipe',
   templateUrl: './add-recipe.component.html',
@@ -44,19 +48,44 @@ export class AddRecipeComponent implements OnInit {
   //                                labels: [],   
   //                                mealWeight: 0};
 //
-  constructor() { }
+
   columns: number[];
+  recipeIngredients: RecipeIngredient[] = [{ingredient: new Ingredient(), quantity: 0}];
+  ingredientsCounter = 1;
+  ingredients: Ingredient[] = [];
 
+  myControl = new FormControl();
+  filteredIngredients: Observable<Ingredient[]>;
+
+
+  constructor(private ingredientService: IngredientService) { }
+  
   ngOnInit() {
-      this.columns = [0, 1, 2, 3, 4, 5];
+    this.ingredientService.getAll().subscribe(
+      ingredients => this.ingredients =ingredients
+    );
+
+    this.filteredIngredients = this.myControl.valueChanges
+    .pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+
   }
 
-  addColumn() {
-      this.columns.push(this.columns.length);
+  private _filter(value: string): Ingredient[] {
+    const filterValue = value.toLowerCase();
+
+    return this.ingredients.filter(ingredient => ingredient.name.toLowerCase().includes(filterValue));
+  }
+  addIngredient() {
+    this.ingredientsCounter++;
+      this.recipeIngredients.push({ingredient: new Ingredient(), quantity: 0});
   }
 
-  removeColumn() {
-      this.columns.splice(-1, 1);
+  removeIngredient() {
+    this.ingredientsCounter--;
+      this.recipeIngredients.splice(-1, 1);
   }
 
 }
