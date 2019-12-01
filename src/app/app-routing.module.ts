@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: '', children: [
     { path: '', loadChildren: './authentication/authentication.module#AuthenticationModule'},
     { path: 'client', loadChildren: './client/client.module#ClientModule'},
-    { path: 'dietician', loadChildren: './dietician/dietician.module#DieticianModule'},
+    { path: 'dietitian', loadChildren: './dietitian/dietitian.module#DietitianModule'},
     { path: 'admin', loadChildren: './admin/admin.module#AdminModule'}]},
   { path: 'user-details', component: UserDetailsComponent}
 

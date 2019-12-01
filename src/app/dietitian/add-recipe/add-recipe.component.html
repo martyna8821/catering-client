@@ -1,0 +1,26 @@
+<mat-card-title><h3>Nowy przepis</h3></mat-card-title>
+<table cellspacing="0">
+    <tr><mat-form-field  appearance="outline">
+        <mat-label>Nazwa</mat-label>
+      <input class="full-width" matInput required [(ngModel)]="recipeToCreate.name">
+    </mat-form-field></tr>
+
+    <tr> 
+        <td *ngFor="let mealType of availableMealTypes" width="20%">
+            <mat-checkbox [(ngModel)]="mealType.chosen" >{{mealType.name}}</mat-checkbox>
+        </td>
+    </tr>
+    <tr><h5>Składniki:</h5></tr>
+        <button mat-raised-button class="button-color" (click)="addColumn()"   
+         [disabled]="columns.length > 20" style="margin-right: .5em">+</button>
+        <button mat-raised-button class="button-color" (click)="removeColumn()" 
+         [disabled]="columns.length < 2 ">-</button>
+
+        <div class="p-grid p-dir-col" style="margin-top: .5em">
+            <div class="p-col" *ngFor="let col of columns; let i=index" [@animation]="'visible'">
+                <div class="box">{{i + 1}}</div>
+            </div>
+        </div>
+    <tr><h5>Sposób przygotowania:</h5></tr>
+
+</table>

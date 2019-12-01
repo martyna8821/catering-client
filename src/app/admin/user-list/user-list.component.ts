@@ -7,6 +7,7 @@ import { UserService } from 'src/app/shared/service/UserService';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmationComponent } from 'src/app/shared/components/confirmation/confirmation.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
@@ -41,7 +42,8 @@ export class UserListComponent implements OnInit {
     {name: 'phoneNumber', display: 'Numer telefonu'   
   }];
   constructor(private userService: UserService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private router: Router) { }
 
   getData(){
   //  var statusQuery = this.buildStatusQuery();
@@ -88,6 +90,10 @@ export class UserListComponent implements OnInit {
     //  }
    // });
    
+  }
+
+  createNewUser(){
+    this.router.navigateByUrl('/admin/add-user');
   }
 
 }

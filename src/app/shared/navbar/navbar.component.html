@@ -20,7 +20,7 @@
       </button>
       <mat-menu #menuDietitian="matMenu">
         <button mat-menu-item>Kreator menu</button>
-        <button mat-menu-item>Zarządzaj przepisami</button>
+        <button (click)="navigate('/dietitian/recipe-list')" mat-menu-item>Zarządzaj przepisami</button>
         <button mat-menu-item>Zarządzaj składnikami</button>
       </mat-menu>
       <button mat-button [matMenuTriggerFor]="menuAdmin" class="button-color" mat-mini-fab 

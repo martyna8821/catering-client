@@ -12,7 +12,8 @@ import { TokenStorageService } from 'src/app/authentication/service/token-storag
 })
 export class OrderListComponent implements OnInit {
 
-  displayedColumns = ['orderDate', 'diet.name'];
+  displayedColumns = ['orderDate', 'diet.name', 'diet.caloricVersion', 
+                      'startDate', 'endDate'];
  
   ordersDataSource: MatTableDataSource<Order>;
   constructor(private orderService: OrderService,
