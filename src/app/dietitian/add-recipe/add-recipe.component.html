@@ -12,26 +12,74 @@
     </tr>
 
     <tr><h5>Składniki:</h5></tr>
-        <button mat-raised-button class="button-color" (click)="addIngredient()"   
-         [disabled]="ingredientsCounter > 100" style="margin-right: .5em">+</button>
-        <button mat-raised-button class="button-color" (click)="removeIngredient()" 
-         [disabled]="ingredientsCounter < 2 ">-</button>
-
-        <div class="p-grid p-dir-col" style="margin-top: .5em">
-            <div class="p-col" *ngFor="let recipeIngredient of recipeIngredients" [@animation]="'visible'">
+    <tr class="spaceUnder"> 
+         <button mat-button (click)="addIngredient()"   
+         [disabled]="ingredientsCounter > 100">
+           <mat-icon>add_circle</mat-icon>
+        </button>
+       
+         <button mat-button  (click)="removeIngredient()" 
+         [disabled]="ingredientsCounter < 2 ">
+           <mat-icon>remove_circle</mat-icon>
+         </button>
+      </tr>
+</table>
+        <div class="p-grid " >
+            <div  *ngFor="let recipeIngredient of recipeIngredients; let i=index" [@animation]="'visible'">
               <form >
-                <mat-form-field class="full-width">
-                  <input type="text" aria-label="Ingredient" matInput [formControl]="myControl" [matAutocomplete]="auto">
-                  <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient.name">
+                <table>
+              <tr class="spaceUnder">
+                <td width="50%">
+                <mat-form-field appearance="outline">
+                  <mat-label>Składnik</mat-label>
+                  <input class="full-width" type="text" aria-label="Ingredient" matInput 
+                   [formControl]="myControl" [matAutocomplete]="auto">
+                  <mat-autocomplete  (optionSelected)="ingredientSelected(i, $event.option.value)"  #auto="matAutocomplete" 
+                                      [displayWith]="displayFn">
+                    <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient">
                       {{ingredient.name}}
                     </mat-option>
                   </mat-autocomplete>
                 </mat-form-field>
-              </form>
+              </td>
+              <td width="50%">
+               <mat-form-field class="full-width"  appearance="outline">
+                 <mat-label>Ilość</mat-label>
+                 <input [ngModelOptions]="{standalone: true}" [(ngModel)]="recipeIngredient.quantity" matInput>
+                <span matSuffix>g</span> 
+               </mat-form-field>
+               </td>
+              </tr>
+            </table>
+              </form>           
             </div>
         </div>
-    <tr><h5>Sposób przygotowania:</h5></tr>
-  <tr>  
-   </tr> 
+          
+<table>    
+  <tr><h5>Sposób przygotowania:</h5></tr>
+  <tr class="spaceUnder"> 
+    <button mat-button (click)="addRecipeStep()"   
+    [disabled]="recipeSteps.length > 100">
+      <mat-icon>add_circle</mat-icon>
+   </button>
+
+    <button mat-button  (click)="removeRecipeStep()" 
+    [disabled]="recipeSteps.length < 2 ">
+      <mat-icon>remove_circle</mat-icon>
+    </button>
+ </tr>
+    <div class="p-grid">
+      <tr *ngFor="let recipeStep of recipeSteps;let i=index" [@animation]="'visible'">
+        <h4>Krok {{recipeStep.number}}</h4>
+        <mat-form-field  appearance="outline">
+          <mat-label>Opis</mat-label>
+          <textarea matTextareaAutosize  matAutosizeMinRows=3 matAutosizeMinCols=3 matInput   
+              [(ngModel)]="recipeStep.step" required></textarea>
+      </mat-form-field>
+    </tr>
+    </div>   
 </table>
+
+<mat-card-actions>
+  <button mat-raised-button (click) ></button>
+</mat-card-actions>

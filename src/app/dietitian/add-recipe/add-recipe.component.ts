@@ -8,6 +8,7 @@ import { IngredientService } from 'src/app/shared/service/IngredientService';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
+import { RecipeStep } from './RecipeStep';
 
 
 @Component({
@@ -49,14 +50,15 @@ export class AddRecipeComponent implements OnInit {
   //                                mealWeight: 0};
 //
 
-  columns: number[];
-  recipeIngredients: RecipeIngredient[] = [{ingredient: new Ingredient(), quantity: 0}];
+  recipeIngredients: RecipeIngredient[] = [{ingredient:{name: 'jajka', unit: 'g', id: ''}, quantity:0}];
   ingredientsCounter = 1;
   ingredients: Ingredient[] = [];
 
   myControl = new FormControl();
   filteredIngredients: Observable<Ingredient[]>;
 
+  recipeStepsCounter = 1;
+  recipeSteps: RecipeStep[] = [{step: '', number: this.recipeStepsCounter}];
 
   constructor(private ingredientService: IngredientService) { }
   
@@ -74,7 +76,7 @@ export class AddRecipeComponent implements OnInit {
   }
 
   private _filter(value: string): Ingredient[] {
-    const filterValue = value.toLowerCase();
+    const filterValue = value;
 
     return this.ingredients.filter(ingredient => ingredient.name.toLowerCase().includes(filterValue));
   }
@@ -86,6 +88,26 @@ export class AddRecipeComponent implements OnInit {
   removeIngredient() {
     this.ingredientsCounter--;
       this.recipeIngredients.splice(-1, 1);
+  }
+
+
+    ingredientSelected(i: number, ingredient: Ingredient){
+     console.log(ingredient);
+      this.recipeIngredients[i].ingredient = ingredient;
+    }
+
+    displayFn(ingredient?: Ingredient): string | undefined {
+      return ingredient ? ingredient.name : undefined;
+  }
+
+  addRecipeStep(){
+    this.recipeStepsCounter++;
+    this.recipeSteps.push({step: '', number: this.recipeStepsCounter});
+  }
+
+  removeRecipeStep(){
+    this.recipeStepsCounter--;
+    this.recipeSteps.splice(-1,1);
   }
 
 }
