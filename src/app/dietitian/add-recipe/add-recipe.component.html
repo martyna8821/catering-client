@@ -1,61 +1,61 @@
 <mat-card-title><h3>Nowy przepis</h3></mat-card-title>
+
 <table cellspacing="0">
-    <tr><mat-form-field  appearance="outline">
+  <tr class="full-width"><td colspan="5"><mat-form-field  appearance="outline">
         <mat-label>Nazwa</mat-label>
-      <input class="full-width" matInput required [(ngModel)]="recipeToCreate.name">
-    </mat-form-field></tr>
+        <input class="full-width" matInput required [(ngModel)]="recipeToCreate.name">
+      </mat-form-field></td>
+  </tr>
+  <tr> 
+      <td *ngFor="let mealType of mealTypes" >
+          <mat-checkbox [(ngModel)]="mealType.chosen" >{{mealType.name}}</mat-checkbox>
+      </td>
+  </tr>
 
-    <tr> 
-        <td *ngFor="let mealType of availableMealTypes" width="20%">
-            <mat-checkbox [(ngModel)]="mealType.chosen" >{{mealType.name}}</mat-checkbox>
-        </td>
-    </tr>
-
-    <tr><h5>Składniki:</h5></tr>
-    <tr class="spaceUnder"> 
-         <button mat-button (click)="addIngredient()"   
-         [disabled]="ingredientsCounter > 100">
-           <mat-icon>add_circle</mat-icon>
-        </button>
-       
-         <button mat-button  (click)="removeIngredient()" 
-         [disabled]="ingredientsCounter < 2 ">
-           <mat-icon>remove_circle</mat-icon>
-         </button>
-      </tr>
+  <tr><h5>Składniki:</h5></tr>
+  <tr class="spaceUnder"> 
+       <button mat-button (click)="addIngredient()"   
+       [disabled]="ingredientsCounter > 100">
+         <mat-icon>add_circle</mat-icon>
+      </button>
+      <button mat-button  (click)="removeIngredient()" 
+       [disabled]="ingredientsCounter < 2 ">
+         <mat-icon>remove_circle</mat-icon>
+       </button>
+  </tr>
 </table>
-        <div class="p-grid " >
-            <div  *ngFor="let recipeIngredient of recipeIngredients; let i=index" [@animation]="'visible'">
-              <form >
-                <table>
-              <tr class="spaceUnder">
-                <td width="50%">
-                <mat-form-field appearance="outline">
-                  <mat-label>Składnik</mat-label>
-                  <input class="full-width" type="text" aria-label="Ingredient" matInput 
-                   [formControl]="myControl" [matAutocomplete]="auto">
-                  <mat-autocomplete  (optionSelected)="ingredientSelected(i, $event.option.value)"  #auto="matAutocomplete" 
-                                      [displayWith]="displayFn">
-                    <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient">
-                      {{ingredient.name}}
-                    </mat-option>
-                  </mat-autocomplete>
-                </mat-form-field>
-              </td>
-              <td width="50%">
-               <mat-form-field class="full-width"  appearance="outline">
-                 <mat-label>Ilość</mat-label>
-                 <input [ngModelOptions]="{standalone: true}" [(ngModel)]="recipeIngredient.quantity" matInput>
-                <span matSuffix>g</span> 
-               </mat-form-field>
-               </td>
-              </tr>
-            </table>
-              </form>           
-            </div>
-        </div>
+<table cellspacing="0" class ="full-width">
+<div class="p-grid full-width">
+  <div *ngFor="let recipeIngredient of recipeIngredients; let i=index" [@animation]="'visible'">  
+        <tr class="spaceUnder full-width">
+        <td width="50%">
+          <mat-form-field appearance="outline">
+            <mat-label>Składnik</mat-label>
+            <input class="full-width" type="text" matInput [formControl]="myControl" 
+                    [matAutocomplete]="auto">
+            <mat-autocomplete (optionSelected)="ingredientSelected(i, $event.option.value)"
+                             #auto="matAutocomplete" [displayWith]="displayFn">
+              <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient">
+                {{ingredient.name}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </td>
+        <td width="50%">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Ilość</mat-label>
+            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="recipeIngredient.value"
+                     matInput>
+            <span matSuffix>g</span> 
+          </mat-form-field>
+        </td>
+        </tr>
           
-<table>    
+  </div>
+</div>
+</table>
+          
+<table cellspacing="0" class="full-width">    
   <tr><h5>Sposób przygotowania:</h5></tr>
   <tr class="spaceUnder"> 
     <button mat-button (click)="addRecipeStep()"   
@@ -69,17 +69,26 @@
     </button>
  </tr>
     <div class="p-grid">
-      <tr *ngFor="let recipeStep of recipeSteps;let i=index" [@animation]="'visible'">
-        <h4>Krok {{recipeStep.number}}</h4>
-        <mat-form-field  appearance="outline">
+      <div *ngFor="let recipeStep of recipeSteps;let i=index" [@animation]="'visible'">
+       <tr> <h4>Krok {{recipeStep.stepNumber}}</h4></tr>        
+        <tr><td  width="40%"><mat-form-field  appearance="outline">
           <mat-label>Opis</mat-label>
           <textarea matTextareaAutosize  matAutosizeMinRows=3 matAutosizeMinCols=3 matInput   
-              [(ngModel)]="recipeStep.step" required></textarea>
-      </mat-form-field>
-    </tr>
+              [(ngModel)]="recipeStep.description" required></textarea>
+      </mat-form-field></td>
+     </tr>
+    </div>
     </div>   
 </table>
 
+<table cellspacing="0">
+  <tr>
+    <td *ngFor="let label of labels">
+      <mat-checkbox [(ngModel)]="label.checked">{{label.name}}</mat-checkbox>
+    </td>
+  </tr>
+</table>
+
 <mat-card-actions>
-  <button mat-raised-button (click) ></button>
+  <button mat-raised-button (click)="save()" >Zapisz</button>
 </mat-card-actions>

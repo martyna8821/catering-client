@@ -1,10 +1,12 @@
 import { Ingredient } from './Ingredient';
+import { RecipeIngredient } from 'src/app/shared/model/RecipeIngredient';
+import { RecipeStep } from './RecipeStep';
 
 export class RecipeInput{
     name: string;
     mealTypes: string[];
-    ingredients: Ingredient[];
-    recipeSteps: string[];
+    ingredients: RecipeIngredient[];
+    recipeSteps: RecipeStep[];
     labels: string[];   
     mealWeight: number;
 }

@@ -12,12 +12,9 @@ import { TokenStorageService } from 'src/app/authentication/service/token-storag
 import {MessageService} from 'primeng/api';
 import { UserService } from 'src/app/shared/service/UserService';
 import { User } from 'src/app/shared/model/User';
+import { LabelInput } from 'src/app/authentication/model/LabelInput';
 
 
-export class LabelInput{
-  name: string;
-  checked: boolean;
-}
 
 @Component({
   selector: 'app-create-diet',
