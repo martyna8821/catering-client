@@ -1,112 +1,125 @@
-<div class="row">
-<div class="col-3"></div>
-<div class="col">
-  <mat-card >  
-      <mat-card-header class="card-layout">   
-        <div *ngIf="checkIfLoggedAdmin(); then admin else client"></div>
-            <ng-template #admin>     
-              <mat-card-title >Dodaj nowego użytownika</mat-card-title>
-            </ng-template>
-            <ng-template #client>     
-                <mat-card-title >Zarejestruj się!</mat-card-title>
-            </ng-template>
-      
-     
-       
-        </mat-card-header>
-        <mat-card-content class="card-layout">
-        <form [formGroup]="personalDetailsGroup">
-      <div class="row">
-      <mat-form-field class="example-full-width" appearance="outline">
-          <input matInput placeholder="Nazwa użytkownika" required [(ngModel)]="model.username" formControlName="userName">
+<mat-card-header class="card-layout">   
+  <div *ngIf="checkIfLoggedAdmin(); then admin else client"></div>
+      <ng-template #admin>     
+        <mat-card-title >Dodaj nowego użytownika</mat-card-title>
+      </ng-template>
+      <ng-template #client>     
+          <mat-card-title >Zarejestruj się!</mat-card-title>
+      </ng-template>    
+</mat-card-header>
+<mat-card-content class="card-layout">
+  <form [formGroup]="personalDetailsGroup">
+    <table>
+      <tr class="spaceUnder">
+      <td colspan="2">  
+      <mat-form-field class="full-width" appearance="outline">
+        <input matInput placeholder="Nazwa użytkownika" required [(ngModel)]="model.username" formControlName="userName">
       </mat-form-field>
-      
-      </div>
-      <div class="row div-class" >
-        <mat-form-field class="example-full-width" appearance="outline">
+      </td>
+      </tr>
+      <tr class="spaceUnder">
+      <td width="50%">
+        <mat-form-field class="full-width" appearance="outline">
           <input matInput placeholder="Hasło"  required [(ngModel)]="model.password" 
-          formControlName="password" [type]="hide ? 'password' : 'text'">
+                  formControlName="password" [type]="hide ? 'password' : 'text'">
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-              <mat-hint>Hasło powinno zawierać minimum 7 znaków</mat-hint>
+          </button>
+          <mat-hint>Hasło powinno zawierać minimum 7 znaków</mat-hint>
         </mat-form-field>
-        <mat-form-field class="example-full-width" appearance="outline">
+        </td>
+        <td width="50%">
+        <mat-form-field class="full-width" appearance="outline">
             <input matInput placeholder="Powtórz hasło"  required [(ngModel)]="reapetedPassword" 
-            formControlName="password" [type]="hide ? 'password' : 'text'">
+                  formControlName="password" [type]="hide ? 'password' : 'text'">
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
+            </button>
           </mat-form-field>
-        </div>
-        <div class="row">
-        <mat-form-field  appearance="outline">
+        </td>
+        </tr>  
+       <tr class="spaceUnder">
+       <td width="50%"> 
+        <mat-form-field class="full-width" appearance="outline">
             <input matInput placeholder="Imię" required [(ngModel)]="model.firstName" 
-            formControlName="firstName" >
-          </mat-form-field>
-          <div class="col-1"></div>
-        <mat-form-field appearance="outline">
+                  formControlName="firstName" >
+        </mat-form-field>
+        </td>
+        <td width="50%"> 
+        <mat-form-field class="full-width" appearance="outline">
             <input matInput placeholder="Nazwisko" required [(ngModel)]="model.lastName" 
-             formControlName="lastName">
+                  formControlName="lastName">
         </mat-form-field> 
-        </div>
-        <div class="row">
-          <mat-form-field class="example-full-width" appearance="outline" >
+        </td>
+        </tr>
+        <tr class="spaceUnder"> 
+        <td colspan="2">   
+        <mat-form-field class="full-width" appearance="outline">
             <input matInput placeholder="Email" required [(ngModel)]="model.email" 
-            formControlName="email">
+                  formControlName="email">
             <mat-icon matSuffix>email</mat-icon>
             <mat-error *ngIf="personalDetailsGroup.controls['email'].hasError('email')">
-              Niepoprawny format!
+                 Niepoprawny format!
             </mat-error>
-
         </mat-form-field>
-        </div> 
-        <div class="row">
-            <mat-form-field class="example-full-width"  appearance="outline">
+       </td>
+       </tr>
+       <tr class="spaceUnder"> 
+       <td colspan="2">   
+       <mat-form-field class="full-width" appearance="outline">
               <input matInput placeholder="Numer telefonu" required [(ngModel)]="model.phoneNumber" 
-              formControlName="phoneNumber">
+                     formControlName="phoneNumber">
               <mat-icon matSuffix>phone</mat-icon>
-
+        </mat-form-field>
+       </td>
+       </tr>
+       <tr class="spaceUnder"> 
+       <td width="50%">   
+       <mat-form-field class="full-width" appearance="outline">
+           <input matInput placeholder="ulica" required [(ngModel)]="model.address.street" 
+                  formControlName="street">
+        </mat-form-field>
+        </td>
+        <td width="50%">
+          <mat-form-field class="full-width"  appearance="outline">
+            <input matInput placeholder="numer domu/mieszkania" required 
+                   [(ngModel)]="model.address.houseNumber" formControlName="houseNumber">
           </mat-form-field>
-        </div>
-        <div class="row">
-            <mat-form-field class="example-full-width" appearance="outline">
-              <input matInput placeholder="ulica" required [(ngModel)]="model.address.street" 
-               formControlName="street">
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <input matInput placeholder="numer domu/mieszkania" required 
-                [(ngModel)]="model.address.houseNumber" formControlName="houseNumber">
-            </mat-form-field>
-        </div>
-        <div class="row">
-            <mat-form-field appearance="outline">
-                <input matInput placeholder="miasto" required [(ngModel)]="model.address.city" 
+        </td>
+        </tr>
+        <tr class="spaceUnder"> 
+        <td width="50%">   
+        <mat-form-field class="full-width" appearance="outline">
+            <input matInput placeholder="miasto" required [(ngModel)]="model.address.city" 
                  formControlName="city">
-                 <mat-icon matSuffix>location_city</mat-icon>
-            </mat-form-field>
-            <mat-form-field class="example-full-width"  appearance="outline">
+            <mat-icon matSuffix>location_city</mat-icon>
+        </mat-form-field>
+        </td>
+        <td width="50%"> 
+        <mat-form-field class="full-width"  appearance="outline">
               <input matInput placeholder="kod pocztowy" required [(ngModel)]="model.address.zipCode" 
               formControlName="zipCode">
           </mat-form-field>
-        </div>
-
+        </td>
+        </tr>
         <div *ngIf="checkIfLoggedAdmin(); then adminRoles else clientRoles"></div>
             <ng-template #adminRoles>     
+              <tr class="spaceUnder">
+                <td colspan="2">
                 <mat-checkbox class="my-checkbox"  [(ngModel)]="roleClient"  [ngModelOptions]="{standalone: true}">Klient</mat-checkbox>
                 <mat-checkbox class="my-checkbox"  [(ngModel)]="roleDietitian"  [ngModelOptions]="{standalone: true}">Dietetyk</mat-checkbox>
                 <mat-checkbox class="my-checkbox"  [(ngModel)]="roleAdmin"  [ngModelOptions]="{standalone: true}">Administrator</mat-checkbox>
+                </td>
+              </tr>  
             </ng-template>
             <ng-template #clientRoles ng-init="roleClient=true"></ng-template>
-    </form>
+   
+          </table>
+          </form>
   </mat-card-content>
     <mat-card-actions class="card-layout">
     <div>
       <button mat-raised-button  class="button-color" (click)="register()"> Zarejestruj</button>
     </div>
 </mat-card-actions>
-    </mat-card>
-</div>
-<div class="col-3"></div>
-</div>
 
