@@ -12,3 +12,9 @@
 .row-details{
     line-height: 50px;
 }
+
+
+tr.spaceUnder>td {
+    padding-bottom: 25px;
+}
+  

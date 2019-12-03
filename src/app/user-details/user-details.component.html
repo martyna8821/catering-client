@@ -3,24 +3,25 @@
 <div class="container">
     <div class="row my-2">
         <div class="col-lg-8 order-lg-2">
-          <h2>Profil użytkownika</h2>
+          <h2>Profil użytkownika {{profileOwner.username}}</h2>
           <mat-divider></mat-divider>
-           <div class="container" *ngIf="isEditModeDisabled()">
-            <div class="row row-details">
-              <div class="col-sm">Imię: {{profileOwner.firstName}}</div>
-              <div class="col-sm">Nazwisko: {{profileOwner.lastName}}</div>
-            </div>
-            <div class="row row-details">
-              <div class="col-sm">Numer telefonu: {{profileOwner.phoneNumber}}</div>
-              <div class="col-sm">Adres email: {{profileOwner.email}}</div>
-            </div> 
-            <div class="row row-details">
-              <div class="col-sm">Adres: {{profileOwner.address.street}} {{profileOwner.address.houseNumber}} </div>
-            </div> 
-            <div class="row row-details">
-              <div class="col-sm">{{profileOwner.address.zipCode}} {{profileOwner.City}}</div>
-            </div>
-          </div>     
+           <table cellspacing="0" *ngIf="isEditModeDisabled()">
+            <tr class="spaceUnder">
+              <td colspan="2"><b>Imię:</b> {{profileOwner.firstName}}</td>
+              <td colspn="2"><b>Nazwisko:</b> {{profileOwner.lastName}}</td>
+            </tr>
+            <tr class="spaceUnder">
+              <td colspan="4"><b>Numer telefonu:</b> {{profileOwner.phoneNumber}}</td>
+            </tr> 
+            <tr class="spaceUnder">
+              <td colspan="4"><b>Adres email:</b> {{profileOwner.email}}</td>
+            </tr>
+            <tr class="spaceUnder">
+              <td colspan="1"><b>Adres:</b> 
+                 {{profileOwner.address.street}} {{profileOwner.address.houseNumber}}</td>
+              <td colspan="3">{{profileOwner.address.zipCode}} {{profileOwner.address.city}}</td>
+            </tr>
+          </table>     
           <div class="container" *ngIf="isEditModeEnabled();">
             <div class="row row-details">
               <div class="col-sm">       
@@ -47,11 +48,10 @@
           </div>
         </div>    
         <div class="col-lg-4 order-lg-1 text-center">
-           <mat-icon>person</mat-icon>
-            <h6>username</h6>
-            <button mat-raised-button (click)="changePasswordDialog()">zmień hasło</button>
+          <img src="../../assets/user.png">
+          <p><button mat-raised-button (click)="changePasswordDialog()">zmień hasło</button></p>
+          <p><button mat-raised-button *ngIf="isEditModeDisabled()" (click)="enableEditMode()">Edytuj profil</button>
+             <button mat-raised-button *ngIf="isEditModeEnabled()" (click)="disableEditMode()">Zapisz dane</button></p>
         </div>
     </div>
 </div>
-<button mat-button *ngIf="isEditModeDisabled()" (click)="enableEditMode()">Edytuj profil</button>
-<button mat-button *ngIf="isEditModeEnabled()" (click)="disableEditMode()">Zapisz dane</button>
