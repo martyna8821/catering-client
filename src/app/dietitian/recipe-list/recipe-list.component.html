@@ -1,32 +1,63 @@
 <mat-card-title><h3>Dostępne przepisy</h3></mat-card-title>
 <button (click)="createNewRecipe()" mat-raised-button class="button-color" >Dodaj nowy przepis</button>
-<!-- <table mat-table [dataSource]="recipesDataSource" class="full-width">
+
+<p><mat-form-field class="full-width">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Szukaj">
+  </mat-form-field></p>
+<table mat-table [dataSource]="recipesDataSource" class="full-width"
+            matSort multiTemplateDataRows >
 
     <ng-container matColumnDef="name">
-      <th class="table-header" mat-header-cell *matHeaderCellDef>Nazwa </th>
+      <th class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa </th>
       <td mat-cell *matCellDef="let recipe"> {{recipe.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="mealTypes">
         <th class="table-header" mat-header-cell *matHeaderCellDef>Posiłki </th>
-        <td mat-cell *matCellDef="let recipe"> <p *ngFor="type of recipe.mealTypes"> {{type}} </td>
+        <td mat-cell *matCellDef="let recipe">{{recipe.mealTypes}} </td>
     </ng-container>
-  
+
     <ng-container matColumnDef="mealWeight">
-        <th class="table-header" mat-header-cell *matHeaderCellDef>Nazwa </th>
-        <td mat-cell *matCellDef="let recipe"> {{recipe.name}} </td>
+        <th class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header>Waga </th>
+        <td mat-cell *matCellDef="let recipe"> {{recipe.mealWeight}} g </td>
     </ng-container>
 
     <ng-container matColumnDef="caloricValue">
-        <th class="table-header" mat-header-cell *matHeaderCellDef>Nazwa </th>
-        <td mat-cell *matCellDef="let recipe"> {{recipe.name}} </td>
+        <th class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header>Wartość kaloryczna </th>
+        <td mat-cell *matCellDef="let recipe"> {{recipe.caloricValue}} kcal</td>
     </ng-container>
 
     <ng-container matColumnDef="labels">
-        <th class="table-header" mat-header-cell *matHeaderCellDef>Nazwa </th>
-        <td mat-cell *matCellDef="let recipe"> {{recipe.name}} </td>
+        <th class="table-header" mat-header-cell *matHeaderCellDef>Etykiety </th>
+        <td mat-cell *matCellDef="let recipe"> {{recipe.labels}} </td>
     </ng-container>
+
+    <ng-container matColumnDef="details">
+      <th class="table-header" mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let recipe"> 
+        <button mat-raised-button (click)="showRecipe(recipe)"><mat-icon matTooltip="wyświetl przepis">
+            details</mat-icon>
+        </button>  
+      </td>
+  </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table> -->
+  </table> 
+
+  <mat-paginator #paginator
+  [pageIndex]="0"
+  [pageSize]="5"
+  [pageSizeOptions]="[ 5, 10, 20, 50]">
+</mat-paginator>
+
+<p-dialog header="Szczegóły" [(visible)]="display">
+  <h5>Składniki: </h5>  
+  <div *ngFor="let i of detailedRecipeIngredients"> 
+    {{i}}
+  </div>
+  <h5>Przygotowanie: </h5>  
+  <div *ngFor="let s of detailedRecipeSteps"> 
+      {{s}}
+    </div>
+</p-dialog>

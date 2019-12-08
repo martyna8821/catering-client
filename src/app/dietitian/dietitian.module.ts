@@ -4,11 +4,12 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { SharedModule } from '../shared/shared.module';
 import { DietitianRoutingModule } from './dietitian-routing.module';
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
+import { CreateMenuComponent } from './create-menu/create-menu.component';
 
 
 
 @NgModule({
-  declarations: [RecipeListComponent, AddRecipeComponent],
+  declarations: [RecipeListComponent, AddRecipeComponent, CreateMenuComponent],
   imports: [
     DietitianRoutingModule,
     SharedModule,

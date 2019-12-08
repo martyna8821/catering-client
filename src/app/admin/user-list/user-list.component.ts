@@ -8,6 +8,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmationComponent } from 'src/app/shared/components/confirmation/confirmation.component';
 import { Router } from '@angular/router';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-user-list',
@@ -19,7 +20,8 @@ import { Router } from '@angular/router';
       state('expanded', style({height: '*'})),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
-  ]
+  ],
+  providers: [ConfirmationService]
 })
 export class UserListComponent implements OnInit {
 
@@ -43,7 +45,8 @@ export class UserListComponent implements OnInit {
   }];
   constructor(private userService: UserService,
     public dialog: MatDialog,
-    private router: Router) { }
+    private router: Router,
+    private confirmationService: ConfirmationService) { }
 
   getData(){
   //  var statusQuery = this.buildStatusQuery();
@@ -75,20 +78,16 @@ export class UserListComponent implements OnInit {
   }
 
   deleteUserByEmail(userEmail: string, username: string){
-   // const dialogRef = this.dialog.open(ConfirmationComponent, {
-  //    data: {header: `Jesteś pewny, że chcesz usunąć użytkownika ${username}?`}
-  //  });
-
-   // dialogRef.afterClosed().subscribe(result => {
-    //  if (result && result.confirmed) {
+    this.confirmationService.confirm({
+      message: 'Czy na pewno chesz usunąć wybranego uytkownika?',
+      accept: () => {
         this.userService.deleteUserByEmail(userEmail).subscribe(
-            res => {   this.getData()},
-            err =>{ this.getData()}
+          res => {this.getData()},
+          err =>{ this.getData()}
 
-        );
-      
-    //  }
-   // });
+      );
+      }
+  });
    
   }
 

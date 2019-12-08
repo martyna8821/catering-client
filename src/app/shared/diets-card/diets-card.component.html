@@ -32,9 +32,11 @@
         Cena za jeden dzień: {{diet.price}}
     </mat-card-footer>
     <mat-card-actions>
-        <button mat-raised-button *ngIf="adminView" >Kup</button>
-        <button mat-raised-button *ngIf="!adminView">{{diet.active ? 'Wycofaj dietę' : 'Publikuj dietę'}}</button>
-        <button mat-raised-button *ngIf="!adminView">usuń</button>
-        <button mat-raised-button *ngIf="!adminView">edytuj</button>
+       <!--  <button mat-raised-button (click)="buy()" *ngIf="!adminView" >Kup</button> -->
+        <button mat-raised-button *ngIf="adminView" (click)="changeStatus()">{{diet.published ? 'Wycofaj dietę' : 'Publikuj dietę'}}</button>
+        <button mat-raised-button *ngIf="adminView && !diet.published" (click)="delete(diet.id)">usuń</button>
+       <!--  <button mat-raised-button *ngIf="adminView">edytuj</button> -->
     </mat-card-actions>
 </mat-card>
+
+<p-confirmDialog header="Potwierdź"></p-confirmDialog>

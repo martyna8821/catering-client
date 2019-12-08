@@ -1,0 +1,28 @@
+<mat-card-title><h3>Kreator menu</h3></mat-card-title>
+
+<table cellspacing="0">
+    <tr>
+        <h6>Wybierz dietę:</h6>
+    </tr>
+    <tr>
+        <mat-form-field> 
+            <mat-label>Dieta</mat-label>
+            <mat-select [(value)]="menuDiet">
+              <mat-option *ngFor="let diet of diets" [value]="diet.name">
+                {{diet.name}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </tr>
+wybór kaloryczność
+
+    <tr>
+        <mat-form-field class="full-width">
+            <input matInput [matDatepicker]="picker" placeholder="Data"
+            [(ngModel)]="menu.date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </tr>
+
+</table>    

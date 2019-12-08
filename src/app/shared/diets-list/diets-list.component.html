@@ -1,9 +1,9 @@
-<mat-grid-list cols="2"  rowHeight="6:6" [gutterSize]="'100px'" >
+<mat-grid-list cols="4"  rowHeight="2:2" [gutterSize]="'100px'">
         <mat-grid-tile class="scrollable"
             *ngFor="let diet of diets"
-            [colspan]="1"
-            [rowspan]="1"
-            [style.background]="white">
-            <app-diets-card [diet]=diet></app-diets-card>
+            [colspan]="2"
+            [rowspan]="3"> 
+            
+            <app-diets-card [diet]=diet [adminView]=true></app-diets-card>
     </mat-grid-tile>
 </mat-grid-list>

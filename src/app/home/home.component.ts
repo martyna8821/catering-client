@@ -3,6 +3,7 @@ import { TokenStorageService } from '../authentication/service/token-storage.ser
 import { DietService } from '../shared/service/DietService';
 import { Diet } from '../shared/model/Diet';
 import { DomSanitizer } from '@angular/platform-browser';
+import { map } from 'rxjs/operators';
 
 export class DietImageUrl{
   diet: Diet;
@@ -46,9 +47,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
   
-    this.dietService.getAll().subscribe(
-      d => this.diets = d
-    );
+    this.dietService.getAll().pipe(
+      map( d => { this.diets = d;
+        this.diets = d.filter(diet => diet.published)
+      })).subscribe();
   }
 
 }

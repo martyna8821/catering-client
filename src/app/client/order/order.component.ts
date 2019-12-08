@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DietService } from 'src/app/shared/service/DietService';
 import { Diet } from 'src/app/shared/model/Diet';
 import { MatRadioChange } from '@angular/material';
@@ -10,6 +10,7 @@ import { UserService } from 'src/app/shared/service/UserService';
 import { TokenStorageService } from 'src/app/authentication/service/token-storage.service';
 import { OrderService } from 'src/app/shared/service/OrderService';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-order',
@@ -28,6 +29,7 @@ export class OrderComponent implements OnInit {
   insertedDeliveryAddress: Address  =  new Address();
   client: User;
   
+
   personalData = false;
 
   regulations = false;
@@ -42,12 +44,15 @@ export class OrderComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.dietService.getAll().subscribe( d => this.diets = d);
+    this.dietService.getAll().pipe(
+      map( d => { this.diets = d;
+        this.diets = d.filter(diet => diet.published)
+      })).subscribe();
     this.userService.getUserByUsername( 
                   this.tokenStorageService.getUserName())
                   .subscribe( user =>
                   this.orderToCreate.client = user
-                  );
+                  );            
   }
 
   deliverHomeChange(){

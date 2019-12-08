@@ -4,6 +4,8 @@ import {ButtonModule} from 'primeng/button';
 import {FileUploadModule} from 'primeng/fileupload';
 import {ListboxModule} from 'primeng/listbox';
 import {ToastModule} from 'primeng/toast';
+import {DialogModule} from 'primeng/dialog';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [],
@@ -12,14 +14,20 @@ import {ToastModule} from 'primeng/toast';
     ButtonModule,
     FileUploadModule,
     ListboxModule,
-    ToastModule
+    ToastModule,
+    DialogModule,
+    ConfirmDialogModule,
+    
   ],
   exports: [
     CarouselModule,
     ButtonModule,
     FileUploadModule,
     ListboxModule,
-    ToastModule
+    ToastModule,
+    DialogModule,
+    ConfirmDialogModule,
+    
   ]
 })
 export class PrimeModule { }

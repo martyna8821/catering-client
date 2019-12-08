@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Order } from 'src/app/shared/model/Order';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { OrderService } from 'src/app/shared/service/OrderService';
 import { TokenError } from '@angular/compiler/src/ml_parser/lexer';
 import { TokenStorageService } from 'src/app/authentication/service/token-storage.service';
@@ -14,6 +14,10 @@ export class OrderListComponent implements OnInit {
 
   displayedColumns = ['orderDate', 'diet.name', 'diet.caloricVersion', 
                       'startDate', 'endDate'];
+
+
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
  
   ordersDataSource: MatTableDataSource<Order>;
   constructor(private orderService: OrderService,
@@ -21,8 +25,12 @@ export class OrderListComponent implements OnInit {
 
   ngOnInit() {
       this.orderService.getUserOrders(this.tokenStorageService.getUserId())
-                                      .subscribe( orders => 
-                                          this.ordersDataSource = new MatTableDataSource(orders)
+                                      .subscribe( orders => { 
+                                          this.ordersDataSource = new MatTableDataSource(orders);
+                                            this.ordersDataSource.sort = this.sort;
+                                            this.ordersDataSource.paginator = this.paginator;
+                                            }
+                                  
                                       );
     }
 

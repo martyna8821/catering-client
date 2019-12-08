@@ -1,37 +1,45 @@
 <mat-card-title><h3>Twoje zamówienia</h3></mat-card-title>
-<table mat-table [dataSource]="ordersDataSource" class="full-width">
+<table mat-table [dataSource]="ordersDataSource" class="full-width"
+matSort multiTemplateDataRows >
 
     <ng-container matColumnDef="orderDate">
-      <th class="table-header" mat-header-cell *matHeaderCellDef>Data złożenia zamówienia </th>
+      <th class="table-header" mat-header-cell *matHeaderCellDef  mat-sort-header >Data złożenia zamówienia </th>
       <td mat-cell *matCellDef="let order"> {{order.orderDate | date: 'dd/MM/yyyy'}} </td>
     </ng-container>
   
     <!-- Name Column -->
     <ng-container matColumnDef="diet.name">
-      <th  class="table-header" mat-header-cell *matHeaderCellDef> Wybrana dieta </th>
-      <td mat-cell *matCellDef="let order"> {{order.diet.name}} </td>
+      <th  class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header> Wybrana dieta </th>
+      <td mat-cell *matCellDef="let order"> {{order.diet.name}}  <mat-icon matTooltip="{{order.diet.description}}" class="icon">info</mat-icon>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="diet.caloricVersion">
-      <th  class="table-header" mat-header-cell *matHeaderCellDef> Wersja kaloryczna </th>
+      <th  class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header> Wersja kaloryczna </th>
       <td mat-cell *matCellDef="let order"> {{order.caloricVersion}}kcal </td>
     </ng-container>
   
     <ng-container matColumnDef="startDate">
-      <th  class="table-header" mat-header-cell *matHeaderCellDef> Data rozpoczęcia </th>
+      <th  class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header> Data rozpoczęcia </th>
       <td mat-cell *matCellDef="let order"> {{order.startDate | date: 'dd/MM/yyyy'}} </td>
     </ng-container>
   
     <ng-container matColumnDef="endDate">
-      <th  class="table-header" mat-header-cell *matHeaderCellDef> Data zakończenia </th>
+      <th  class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header> Data zakończenia </th>
       <td mat-cell *matCellDef="let order"> {{order.endDate  | date: 'dd/MM/yyyy'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="price">
-      <th  class="table-header" mat-header-cell *matHeaderCellDef> Wersja kaloryczna </th>
+      <th  class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header> Wersja kaloryczna </th>
       <td mat-cell *matCellDef="let order"> {{order.endDate  | date: 'dd/MM/yyyy'}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
+  <mat-paginator #paginator
+                 [pageIndex]="0"
+                 [pageSize]="5"
+                 [pageSizeOptions]="[ 5, 10, 20, 50]">
+  </mat-paginator>

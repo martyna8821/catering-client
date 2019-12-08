@@ -19,9 +19,9 @@
                 D 
       </button>
       <mat-menu #menuDietitian="matMenu">
-        <button mat-menu-item>Kreator menu</button>
+        <button mat-menu-item (click)="navigate('/dietitian/create-menu')">Kreator menu</button>
         <button (click)="navigate('/dietitian/recipe-list')" mat-menu-item>Zarządzaj przepisami</button>
-        <button mat-menu-item>Zarządzaj składnikami</button>
+       <!-- <button mat-menu-item>Przeglądaj swoje manu</button>--> 
       </mat-menu>
       <button mat-button [matMenuTriggerFor]="menuAdmin" class="button-color" mat-mini-fab 
               matTooltip="administrator"  *ngIf="hasRole('ROLE_ADMIN')"> 

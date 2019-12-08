@@ -35,4 +35,12 @@ export class DietService {
     sendImage(image: any[]): Observable<Diet>{
       return this.http.post<Diet>(this.apiUrl, image);
     }
+
+    deleteById(id: string): Observable<''>{
+      return this.http.delete<''>(this.apiUrl+'/'+id);
+    }
+
+    changeStatus(published: boolean, id: string): Observable<"">{
+      return this.http.patch<"">(this.apiUrl+'/'+id+'/'+published, published);
+    }
 }
