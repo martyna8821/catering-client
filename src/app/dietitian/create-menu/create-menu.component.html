@@ -1,28 +1,94 @@
 <mat-card-title><h3>Kreator menu</h3></mat-card-title>
 
-<table cellspacing="0">
-    <tr>
-        <h6>Wybierz dietę:</h6>
-    </tr>
-    <tr>
-        <mat-form-field> 
-            <mat-label>Dieta</mat-label>
-            <mat-select [(value)]="menuDiet">
-              <mat-option *ngFor="let diet of diets" [value]="diet.name">
-                {{diet.name}}
-              </mat-option>
-            </mat-select>
-        </mat-form-field>
-    </tr>
-wybór kaloryczność
+<mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-step>
+        <ng-template matStepLabel>Wybierz dietę</ng-template>
+        <mat-radio-group [(ngModel)]="menuToCreate.diet" >
+        <mat-grid-list cols="5"  rowHeight="2:1" [gutterSize]="'5px'" >
+                <mat-grid-tile class="scrollable"
+                    *ngFor="let diet of diets"
+                    [colspan]="1"
+                    [rowspan]="4"
+                    [style.background]="white">
+                    <mat-card>
+                        <mat-card-title>{{diet.name}}  
+                               <mat-icon matTooltip="{{diet.description}}" class="icon">info</mat-icon>
+                        </mat-card-title>
+                        <img  height="200px" width="150px" src="../../../assets/medina-catering-AdtqezIqv7c-unsplash.jpg"/>
+                        <mat-card-actions>
+                             <mat-radio-button [value]="diet">
+                                 Wybierz
+                            </mat-radio-button>
+                        </mat-card-actions>
+                    </mat-card>
+            </mat-grid-tile>
+        </mat-grid-list>
+        </mat-radio-group>   
+        <button mat-raised-button matStepperNext>Dalej</button>    
+    </mat-step>
+    <mat-step>
+            <ng-template matStepLabel>Szczegóły diety</ng-template>
+            <table cellspacing="0">
+                <tr><h4>Dieta: {{menuToCreate.diet.name}}</h4></tr>
+                <tr class="spaceUnder"><td>Wybierz wariant kaloryczny: </td>
+                    <td>
+                        <mat-radio-group [(ngModel)]="menuToCreate.caloricVersion" >
+                            <mat-radio-button *ngFor="let version of menuToCreate.diet.caloricVersions" [value]="version">
+                                {{version}}
+                            </mat-radio-button>
+                        </mat-radio-group> 
+                    </td>
+                </tr>
+                <tr class="spaceUnder">
+                    
+                    <td>
+                        <mat-form-field class="full-width">
+                            <input matInput [matDatepicker]="picker" placeholder="Data rozpoczęcia"
+                            [(ngModel)]="menuToCreate.menuDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <button mat-raised-button matStepperPrevious>Wróć</button>
+                    <button mat-raised-button matStepperNext>Dalej</button>
+                 </tr>
+            </table>
+    </mat-step>    
+    <mat-step>
 
-    <tr>
-        <mat-form-field class="full-width">
-            <input matInput [matDatepicker]="picker" placeholder="Data"
-            [(ngModel)]="menu.date">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-    </tr>
+            <ng-template matStepLabel>Dodaj posiłki</ng-template>
+          
+         <div>
+          <mat-card *ngFor="let menuEntry of menuToCreate.menuEntries">
+            <mat-card-title>{{menuEntry.mealType}}</mat-card-title> 
+            <mat-form-field>
+                    <mat-select [(value)]="menuEntry.recipe">
+                      <mat-option *ngFor="let recipe of recipies" [value]="recipe" >
+                        {{recipe.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
 
-</table>    
+                  <mat-form-field  appearance="outline">
+                        <mat-label>Ilość:</mat-label>  
+                        <input matInput  class="input-right-align full-width"
+                               [(ngModel)]="menuEntry.amount">
+                        <span matSuffix>.00 g</span>
+                    </mat-form-field>
+
+
+          </mat-card> 
+        
+                    <button mat-raised-button matStepperPrevious (click)="sayHi()">Wróć</button>
+                    <button mat-raised-button matStepperNext >Dalej</button>
+</div>
+    </mat-step>    
+ 
+<!--       <button mat-raised-button matStepperPrevious>Wróć</button>
+       <button mat-raised-button (click)="placeOrder()">Wyślij</button>
+       <button mat-raised-button (click)="stepper.reset()">Zacznij od nowa</button>
+-->
+
+</mat-horizontal-stepper>     

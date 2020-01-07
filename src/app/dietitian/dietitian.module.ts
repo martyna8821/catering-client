@@ -7,7 +7,6 @@ import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 import { CreateMenuComponent } from './create-menu/create-menu.component';
 
 
-
 @NgModule({
   declarations: [RecipeListComponent, AddRecipeComponent, CreateMenuComponent],
   imports: [
