@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { LoginRequest } from '../model/LoginRequest';
@@ -16,6 +16,9 @@ export class LoginComponent implements OnInit {
   isLoggedIn = false;
   hide = true;
   roles: string[] = [];
+
+
+  @Output() loggedIn: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
       private route: ActivatedRoute,
@@ -37,7 +40,8 @@ export class LoginComponent implements OnInit {
          this.tokenStorage.saveUserId(data.userId);
          this.isLoggedIn = true;
          this.roles = this.tokenStorage.getAuthorities();
-         this.router.navigate([this.roles[0].toLowerCase().substring(5)]);
+         
+         this.router.navigateByUrl('/home').then(then => location.reload());
          
        },
        error => {

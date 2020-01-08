@@ -3,7 +3,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { TokenStorageService } from '../service/token-storage.service';
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
     constructor(
         private router: Router,
         private tokenStarageService: TokenStorageService
@@ -11,8 +11,9 @@ export class AuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-        if (this.tokenStarageService.getToken() != null) {
-            return true;
+        if (this.tokenStarageService.getToken() != null &&
+            this.tokenStarageService.getAuthorities().includes("ROLE_ADMIN")){ 
+                return true;
         }
         else{
             this.router.navigate(['/home']);

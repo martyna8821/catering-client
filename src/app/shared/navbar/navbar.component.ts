@@ -14,9 +14,16 @@ export class NavbarComponent implements OnInit {
     private router: Router) { }
   userRoles: string[];
   ngOnInit() {
-      this.userRoles  = this.tokenStorage.getAuthorities();
-    
+  
+    this.userRoles  = this.tokenStorage.getAuthorities();
   }
+
+  onLoggedIn($event){
+    console.log("refresh");
+    this.userRoles  = this.tokenStorage.getAuthorities();
+  }
+
+
 
   isLogged(): boolean{
    if( this.tokenStorage.getToken() === null){

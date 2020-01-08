@@ -81,7 +81,8 @@ model: RegisterRequest = {username: '', password: '', firstName: '', lastName: '
       this.tokenStorage.saveUsername(data.username);
       this.tokenStorage.saveAuthorities(data.authorities);
       this.tokenStorage.saveUserId(data.userId);
-      this.router.navigate(['']);
+      window.location.reload();
+      this.router.navigateByUrl('/home').then(then => location.reload());
      }
        
       },
