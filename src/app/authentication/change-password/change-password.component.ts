@@ -27,6 +27,7 @@ export class ChangePasswordComponent implements OnInit {
   @Input() token: string;
 
   ngOnInit() {
+    console.log(this.isDialog.valueOf());
     if(this.isDialog){
         this.userId = this.tokenStorageService.getUserId();
     }
@@ -34,17 +35,18 @@ export class ChangePasswordComponent implements OnInit {
 
 
   changePassword(){
-    console.log(this.userId);
     if(this.checkPassword()){
       this.authenticationService.changePassword(this.password, this.userId).subscribe(
         data =>{  
           this.authenticationService.deletePasswordToken(this.token).subscribe();
-          const dialogRef = this.dialog.open(PasswordChangedDialog, {
+          const dialog2 = this.dialog.open(PasswordChangedDialog, {
           });
             
-          dialogRef.afterClosed().subscribe(result => {
-            this.isDialog ? this.onNoClick() : this.router.navigate(['login']);
-          });
+          console.log("is or not");
+          console.log(this.isDialog);
+          dialog2.afterClosed().subscribe(result =>
+              this.router.navigate(['home'])
+          );
         }
       );
     }
@@ -75,6 +77,7 @@ export class PasswordChangedDialog {
 
   onNoClick(): void {
     this.dialogRef.close();
+
   }
 
 }

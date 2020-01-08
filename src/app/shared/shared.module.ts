@@ -13,6 +13,7 @@ import { PrimeModule } from './primeng/prime/prime.module';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatNativeDateModule } from '@angular/material';
 
+
 @NgModule({
   declarations: [NavbarComponent, ConfirmationComponent, DietsListComponent, DietsCardComponent],
   imports: [

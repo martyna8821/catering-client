@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { UserService } from 'src/app/shared/service/UserService';
 import { Address } from 'src/app/authentication/model/Address';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-register',
@@ -31,6 +32,7 @@ model: RegisterRequest = {username: '', password: '', firstName: '', lastName: '
   constructor(private authenticationService: AuthenticationService,
               private tokenStorage: TokenStorageService,
               private router: Router,
+              private snackBar: MatSnackBar,
               private _formBuilder: FormBuilder,
               private userService: UserService) { 
                 this.personalDetailsGroup = this._formBuilder.group({
@@ -81,13 +83,14 @@ model: RegisterRequest = {username: '', password: '', firstName: '', lastName: '
       this.tokenStorage.saveUsername(data.username);
       this.tokenStorage.saveAuthorities(data.authorities);
       this.tokenStorage.saveUserId(data.userId);
-      window.location.reload();
       this.router.navigateByUrl('/home').then(then => location.reload());
      }
        
       },
       error => {
-        console.log("register error");
+        this.snackBar.open('Nie udało się dodać użytkownika!', '',{
+          duration: 3000,
+        });
       }
     );
   }
@@ -95,8 +98,6 @@ model: RegisterRequest = {username: '', password: '', firstName: '', lastName: '
 
   checkIfLoggedAdmin(): boolean{
 
-    console.log(this.tokenStorage.getToken() != null)
-    console.log(this.tokenStorage.getAuthorities())
     if(this.tokenStorage.getToken() != null && this.tokenStorage.getAuthorities().includes("ROLE_ADMIN")){
       return true;
     }

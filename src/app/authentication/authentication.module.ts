@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { RetrievePasswordComponent } from './retrieve-password/retrieve-password.component';
 import { ChangePasswordComponent, PasswordChangedDialog } from './change-password/change-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 
 @NgModule({
@@ -29,10 +30,15 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     PasswordChangedDialog,
     ResetPasswordComponent,
   ],
-
-
     entryComponents: [
       PasswordChangedDialog
+    ],
+
+    providers:[
+      { provide: MatDialogRef, useValue: {} },
+      { provide: MAT_DIALOG_DATA, useValue: [] }
+
     ]
+
   })
 export class AuthenticationModule { }

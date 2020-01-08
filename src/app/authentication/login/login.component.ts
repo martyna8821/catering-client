@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { LoginRequest } from '../model/LoginRequest';
 import { AuthenticationService } from '../service/authentication.service';
 import { TokenStorageService } from '../service/token-storage.service';
+import { MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
       private route: ActivatedRoute,
       private router: Router,
       private authenticationService: AuthenticationService,
-      private tokenStorage: TokenStorageService
+      private tokenStorage: TokenStorageService,
+      private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -45,9 +47,15 @@ export class LoginComponent implements OnInit {
          
        },
        error => {
-         console.log("login error");
+         this.snackBar.open('Nie udało się zalogować!', '',{
+           duration: 3000,
+         });
        }
      );
  
+  }
+
+  retrievePassword(){
+    this.router.navigateByUrl('retrieve-password');
   }
 }

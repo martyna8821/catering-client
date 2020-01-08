@@ -16,8 +16,6 @@ const httpOptions = {
 export class AuthenticationService {
 
   private apiUrl = 'http://localhost:8080/api/';
-
-  
   constructor( 
       private http: HttpClient,
       private router: Router
