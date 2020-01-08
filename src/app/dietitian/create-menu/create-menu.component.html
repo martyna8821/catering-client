@@ -65,7 +65,7 @@
             <mat-card-title>{{menuEntry.mealType}}</mat-card-title> 
             <mat-form-field>
                     <mat-select [(value)]="menuEntry.recipe">
-                      <mat-option *ngFor="let recipe of recipies" [value]="recipe" >
+                      <mat-option *ngFor="let recipe of recipes" [value]="recipe" >
                         {{recipe.name}}
                       </mat-option>
                     </mat-select>
@@ -81,8 +81,8 @@
 
           </mat-card> 
         
-                    <button mat-raised-button matStepperPrevious (click)="sayHi()">Wróć</button>
-                    <button mat-raised-button matStepperNext >Dalej</button>
+                    <button mat-raised-button matStepperPrevious>Wróć</button>
+                    <button mat-raised-button (click)="addMenu()">Dodaj</button>
 </div>
     </mat-step>    
  

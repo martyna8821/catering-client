@@ -8,6 +8,7 @@ import { MenuInput } from 'src/app/shared/model/MenuInput';
 import { MenuEntryInput } from 'src/app/shared/model/MenuEntryInput';
 import { RecipeService } from 'src/app/shared/service/RecipeService';
 import { Recipe } from 'src/app/shared/model/Recipe';
+import { MenuService } from 'src/app/shared/service/MenuService';
 
 @Component({
   selector: 'app-create-menu',
@@ -27,7 +28,8 @@ export class CreateMenuComponent implements OnInit {
 
   constructor(private dietService: DietService,
               private tokenStorageService: TokenStorageService,
-              private recipeService: RecipeService) { }
+              private recipeService: RecipeService,
+              private menuService: MenuService) { }
 
   ngOnInit() {
     var loggedUser = this.tokenStorageService.getUserName();
@@ -41,9 +43,8 @@ export class CreateMenuComponent implements OnInit {
 
   }
 
-
-  sayHi(){
-    console.log(this.menuToCreate);
+  addMenu(){
+    this.menuService.add(this.menuToCreate).subscribe();
   }
 
 }

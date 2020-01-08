@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { AuthGuard } from './authentication/guard/auth-guard';
 
 
 const routes: Routes = [ 
@@ -10,10 +11,10 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '', children: [
     { path: '', loadChildren: './authentication/authentication.module#AuthenticationModule'},
-    { path: 'client', loadChildren: './client/client.module#ClientModule'},
-    { path: 'dietitian', loadChildren: './dietitian/dietitian.module#DietitianModule'},
-    { path: 'admin', loadChildren: './admin/admin.module#AdminModule'}]},
-  { path: 'user-details', component: UserDetailsComponent}
+    { path: 'client', loadChildren: './client/client.module#ClientModule', canActivate: [AuthGuard]},
+    { path: 'dietitian', loadChildren: './dietitian/dietitian.module#DietitianModule', canActivate: [AuthGuard]},
+    { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canActivate: [AuthGuard]},]},
+  { path: 'user-details', component: UserDetailsComponent, canActivate: [AuthGuard]}
 
 ];
 

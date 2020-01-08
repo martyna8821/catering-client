@@ -9,6 +9,8 @@ import 'hammerjs';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './authentication/interceptor/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     AuthenticationModule,
     SharedModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
