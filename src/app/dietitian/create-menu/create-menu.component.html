@@ -24,71 +24,74 @@
             </mat-grid-tile>
         </mat-grid-list>
         </mat-radio-group>   
-        <button mat-raised-button matStepperNext>Dalej</button>    
+        <button mat-raised-button matStepperNext [disabled]="!menuToCreate.diet.id" >Dalej</button>    
     </mat-step>
     <mat-step>
             <ng-template matStepLabel>Szczegóły diety</ng-template>
             <table cellspacing="0">
                 <tr><h4>Dieta: {{menuToCreate.diet.name}}</h4></tr>
-                <tr class="spaceUnder"><td>Wybierz wariant kaloryczny: </td>
-                    <td>
+                <tr class="spaceUnder"><td class="space-right">Wybierz wariant kaloryczny: </td>
+                    <td >
                         <mat-radio-group [(ngModel)]="menuToCreate.caloricVersion" >
-                            <mat-radio-button *ngFor="let version of menuToCreate.diet.caloricVersions" [value]="version">
-                                {{version}}
+                            <mat-radio-button *ngFor="let version of menuToCreate.diet.caloricVersions" [value]="version" class="space-right">
+                                {{version}}kcal
                             </mat-radio-button>
                         </mat-radio-group> 
                     </td>
                 </tr>
-                <tr class="spaceUnder">
-                    
+                <tr class="spaceUnder"> 
                     <td>
                         <mat-form-field class="full-width">
                             <input matInput [matDatepicker]="picker" placeholder="Data rozpoczęcia"
-                            [(ngModel)]="menuToCreate.menuDate">
+                            [(ngModel)]="menuToCreate.menuDate" [min]="minDate" >
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-datepicker #picker [startAt]="minDate" ></mat-datepicker>
                         </mat-form-field>
                     </td>
                 </tr>
                 <tr>
                     <button mat-raised-button matStepperPrevious>Wróć</button>
-                    <button mat-raised-button matStepperNext>Dalej</button>
+                    <button mat-raised-button matStepperNext [disabled]="!menuToCreate.caloricVersion">Dalej</button>
                  </tr>
             </table>
     </mat-step>    
     <mat-step>
-
-            <ng-template matStepLabel>Dodaj posiłki</ng-template>
-          
-         <div>
-          <mat-card *ngFor="let menuEntry of menuToCreate.menuEntries">
+        <ng-template matStepLabel>Dodaj posiłki</ng-template>
+        <mat-card *ngFor="let menuEntry of menuToCreate.menuEntries" class="spaceUnder">
             <mat-card-title>{{menuEntry.mealType}}</mat-card-title> 
-            <mat-form-field>
-                    <mat-select [(value)]="menuEntry.recipe">
-                      <mat-option *ngFor="let recipe of recipes" [value]="recipe" >
+            <table cellspacing="0" class="full-width">
+                <td width="34%">    
+                <mat-form-field>
+                    <mat-select [(value)]="menuEntry.recipe" >
+                    <mat-option *ngFor="let recipe of recipes" [value]="recipe" class="full-width"
+                                (onSelectionChange)="calculateEntryCalories(menuEntry, $event)">
                         {{recipe.name}}
-                      </mat-option>
+                    </mat-option>
                     </mat-select>
-                  </mat-form-field>
-
-                  <mat-form-field  appearance="outline">
+                </mat-form-field>
+                </td>
+                <td width="33%"> 
+                <mat-form-field  appearance="outline">
                         <mat-label>Ilość:</mat-label>  
                         <input matInput  class="input-right-align full-width"
-                               [(ngModel)]="menuEntry.amount">
+                               [(ngModel)]="menuEntry.amount" (keyup)="calculateEntryCalories(menuEntry, $event)">
                         <span matSuffix>.00 g</span>
                     </mat-form-field>
-
-
+                </td>
+                <td width="33%">
+                Wartość energetyczna: {{menuEntry.caloricValue}}kcal
+                </td>
+          </table>          
           </mat-card> 
-        
-                    <button mat-raised-button matStepperPrevious>Wróć</button>
-                    <button mat-raised-button (click)="addMenu()">Dodaj</button>
-</div>
-    </mat-step>    
- 
-<!--       <button mat-raised-button matStepperPrevious>Wróć</button>
-       <button mat-raised-button (click)="placeOrder()">Wyślij</button>
-       <button mat-raised-button (click)="stepper.reset()">Zacznij od nowa</button>
--->
 
+        <div class="space-above">
+        <h4>Łączna wartość kaloryczna: {{menuCaloricValue}}kcal</h4>
+        </div>
+
+        <div class="space-above">    
+            <button mat-raised-button matStepperPrevious>Wróć</button>
+            <button mat-raised-button (click)="addMenu()">Wyślij</button>
+            <button mat-raised-button (click)="stepper.reset()">Zacznij od nowa</button>
+        </div>
+    </mat-step>    
 </mat-horizontal-stepper>     

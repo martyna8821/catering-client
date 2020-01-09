@@ -5,4 +5,5 @@ export class MenuEntryInput{
     mealType: string;
     recipe: Recipe;
     amount: number;
+    caloricValue: number;
 }

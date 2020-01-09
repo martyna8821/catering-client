@@ -9,9 +9,6 @@ import { DietService } from '../service/DietService';
 })
 export class DietsListComponent implements OnInit {
 
-
-
-
   constructor(private dietService: DietService) { }
 
   ngOnInit() {
