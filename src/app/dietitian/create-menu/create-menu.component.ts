@@ -11,6 +11,7 @@ import { Recipe } from 'src/app/shared/model/Recipe';
 import { MenuService } from 'src/app/shared/service/MenuService';
 import { MatSnackBar } from '@angular/material';
 import { MenuEntry } from 'src/app/shared/model/MenuEntry';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-menu',
@@ -35,7 +36,8 @@ export class CreateMenuComponent implements OnInit {
               private tokenStorageService: TokenStorageService,
               private recipeService: RecipeService,
               private menuService: MenuService,
-              private snackBar: MatSnackBar) { }
+              private snackBar: MatSnackBar,
+              private router: Router) { }
 
 
   ngOnInit() {
@@ -69,7 +71,11 @@ export class CreateMenuComponent implements OnInit {
       });
 
     }else{ 
-       this.menuService.add(this.menuToCreate).subscribe();
+       this.menuService.add(this.menuToCreate).subscribe(
+         success => this.router.navigateByUrl('/home'),
+         error => this.snackBar.open('Dodanie menu nie powiodło się!','',{
+              duration: 3000})
+       );
     }    
   }
 
