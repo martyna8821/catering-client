@@ -7,7 +7,6 @@ export class Recipe{
     mealTypes: string[];
     ingredients: RecipeIngredient[];
     recipeSteps: RecipeStep[];
-    labels: string[];   
     mealWeight: number;
     caloricValue: number;
 }

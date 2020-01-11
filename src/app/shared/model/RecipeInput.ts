@@ -7,6 +7,6 @@ export class RecipeInput{
     mealTypes: string[];
     ingredients: RecipeIngredient[];
     recipeSteps: RecipeStep[];
-    labels: string[];   
+
     mealWeight: number;
 }

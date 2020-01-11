@@ -12,7 +12,7 @@ import { RecipeService } from 'src/app/shared/service/RecipeService';
 export class RecipeListComponent implements OnInit {
 
   displayedColumns = ['name', 'mealTypes', 'mealWeight', 
-                      'caloricValue', 'labels', 'details'];
+                      'caloricValue', 'details'];
  
   recipesDataSource: MatTableDataSource<Recipe>;
   filterValue = '';

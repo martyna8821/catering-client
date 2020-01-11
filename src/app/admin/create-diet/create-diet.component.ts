@@ -12,7 +12,7 @@ import { TokenStorageService } from 'src/app/authentication/service/token-storag
 import {MessageService} from 'primeng/api';
 import { UserService } from 'src/app/shared/service/UserService';
 import { User } from 'src/app/shared/model/User';
-import { LabelInput } from 'src/app/authentication/model/LabelInput';
+import { MatSnackBar } from '@angular/material';
 
 
 
@@ -38,24 +38,16 @@ export class CreateDietComponent implements OnInit {
   @ViewChild('caloricVersionInput', {static: false}) caloricVersionInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 
-
-  labels: LabelInput[] = [{name: "wegetariańska", checked: false}, 
-                          {name: "wegańska", checked : false}, 
-                          {name: "bezglutenowa", checked: false},
-                          {name: "bez laktozy", checked: false}];
-
-  uploadedImageData: string;
-  imageFilename: string;
-
-  dietToCreate: DietInput = {name: ' ', description: ' ', price: 100, labels: [], forbiddenIngredients:[], caloricVersions:[],
-                             dietitianUsername: '', image: 'null'};
+  dietToCreate: DietInput = {name: ' ', description: ' ', price: 100, forbiddenIngredients:[], caloricVersions:[],
+                             dietitianUsername: ''};
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
               private tokenService: TokenStorageService,
               private messageService: MessageService,
               private userService: UserService,
-              private dietService:DietService){  
+              private dietService:DietService,
+              private snackBar: MatSnackBar){  
                 this.filteredCaloricVersions = this.caloricVersionsCtrl.valueChanges.pipe(
                                                     startWith(null),
                                                     map((caloricVersion: string | null) => 
@@ -83,28 +75,17 @@ export class CreateDietComponent implements OnInit {
 }
 
   createDiet(){
-    this.dietToCreate.image = this.uploadedImageData;
     this.dietToCreate.caloricVersions = this.caloricVersionsList;
-    this.labels.forEach( l => {if(l.checked) this.dietToCreate.labels.push(l.name);} ) ;  
     this.dietToCreate.dietitianUsername = this.tokenService.getUserName();
     this.dietService.add(this.dietToCreate).subscribe(
           res =>  this.router.navigateByUrl('/admin/manage-diet').then(() => {
             this.showSuccess();
           }),
-          err => console.log("error adding new diet")
+          err => this.snackBar.open('Nie udało się utworzyć nowej diety!', '',{
+            duration: 3000,
+          })
        );
   }
-
- myUploader(event){
-
-   let reader = new FileReader();
-   let file =event.files[0];
-   this.imageFilename = file.name;
-   reader.readAsDataURL(file);
-   reader.onload = () => 
-       this.uploadedImageData = reader.result.toString().split(',')[1];
-   }
-
  
  add(event: MatChipInputEvent): void {
   

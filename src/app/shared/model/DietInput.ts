@@ -5,7 +5,5 @@ export class DietInput{
     price: number;
     caloricVersions: string[];
     forbiddenIngredients: string[];
-    labels: string[];
     dietitianUsername: string;
-    image: string; 
 }

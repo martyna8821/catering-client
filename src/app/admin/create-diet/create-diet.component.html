@@ -37,8 +37,7 @@
         <ng-template matStepLabel>Szczegóły diety</ng-template>
         <table width="100%" cellspacing="0">
           <tr>
-              <td>Dostępne wersje kaloryczne:</td>
-              <td >Etykiety:</td>
+              <td>Dostępne wersje kaloryczne:</td>          
           </tr>
           <tr>
             <td>
@@ -68,12 +67,6 @@
                    </mat-autocomplete>
                  </mat-form-field>     
             </td>
-            <td >  
-              <div *ngFor="let label of labels">  
-              <mat-checkbox class="checkbox-class" [(ngModel)]="label.checked"  [ngModelOptions]="{standalone: true}">{{label.name}}</mat-checkbox>
-              </div>
-            </td>
-
           </tr>
           <tr>
               <button mat-raised-button matStepperPrevious>Wróć</button>
@@ -99,28 +92,10 @@
       <tr class="spaceUnder">
           <td colspan="6">
             <button mat-raised-button matStepperPrevious>Wróć</button>
-            <button mat-raised-button matStepperNext>Dalej</button>
+          <button mat-raised-button (click)="createDiet()">Zapisz</button>
+          <button mat-raised-button (click)="stepper.reset()">Zacznij od nowa</button>
           </td>
       </tr>   
     </table>
     </mat-step>
-  <mat-step>
-  <ng-template matStepLabel>Zdjęcie</ng-template>
-  <table>
-    <tr>
-      <p-fileUpload  name="myFile[]" url="./upload.php"  accept="image/*" 
-          maxFileSize="2000005" chooseLabel="Wybierz zdjęcie" [auto]="true" 
-          customUpload="true" (uploadHandler)="myUploader($event)">
-      </p-fileUpload>    
-    </tr>
-    <tr> </tr>
-    <tr class="spaceUnder">
-        <td colspan="6">
-          <button mat-raised-button matStepperPrevious>Wróć</button>
-          <button mat-raised-button (click)="createDiet()">Zapisz</button>
-          <button mat-raised-button (click)="stepper.reset()">Zacznij od nowa</button>
-        </td>
-    </tr>   
-  </table>
-  </mat-step>
 </mat-horizontal-stepper>

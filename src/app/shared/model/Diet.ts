@@ -9,7 +9,6 @@ export class Diet{
     published: boolean;
     caloricVersions: string[];  
     forbiddenIngredients: string[];
-    labels: string[];
     dietitianUsername: string;
     image: string;
     imageUrl: SafeUrl;

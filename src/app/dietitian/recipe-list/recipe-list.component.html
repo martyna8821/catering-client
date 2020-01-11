@@ -27,11 +27,6 @@
         <td mat-cell *matCellDef="let recipe"> {{recipe.caloricValue}} kcal</td>
     </ng-container>
 
-    <ng-container matColumnDef="labels">
-        <th class="table-header" mat-header-cell *matHeaderCellDef>Etykiety </th>
-        <td mat-cell *matCellDef="let recipe"> {{recipe.labels}} </td>
-    </ng-container>
-
     <ng-container matColumnDef="details">
       <th class="table-header" mat-header-cell *matHeaderCellDef> </th>
       <td mat-cell *matCellDef="let recipe"> 

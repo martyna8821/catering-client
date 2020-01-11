@@ -5,17 +5,7 @@
     <img mat-card-image src="../../../assets/medina-catering-AdtqezIqv7c-unsplash.jpg" width="50" height="300">
     <mat-card-content >
         {{diet.description}}
-        <mat-accordion>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-              Etykiety:
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-              <mat-list role="list" dense *ngFor="let label of diet.labels">
-                  <mat-list-item role="listitem">{{label}}</mat-list-item>
-                </mat-list>
-              </mat-expansion-panel>     
+        <mat-accordion>  
           <mat-expansion-panel> 
           <mat-expansion-panel-header>
               <mat-panel-title>
@@ -32,11 +22,9 @@
         Cena za jeden dzień: {{diet.price}}
     </mat-card-footer>
     <mat-card-actions>
-       <!--  <button mat-raised-button (click)="buy()" *ngIf="!adminView" >Kup</button> -->
         <button mat-raised-button *ngIf="adminView" (click)="changeStatus()">{{diet.published ? 'Wycofaj dietę' : 'Publikuj dietę'}}</button>
         <button mat-raised-button *ngIf="adminView && !diet.published" (click)="delete(diet.id)">usuń</button>
-       <!--  <button mat-raised-button *ngIf="adminView">edytuj</button> -->
-    </mat-card-actions>
+       </mat-card-actions>
 </mat-card>
 
 <p-confirmDialog header="Potwierdź"></p-confirmDialog>
