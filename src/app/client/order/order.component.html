@@ -1,6 +1,6 @@
 <mat-card-title><h2>Złóż zamówienie</h2></mat-card-title>
 
-<mat-horizontal-stepper [linear]="true" #stepper>
+<mat-horizontal-stepper [linear]="true" #stepper (selectionChange)="selectionChange($event)">
   <mat-step>
         <ng-template matStepLabel>Wybierz dietę</ng-template>
         <mat-radio-group [(ngModel)]="chosenDiet" >
@@ -15,7 +15,7 @@
                                <mat-icon matTooltip="{{diet.description}}" class="icon">info</mat-icon>
                         </mat-card-title>
                         <img  height="200px" width="150px" src="../../../assets/medina-catering-AdtqezIqv7c-unsplash.jpg"/>
-                        <mat-card-content>Cena: {{diet.price}}</mat-card-content>
+                        <mat-card-content>Cena za jeden dzień: {{diet.price}}zł</mat-card-content>
                         <mat-card-actions>
                              <mat-radio-button [value]="diet">
                                  Wybierz
@@ -25,7 +25,7 @@
             </mat-grid-tile>
         </mat-grid-list>
         </mat-radio-group>   
-        <button mat-raised-button matStepperNext>Dalej</button>    
+        <button [disabled]="!chosenDiet.id" mat-raised-button matStepperNext>Dalej</button>    
     </mat-step>
     <mat-step>
             <ng-template matStepLabel>Dostosuj</ng-template>
@@ -35,7 +35,7 @@
                     <td>
                         <mat-radio-group [(ngModel)]="orderToCreate.caloricVersion" >
                             <mat-radio-button *ngFor="let version of chosenDiet.caloricVersions" [value]="version">
-                                {{version}}
+                                {{version}}kcal
                             </mat-radio-button>
                         </mat-radio-group> 
                     </td>
@@ -45,95 +45,101 @@
                     <td>
                         <mat-form-field class="full-width">
                             <input matInput [matDatepicker]="picker" placeholder="Data rozpoczęcia"
-                            [(ngModel)]="orderToCreate.startDate">
+                            [(ngModel)]="orderToCreate.startDate" [min]="minStartDate">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-datepicker #picker [startAt]="minStartDate"></mat-datepicker>
                         </mat-form-field>
                     </td>
                
                     <td>
                             <mat-form-field class="full-width">
-                                    <input matInput [min]="startDate" [matDatepicker]="picker1" placeholder="Data zakończenia"
-                                    [(ngModel)]="orderToCreate.endDate">
+                                    <input matInput [matDatepicker]="picker1" placeholder="Data zakończenia"
+                                    [(ngModel)]="orderToCreate.endDate" [min]=" startDate">
                                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker1></mat-datepicker>
+                                    <mat-datepicker #picker1 ></mat-datepicker>
                                 </mat-form-field>
                     </td>
                 </tr>
                 <tr>
                     <button mat-raised-button matStepperPrevious>Wróć</button>
-                    <button mat-raised-button matStepperNext>Dalej</button>
+                    <button mat-raised-button matStepperNext [disabled]="orderToCreate.caloricVersion===''">Dalej</button>
                  </tr>
             </table>
     </mat-step>    
     <mat-step>
-
-            <ng-template matStepLabel>Dane dostawy</ng-template>
-            <mat-checkbox [(ngModel)]="deliverToHome" (change)="
-            deliverHomeChange()">
+        <ng-template matStepLabel>Dane dostawy</ng-template>
+        <mat-checkbox [(ngModel)]="deliverToHome" (change)="deliverHomeChange()">
                 Użyj adresu zamieszkania</mat-checkbox>
         
-            <table cellspacing="0" *ngIf="!deliverToHome">  
-                <tr>
-                    <td colspan="2">
+        <table cellspacing="0" *ngIf="!deliverToHome">  
+            <tr>
+            <td colspan="2">
                 <mat-form-field class="full-width" appearance="outline">
-                        <mat-label>Ulica</mat-label> 
-                  <input matInput  required [(ngModel)]="insertedDeliveryAddress.street" 
-                   >
+                    <mat-label>Ulica</mat-label> 
+                    <input matInput  required [(ngModel)]="insertedDeliveryAddress.street">
                 </mat-form-field>
             </td>
             <td colspan="1"> 
                 <mat-form-field appearance="outline">
-                        <mat-label>Numer domu</mat-label> 
-                    <input matInput required 
-                    [(ngModel)]="insertedDeliveryAddress.houseNumber" >
+                    <mat-label>Numer domu</mat-label> 
+                    <input matInput required [(ngModel)]="insertedDeliveryAddress.houseNumber" >
                 </mat-form-field>
-                </td>
+            </td>
             </tr>
             <tr> 
-                <td colspan="2"> 
+            <td colspan="2"> 
                 <mat-form-field appearance="outline">
-                        <mat-label>Miasto</mat-label> 
-                    <input matInput  required [(ngModel)]="insertedDeliveryAddress.city" 
-                     >
-                     <mat-icon matSuffix>location_city</mat-icon>
+                    <mat-label>Miasto</mat-label> 
+                    <input matInput  required [(ngModel)]="insertedDeliveryAddress.city">
+                    <mat-icon matSuffix>location_city</mat-icon>
                 </mat-form-field>
-                </td>
-                <td colspan="1">
+            </td>
+            <td colspan="1">
                 <mat-form-field class="full-width"  appearance="outline">
-                        <mat-label>Kod pocztowy</mat-label> 
-                  <input matInput placeholder="kod pocztowy" required [(ngModel)]="insertedDeliveryAddress.zipCode" 
-                >
+                    <mat-label>Kod pocztowy</mat-label> 
+                    <input matInput placeholder="kod pocztowy" required [(ngModel)]="insertedDeliveryAddress.zipCode">
               </mat-form-field>
-              </td>
+            </td>
             </tr>
-            </table>
-         <div>
-                    <button mat-raised-button matStepperPrevious>Wróć</button>
-                    <button mat-raised-button matStepperNext>Dalej</button>
-</div>
+        </table>
+        <h4>Godzina dostawy:</h4>   
+            <mat-form-field>
+             <mat-select  [(ngModel)]="deliveryHours">
+             <mat-option *ngFor="let hour of hours" [value]="hour">
+               {{hour}}
+             </mat-option>
+             </mat-select>
+            </mat-form-field>
+            :
+            <mat-form-field>
+             <mat-select [(ngModel)]="deliveryMinutes">
+             <mat-option *ngFor="let minute of minutes" [value]="minute">
+               {{minute}}
+             </mat-option>
+             </mat-select>
+            </mat-form-field>
+        <div>
+            <button mat-raised-button matStepperPrevious>Wróć</button>
+            <button mat-raised-button matStepperNext>Dalej</button>
+        </div>
     </mat-step>    
-    <mat-step>
+    <mat-step (selected)="xx()" >
         <ng-template matStepLabel>Podsumowanie</ng-template>
         <table>
             <tr class="spaceUnder">
                 <h4>{{chosenDiet.name}}</h4>
             </tr>
             <tr class="spaceUnder">
-                 Wersja kaloryczna: {{orderToCreate.caloricVersion}}kcal
-                </tr>
-           <tr class="spaceUnder"> Cena: {{chosenDiet.price}}</tr>
-           <tr class="spaceUnder"><td> Data rozpoczęcia: {{orderToCreate.startDate | date:'dd/MM/yyyy'}} </td>
-            <td>Data zakończenia: {{orderToCreate.endDate | date:'dd/MM/yyyy'}}</td></tr>
-       <tr class="spaceUnder">Adres dostawy:</tr>
+                <b>Wybrana wersja kaloryczna:</b> {{orderToCreate.caloricVersion}}kcal
+            </tr>
+           <tr class="spaceUnder"><b>Cena zamówienia:</b> {{orderToCreate.price}}zł</tr>
+           <tr class="spaceUnder">
+               <td><b>Data rozpoczęcia:</b> {{orderToCreate.startDate | date:'dd/MM/yyyy'}} </td>
+               <td><b>Data zakończenia:</b> {{orderToCreate.endDate | date:'dd/MM/yyyy'}}</td></tr>
+       <tr class="spaceUnder"><b>Adres dostawy:</b></tr>
        <tr class="spaceUnder">ul. {{orderToCreate.deliveryAddress.street}} {{orderToCreate.deliveryAddress.houseNumber}}</tr>
        <tr class="spaceUnder">{{orderToCreate.deliveryAddress.zipCode}} {{orderToCreate.deliveryAddress.city}}</tr>
-        
-    <tr class="spaceUnder">
-        <mat-checkbox [(ngModel)]="regulations">Oświadczam, że zapoznałem się z regulaminem</mat-checkbox></tr>
-    <tr class="spaceUnder">
-            <mat-checkbox [(ngModel)]="personalData">Oświadczenie rodo</mat-checkbox>
-    </tr>
+   
        <button mat-raised-button matStepperPrevious>Wróć</button>
        <button mat-raised-button (click)="placeOrder()">Wyślij</button>
        <button mat-raised-button (click)="stepper.reset()">Zacznij od nowa</button>

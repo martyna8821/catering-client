@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeInput } from 'src/app/shared/model/RecipeInput';
 import {trigger,state,style,transition,animate,AnimationEvent} from '@angular/animations';
-import { MealType } from './Mealtype';
+import { MealTypeCheckbox } from './MealtypeCheckbox';
 import { RecipeIngredient } from '../../shared/model/RecipeIngredient';
 import { Ingredient } from 'src/app/shared/model/Ingredient';
 import { IngredientService } from 'src/app/shared/service/IngredientService';
@@ -11,7 +11,6 @@ import { startWith, map } from 'rxjs/operators';
 import { RecipeStep } from '../../shared/model/RecipeStep';
 import { RecipeService } from 'src/app/shared/service/RecipeService';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-add-recipe',
@@ -39,9 +38,12 @@ import { Router } from '@angular/router';
 })
 export class AddRecipeComponent implements OnInit {
 
-  mealTypes: MealType[] = [{ name: 'śniadanie', chosen: false}, {name: 'lunch', chosen:false},
-  { name: 'obiad', chosen: false}, {name: 'podwieczorek', chosen: false}, 
-  {name: 'kolacja', chosen: false}];
+  mealTypes:MealTypeCheckbox[] =  [{name: "śniadanie", chosen: false}, 
+                                  {name: "drugie śniadanie",chosen: false },
+                                  {name: "obiad", chosen: false },
+                                  {name: "podwieczorek", chosen: false },
+                                  {name: "kolacja",chosen: false }
+                                ];
  
   recipeToCreate: RecipeInput = {name: '', mealTypes: [],
                         mealWeight: 0, ingredients: [], recipeSteps:[]};
@@ -61,6 +63,8 @@ export class AddRecipeComponent implements OnInit {
               private router: Router) { }
   
   ngOnInit() {
+    
+    
     this.ingredientService.getAll().subscribe(
       ingredients => this.ingredients =ingredients
     );
@@ -70,6 +74,8 @@ export class AddRecipeComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value))
     );
+
+    this.addIngredient();
 
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { Diet } from 'src/app/shared/model/Diet';
 import { DietService } from 'src/app/shared/service/DietService';
 import { TokenStorageService } from 'src/app/authentication/service/token-storage.service';
@@ -41,6 +41,7 @@ export class CreateMenuComponent implements OnInit {
 
 
   ngOnInit() {
+    this.recipeService.getAll().subscribe( r => this.recipes = r);
     var dateTmp =  new Date(Date.now());
     this.minDate.setDate(dateTmp.getDate()+1);
 
@@ -51,7 +52,7 @@ export class CreateMenuComponent implements OnInit {
        })
      )
      .subscribe();
-     this.recipeService.getAll().subscribe( r => this.recipes = r);
+     
   }
 
   addMenu(){
@@ -106,5 +107,4 @@ export class CreateMenuComponent implements OnInit {
 
     return allChoosen;
   }
-
 }

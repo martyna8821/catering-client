@@ -10,7 +10,8 @@ import { UserService } from 'src/app/shared/service/UserService';
 import { TokenStorageService } from 'src/app/authentication/service/token-storage.service';
 import { OrderService } from 'src/app/shared/service/OrderService';
 import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { Time } from '@angular/common';
+import { map, min } from 'rxjs/operators';
 
 @Component({
   selector: 'app-order',
@@ -22,21 +23,23 @@ export class OrderComponent implements OnInit {
   diets: Diet[];
   chosenDiet: Diet= new Diet();
 
-  minDate = Date.now;
-  startDate = new FormControl(new Date());
-  endDate = new FormControl(new Date());
+  minStartDate = new Date();
+
+  hours: string[] = [];
+  minutes: string[] = ['00', '15', '30', '45'];
+  deliveryHours = '05';
+  deliveryMinutes = '00';
+
+
+  startDate =new Date();
+  endDate =new Date();
   deliverToHome:boolean = false;
   insertedDeliveryAddress: Address  =  new Address();
   client: User;
-  
 
-  personalData = false;
-
-  regulations = false;
-
-  orderToCreate: OrderInput = {diet: new Diet(), caloricVersion: '', startDate: null,
-                                endDate: null, deliveryAddress: {city: '', street: '',
-                              zipCode: '', houseNumber: ''}, client: null};
+  orderToCreate: OrderInput = {diet: new Diet(), caloricVersion: '', startDate: this.minStartDate,
+                                endDate: this.minStartDate, deliveryAddress: {city: '', street: '',
+                              zipCode: '', houseNumber: ''}, client: null, deliveryTime: '', price: 0};
   constructor(private dietService: DietService,
               private userService: UserService,
               private tokenStorageService: TokenStorageService,
@@ -44,6 +47,17 @@ export class OrderComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    var dateTmp =  new Date(Date.now());
+    this.minStartDate.setDate(dateTmp.getDate()+1);
+    this.startDate = this.minStartDate;
+    this.endDate = this.minStartDate;
+
+    for (let i = 5; i < 22; i++) {
+      if(i < 10)
+        this.hours.push('0'+i.toString());
+      else
+        this.hours.push(i.toString());  
+    }
     this.dietService.getAll().pipe(
       map( d => { this.diets = d;
         this.diets = d.filter(diet => diet.published)
@@ -66,12 +80,25 @@ export class OrderComponent implements OnInit {
 
   placeOrder(){
 
-    if(this.personalData && this.regulations){
+   // var t: Time = {hours: 5, minutes: 0};
+    this.orderToCreate.deliveryTime = this.deliveryHours+':'+this.deliveryMinutes;
       this.orderToCreate.diet = this.chosenDiet;
         this.orderService.add(this.orderToCreate).subscribe(
           succ => this.router.navigateByUrl("/home"),
           err => console.log("error creating order")
         );
+  }
+
+  selectionChange(event){
+    if(event.selectedIndex ===3){
+      this.calculatePrice();
     }
+  }
+
+  calculatePrice(){
+    var delta = (this.orderToCreate.endDate.getTime() - 
+                            this.orderToCreate.startDate.getTime() ) 
+                        / (1000 * 3600 * 24);
+    this.orderToCreate.price = this.chosenDiet.price * (Math.floor(delta)+1); 
   }
 }

@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Recipe } from 'src/app/shared/model/Recipe';
+
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { Router } from '@angular/router';
 import { RecipeService } from 'src/app/shared/service/RecipeService';
-
+import { Recipe } from 'src/app/shared/model/Recipe';
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
@@ -54,6 +54,7 @@ export class RecipeListComponent implements OnInit {
   }
 
   showRecipe(recipe: Recipe){
+    
     this.detailedRecipeIngredients = [];
     this.detailedRecipeSteps = [];
     recipe.ingredients.forEach( i => {

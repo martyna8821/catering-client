@@ -40,7 +40,11 @@ export class DietService {
       return this.http.delete<''>(this.apiUrl+'/'+id);
     }
 
-    changeStatus(published: boolean, id: string): Observable<"">{
-      return this.http.patch<"">(this.apiUrl+'/'+id+'/'+published, published);
+    changeStatus(published: boolean, dietId: string): Observable<"">{
+      return this.http.patch<"">(this.apiUrl+'/'+dietId+'/'+published, published);
+    }
+
+    addNewCaloricVersion(caloricVersion: string, dietId: string): Observable<Diet>{
+      return this.http.patch<Diet>(this.apiUrl+'/'+dietId+'/caloric-version', caloricVersion);
     }
 }

@@ -12,8 +12,8 @@ td {
     margin-left: 16px;
   }
 
-  tr.spaceUnder>td {
-    padding-top: 30px;
+  tr.spaceUnder{
+    padding-bottom: 30px;
   }
-  
+
   

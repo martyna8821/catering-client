@@ -26,7 +26,7 @@
         </mat-radio-group>   
         <button mat-raised-button matStepperNext [disabled]="!menuToCreate.diet.id" >Dalej</button>    
     </mat-step>
-    <mat-step>
+    <mat-step >
             <ng-template matStepLabel>Szczegóły diety</ng-template>
             <table cellspacing="0">
                 <tr><h4>Dieta: {{menuToCreate.diet.name}}</h4></tr>
@@ -55,7 +55,7 @@
                  </tr>
             </table>
     </mat-step>    
-    <mat-step>
+    <mat-step *ngIf="recipes">
         <ng-template matStepLabel>Dodaj posiłki</ng-template>
         <mat-card *ngFor="let menuEntry of menuToCreate.menuEntries" class="spaceUnder">
             <mat-card-title>{{menuEntry.mealType}}</mat-card-title> 
@@ -63,7 +63,7 @@
                 <td width="34%">    
                 <mat-form-field>
                     <mat-select [(value)]="menuEntry.recipe" >
-                    <mat-option *ngFor="let recipe of recipes" [value]="recipe" class="full-width"
+                    <mat-option *ngFor="let recipe of recipes | mealTypeFilter: menuEntry.mealType" [value]="recipe" class="full-width"
                                 (onSelectionChange)="calculateEntryCalories(menuEntry, $event)">
                         {{recipe.name}}
                     </mat-option>

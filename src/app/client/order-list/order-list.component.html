@@ -30,8 +30,21 @@
     </ng-container>
 
     <ng-container matColumnDef="price">
-      <th  class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header> Wersja kaloryczna </th>
-      <td mat-cell *matCellDef="let order"> {{order.endDate  | date: 'dd/MM/yyyy'}} </td>
+      <th  class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header> Koszt </th>
+      <td mat-cell *matCellDef="let order"> {{order.price}}zł </td>
+    </ng-container>
+
+    <ng-container matColumnDef="deliveryTime">
+      <th  class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header> Czas dostawy </th>
+      <td mat-cell *matCellDef="let order"> {{order.deliveryTime}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="deliveryAddress">
+      <th  class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header> Adres dostawy </th>
+      <td mat-cell *matCellDef="let order">  <mat-icon mat-list-icon>location_city</mat-icon>
+      ul.{{order.deliveryAddress.street}} {{order.deliveryAddress.houseNumber}}
+        {{order.deliveryAddress.zipCode}} {{order.deliveryAddress.city}}
+     </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

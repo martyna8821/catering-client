@@ -43,10 +43,9 @@
                 <button class="button-color" mat-mini-fab matTooltip="administrator" *ngSwitchCase="'ROLE_ADMIN'"> A </button>
               </div>        
             </mat-list-item>
-            <h3 mat-subheader>Dostępne modyfikacje:</h3>
             <mat-list-item>     
               <button  mat-raised-button class="button-color" (click)="deleteUserByEmail(element.email, element.userame)">
-                usuń
+                usuń użytkownika
               </button>
              <!--  <button mat-raised-button class="button-color">
                 zmień role

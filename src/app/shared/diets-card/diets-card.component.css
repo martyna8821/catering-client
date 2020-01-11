@@ -14,3 +14,7 @@
 .text-container {
   overflow-y: scroll;
 }
+
+.input{
+  padding-right: 5px;
+}

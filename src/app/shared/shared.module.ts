@@ -12,10 +12,12 @@ import { DietsCardComponent } from './diets-card/diets-card.component';
 import { PrimeModule } from './primeng/prime/prime.module';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatNativeDateModule } from '@angular/material';
+import { MealTypeFilterPipe } from './MealTypeFilter';
 
 
 @NgModule({
-  declarations: [NavbarComponent, ConfirmationComponent, DietsListComponent, DietsCardComponent],
+  declarations: [NavbarComponent, ConfirmationComponent, DietsListComponent, DietsCardComponent, 
+    MealTypeFilterPipe],
   imports: [
     MaterialModule,
     PrimeModule,
@@ -38,7 +40,8 @@ import { MatNativeDateModule } from '@angular/material';
     DietsListComponent,
     DietsCardComponent,
     NgxMatSelectSearchModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MealTypeFilterPipe
     ]
 })
 export class SharedModule { }
