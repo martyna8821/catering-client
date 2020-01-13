@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from '../model/User';
 
+
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type:': 'application/json'})
 };
@@ -46,5 +47,9 @@ export class UserService {
 
   getUserByUsername(username: string): Observable<User>{
     return this.http.get<User>(this.apiUrl+'/'+username);
+  }
+
+  editUser(editedUser: User, id: string): Observable<User> {
+      return this.http.put<User>(this.apiUrl+"/"+id, editedUser);
   }
 }

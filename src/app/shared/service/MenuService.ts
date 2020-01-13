@@ -31,4 +31,8 @@ export class MenuService {
       return this.http.get<Menu[]>(this.apiUrl);
     }
 
+    getClientsMenus(userId: string): Observable<Menu[]>{
+      return this.http.get<Menu[]>(this.apiUrl+'/user/'+userId);
+    }
+
 }

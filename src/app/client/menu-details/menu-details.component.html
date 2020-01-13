@@ -1,0 +1,8 @@
+<mat-list role="list">
+    <mat-list-item *ngFor="let menuEntry of menu.menuEntries">
+       <mat-icon mat-list-icon>room_service</mat-icon>
+       <h4 mat-line> <b>{{menuEntry.mealType.name}}</b></h4>
+       <p mat-line>{{menuEntry.recipe.name}} {{menuEntry.caloricValue}}kcal</p>
+    </mat-list-item>
+</mat-list>
+  

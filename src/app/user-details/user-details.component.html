@@ -1,6 +1,6 @@
 <div *ngIf="isEditModeEnabled(); then editionMode else viewMode"></div>
 
-<div class="container">
+<div class="container" *ngIf="profileOwner">
     <div class="row my-2">
         <div class="col-lg-8 order-lg-2">
           <h2>Profil użytkownika {{profileOwner.username}}</h2>
@@ -22,36 +22,77 @@
               <td colspan="3">{{profileOwner.address.zipCode}} {{profileOwner.address.city}}</td>
             </tr>
           </table>     
-          <div class="container" *ngIf="isEditModeEnabled();">
-            <div class="row row-details">
-              <div class="col-sm">       
-                <mat-form-field class="example-full-width" appearance="outline">
-                  <input matInput placeholder="Jan" enabled=false aria-label="Imię:"  required>
+          <table cellspacing="0" *ngIf="isEditModeEnabled()">
+              <tr class="spaceUnder">
+                <td width="50%"> 
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Imię</mat-label>  
+                      <input matInput required [(ngModel)]="editedUser.firstName" >
+                  </mat-form-field>
+                  </td>
+                  <td width="50%"> 
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Nazwisko</mat-label>  
+                      <input matInput required [(ngModel)]="editedUser.lastName">
+                    </mat-form-field>
+                  </td>
+              </tr>
+              <tr class="spaceUnder">
+                <td colspan="2">   
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Numer telefonu</mat-label>  
+                         <input matInput required [(ngModel)]="editedUser.phoneNumber">
+                         <mat-icon matSuffix>phone</mat-icon>
+                   </mat-form-field>
+                  </td>
+              </tr> 
+              <tr class="spaceUnder"> 
+                <td colspan="2">   
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>Email</mat-label>  
+                    <input matInput placeholder="Email" required [(ngModel)]="editedUser.email" >
+                    <mat-icon matSuffix>email</mat-icon>
                 </mat-form-field>
-              </div>
-              <div class="col-sm">
-                <mat-form-field class="example-full-width" appearance="outline">
-                   <input matInput placeholder="Kowalski"   required>
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="row row-details">
-              <div class="col-sm">ENumer telefonu: 123456789</div>
-              <div class="col-sm">WAdres email: janek@mail.com</div>
-            </div> 
-            <div class="row">
-              <div class="col-sm">EAdres: ul.Funny 123 </div>
-            </div> 
-            <div class="row">
-              <div class="col-sm">E12-345 New York</div>
-            </div>
-          </div>
+               </td>
+               </tr>
+              <tr class="spaceUnder">
+                <td width="50%">   
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Ulica</mat-label>  
+                      <input matInput required [(ngModel)]="editedUser.address.street">
+                   </mat-form-field>
+                   </td>
+                   <td width="50%">
+                     <mat-form-field class="full-width"  appearance="outline">
+                      <mat-label>Numer domu/mieszkania</mat-label>  
+                       <input matInput required 
+                              [(ngModel)]="editedUser.address.houseNumber">
+                     </mat-form-field>
+                   </td>
+                   </tr>
+                   <tr class="spaceUnder"> 
+                   <td width="50%">   
+                   <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Miasto</mat-label>  
+                       <input matInput placeholder="miasto" required [(ngModel)]="editedUser.address.city">
+                       <mat-icon matSuffix>location_city</mat-icon>
+                   </mat-form-field>
+                   </td>
+                   <td width="50%"> 
+                   <mat-form-field class="full-width"  appearance="outline">
+                    <mat-label>Kod pocztowy</mat-label>  
+                         <input matInput placeholder="kod pocztowy" required [(ngModel)]="editedUser.address.zipCode" >
+                     </mat-form-field>
+                   </td>
+                   </tr>
+          </table>     
         </div>    
         <div class="col-lg-4 order-lg-1 text-center">
           <img src="../../assets/user.png">
           <p><button mat-raised-button (click)="changePasswordDialog()">zmień hasło</button></p>
           <p><button mat-raised-button *ngIf="isEditModeDisabled()" (click)="enableEditMode()">Edytuj profil</button>
-             <button mat-raised-button *ngIf="isEditModeEnabled()" (click)="disableEditMode()">Zapisz dane</button></p>
+             <button mat-raised-button *ngIf="isEditModeEnabled()" (click)="saveChangedUserData()">Zapisz dane</button></p>
+          <p><button mat-raised-button *ngIf="isEditModeEnabled()" (click)="discardChanges()">Wycofaj zmiany</button></p>
         </div>
     </div>
 </div>

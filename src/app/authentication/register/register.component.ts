@@ -79,11 +79,7 @@ model: RegisterRequest = {username: '', password: '', firstName: '', lastName: '
         this.router.navigate(['admin/user-list']);
      }
      else{
-      this.tokenStorage.saveToken(data.token);
-      this.tokenStorage.saveUsername(data.username);
-      this.tokenStorage.saveAuthorities(data.authorities);
-      this.tokenStorage.saveUserId(data.userId);
-      this.router.navigateByUrl('/home').then(then => location.reload());
+      this.router.navigateByUrl('/login').then(then => location.reload());
      }
        
       },

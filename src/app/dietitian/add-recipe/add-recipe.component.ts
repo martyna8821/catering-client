@@ -11,6 +11,7 @@ import { startWith, map } from 'rxjs/operators';
 import { RecipeStep } from '../../shared/model/RecipeStep';
 import { RecipeService } from 'src/app/shared/service/RecipeService';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-add-recipe',
@@ -60,7 +61,8 @@ export class AddRecipeComponent implements OnInit {
 
   constructor(private ingredientService: IngredientService,
               private recipeService: RecipeService,
-              private router: Router) { }
+              private router: Router,
+              private snackBar: MatSnackBar) { }
   
   ngOnInit() {
     
@@ -125,7 +127,11 @@ export class AddRecipeComponent implements OnInit {
     this.recipeToCreate.recipeSteps = this.recipeSteps;
     
     this.recipeService.add(this.recipeToCreate).subscribe(
-      succ => this.router.navigateByUrl('/dietitian/recipe-list')
+      succ => this.router.navigateByUrl('/dietitian/recipe-list'),
+      err => this.snackBar.open("Dodanie przepisu nie powiodło się.", 
+      "Pamiętaj żeby używać tylko składników dostępnych w bazie", {
+        duration: 3000
+      })
     );
   }
 

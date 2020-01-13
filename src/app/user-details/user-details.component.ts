@@ -25,8 +25,10 @@ export class UserDetailsComponent implements OnInit {
 
   editMode=false;
   profileOwner: User;
+  editedUser: User;
   userDto: UserDTO;
   username: string;
+  userId: string;
   tiles: Tile[] = [
     {text: 'One', cols: 3, rows: 1, color: 'lightblue'},
     {text: 'Two', cols: 1, rows: 2, color: 'lightgreen'},
@@ -40,9 +42,20 @@ export class UserDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.username = this.tokenStorageService.getUserName();
+    this.userId = this.tokenStorageService.getUserId();
+    this.loadUser();
+  }
+
+  loadUser(){
     this.userService.getUserByUsername(this.username).subscribe(
       user => { 
         this.profileOwner = user;
+      }
+    );
+
+    this.userService.getUserByUsername(this.username).subscribe(
+      user => { 
+        this.editedUser = user;
       }
     );
   }
@@ -72,6 +85,20 @@ export class UserDetailsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  saveChangedUserData(){
+    this.userService.editUser(this.editedUser,this.userId).subscribe(
+      user => {
+        this.profileOwner = user;
+      }
+    )
+      this.disableEditMode();
+  }
+
+  discardChanges(){
+    this.loadUser();
+    this.disableEditMode();
   }
 }
 

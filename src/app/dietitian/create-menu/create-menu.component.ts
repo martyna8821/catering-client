@@ -2,7 +2,7 @@ import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { Diet } from 'src/app/shared/model/Diet';
 import { DietService } from 'src/app/shared/service/DietService';
 import { TokenStorageService } from 'src/app/authentication/service/token-storage.service';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Menu } from 'src/app/shared/model/Menu';
 import { MenuInput } from 'src/app/shared/model/MenuInput';
 import { MenuEntryInput } from 'src/app/shared/model/MenuEntryInput';
@@ -24,6 +24,8 @@ export class CreateMenuComponent implements OnInit {
   recipes: Recipe[];
   minDate = new Date();
   menuCaloricValue = 0;
+  dietsAvailable: boolean;
+  dietsRetrieved = false;
 
   menuToCreate: MenuInput = {menuDate: this.minDate, diet: new Diet(), caloricVersion: '',
     menuEntries: [{mealType: 'śniadanie', recipe: null, amount: 0, caloricValue: 0},
@@ -48,11 +50,14 @@ export class CreateMenuComponent implements OnInit {
     var loggedUser = this.tokenStorageService.getUserName();
     this.dietService.getAll().pipe(
       map( diets => { this.diets = diets;
+        this.dietsRetrieved = true;
          this.diets = diets.filter(diet => diet.dietitianUsername === loggedUser)
-       })
+       }),
+       tap(td => this.dietsAvailable = this.diets.length > 0? true : false)
      )
      .subscribe();
      
+    
   }
 
   addMenu(){

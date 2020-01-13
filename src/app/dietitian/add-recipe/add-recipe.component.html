@@ -27,21 +27,21 @@
 <table cellspacing="0" class ="full-width">
 <div class="p-grid full-width">
   <div *ngFor="let recipeIngredient of recipeIngredients; let i=index" [@animation]="'visible'">  
-        <tr class="spaceUnder full-width">
-        <td width="50%">
-          <mat-form-field appearance="outline">
+        <tr width="100%" class="spaceUnder full-width">
+        <td width="70%">
+          <mat-form-field appearance="outline" class="full-width">
             <mat-label>Składnik</mat-label>
             <input class="full-width" type="text" matInput [formControl]="myControl" 
                     [matAutocomplete]="auto">
             <mat-autocomplete (optionSelected)="ingredientSelected(i, $event.option.value)"
                              #auto="matAutocomplete" [displayWith]="displayFn">
               <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient">
-                {{ingredient.name}}
+                {{ingredient.name}} {{ingredient.caloricValue | number: '1.2-2'}}kcal/100g
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
         </td>
-        <td width="50%">
+        <td width="30%">
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Ilość</mat-label>
             <input [ngModelOptions]="{standalone: true}" [(ngModel)]="recipeIngredient.value"
@@ -68,16 +68,16 @@
       <mat-icon>remove_circle</mat-icon>
     </button>
  </tr>
-    <div class="p-grid">
-      <div *ngFor="let recipeStep of recipeSteps;let i=index" [@animation]="'visible'">
+      <div *ngFor="let recipeStep of recipeSteps;let i=index" class="full-width" [@animation]="'visible'">
        <tr> <h4>Krok {{recipeStep.stepNumber}}</h4></tr>        
-        <tr><td  width="40%"><mat-form-field  appearance="outline">
+        <tr class="full-width">
+          <mat-form-field class="full-width"  appearance="outline">
           <mat-label>Opis</mat-label>
-          <textarea matTextareaAutosize  matAutosizeMinRows=3 matAutosizeMinCols=3 matInput   
+          <textarea matTextareaAutosize  matAutosizeMinRows=3 matAutosizeMinCols=5 matInput   
               [(ngModel)]="recipeStep.description" required></textarea>
-      </mat-form-field></td>
+      </mat-form-field>
      </tr>
-    </div>
+  
     </div>   
 </table>
 

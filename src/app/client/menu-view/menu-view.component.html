@@ -1,1 +1,52 @@
-<p>menu-view works!</p>
+<mat-card-title>Menu</mat-card-title>
+<div class="row">
+  <div class="col-sm">
+    <mat-form-field class="example-full-width">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Szukaj">
+    </mat-form-field>
+  </div>
+</div>
+<div class="mat-elevation-z8">
+  <table mat-table class="full-width-table" [dataSource]="menus"
+         matSort multiTemplateDataRows >    
+
+         <ng-container matColumnDef="diet">
+          <th class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa </th>
+          <td mat-cell *matCellDef="let menu"> {{menu.diet.name}}   
+            <mat-icon matTooltip="{{menu.diet.description}}" class="icon">info</mat-icon>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="caloricVersion">
+          <th class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header>Wersja kaloryczna </th>
+          <td mat-cell *matCellDef="let menu"> {{menu.caloricVersion}}kcal</td>
+        </ng-container>
+
+    <ng-container matColumnDef="menuDate" >
+      <th class="table-header" mat-header-cell *matHeaderCellDef mat-sort-header>Data dostarczenia </th>
+      <td mat-cell *matCellDef="let menu"> {{menu.menuDate}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let menu" [attr.colspan]="displayedColumns.length">
+        <div class="example-element-detail"
+              [@detailExpand]="menu == expandedElement ? 'expanded' : 'collapsed'">
+              <app-menu-details [menu]="menu"></app-menu-details>
+          
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+        class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
+  <mat-paginator #paginator
+                 [pageIndex]="0"
+                 [pageSize]="5"
+                 [pageSizeOptions]="[ 5, 10, 20, 50]">
+  </mat-paginator>
+</div>  

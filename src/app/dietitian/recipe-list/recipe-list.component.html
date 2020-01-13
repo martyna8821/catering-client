@@ -50,7 +50,7 @@
   [pageSizeOptions]="[ 5, 10, 20, 50]">
 </mat-paginator>
 
-<p-dialog header="Szczegóły" [(visible)]="display">
+<p-dialog header="{{detailedRecipeName}}" [(visible)]="display">
   <h5>Składniki: </h5>  
   <div *ngFor="let i of detailedRecipeIngredients"> 
     {{i}}

@@ -1,20 +1,20 @@
-<nav  class="navbar navbar-dark nav mt-1 navbar-right order-1 order-md-last bg-dark">      
-  <div class="row">    
-    <button (click)="navigate('/home')"  mat-mini-fab >
+<mat-toolbar color="basic">
+  <mat-toolbar-row>  
+    <button (click)="navigate('/home')"  mat-mini-fab color="primary" >
       <mat-icon>home</mat-icon>
     </button>
     <span class="example-spacer"></span>
     <div  *ngIf="isLogged()"> 
-      <button mat-button [matMenuTriggerFor]="menuClient" class="button-color" mat-mini-fab  
+      <button color="primary" mat-button [matMenuTriggerFor]="menuClient" class="button-color" mat-mini-fab  
               matTooltip="klient" *ngIf="hasRole('ROLE_CLIENT')">
                 K
       </button>
       <mat-menu #menuClient="matMenu">
         <button (click)="navigate('/client/order')"  mat-menu-item>Złóż zamówienie</button>
         <button (click)="navigate('/client/order-list')"  mat-menu-item>Przeglądaj swoje zamówienia</button>
-        <button mat-menu-item>Przeglądaj menu</button>
+        <button (click)="navigate('/client/menu-list')"  mat-menu-item>Przeglądaj menu</button>
       </mat-menu>
-      <button mat-button [matMenuTriggerFor]="menuDietitian" class="button-color" mat-mini-fab
+      <button color="primary" mat-button [matMenuTriggerFor]="menuDietitian" class="button-color" mat-mini-fab
               matTooltip="dietetyk" *ngIf="hasRole('ROLE_DIETITIAN')"> 
                 D 
       </button>
@@ -23,7 +23,7 @@
         <button (click)="navigate('/dietitian/recipe-list')" mat-menu-item>Zarządzaj przepisami</button>
        <!-- <button mat-menu-item>Przeglądaj swoje manu</button>--> 
       </mat-menu>
-      <button mat-button [matMenuTriggerFor]="menuAdmin" class="button-color" mat-mini-fab 
+      <button color="primary" mat-button [matMenuTriggerFor]="menuAdmin" class="button-color" mat-mini-fab 
               matTooltip="administrator"  *ngIf="hasRole('ROLE_ADMIN')"> 
                 A 
       </button>
@@ -32,17 +32,17 @@
         <button (click)="navigate('/admin/manage-diet')"   mat-menu-item>Zarządzaj typami diet</button>
         <button (click)="navigate('/admin/create-diet')"   mat-menu-item>Utwórz nową dietę</button>
       </mat-menu>  
-      <button (click)="navigate('/user-details')" mat-mini-fab >
+      <button color="primary" (click)="navigate('/user-details')" mat-mini-fab >
         <mat-icon>person</mat-icon>    
       </button>      
-      <button mat-mini-fab (click)="logOut()">
+      <button color="primary" mat-mini-fab (click)="logOut()">
         <mat-icon>power_settings_new</mat-icon>    
       </button>
     </div>
   <div *ngIf="!isLogged()">
-      <button (click)="navigate('/register')"  mat-raised-button class=" button-color" >Zarejestruj się</button>
-      <button (click)="navigate('/login')"  mat-raised-button class=" button-color">Zaloguj się</button> 
+      <button color="primary" (click)="navigate('/register')"  mat-raised-button class=" button-color" >Zarejestruj się</button>
+      <button  color="primary"(click)="navigate('/login')"  mat-raised-button class=" button-color">Zaloguj się</button> 
   </div>
 
-  </div>
-</nav>
+</mat-toolbar-row>
+</mat-toolbar>

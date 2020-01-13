@@ -1,5 +1,5 @@
-<mat-card-title><h3>Kreator menu</h3></mat-card-title>
-
+<div *ngIf="dietsAvailable">
+<mat-card-title><h3>Kreator menu</h3></mat-card-title><div *ngIf="dietsAvailable"></div>
 <mat-horizontal-stepper [linear]="true" #stepper>
   <mat-step>
         <ng-template matStepLabel>Wybierz dietę</ng-template>
@@ -42,7 +42,7 @@
                 <tr class="spaceUnder"> 
                     <td>
                         <mat-form-field class="full-width">
-                            <input matInput [matDatepicker]="picker" placeholder="Data rozpoczęcia"
+                            <input matInput [matDatepicker]="picker" placeholder="Data dostawy"
                             [(ngModel)]="menuToCreate.menuDate" [min]="minDate" >
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker [startAt]="minDate" ></mat-datepicker>
@@ -94,4 +94,8 @@
             <button mat-raised-button (click)="stepper.reset()">Zacznij od nowa</button>
         </div>
     </mat-step>    
-</mat-horizontal-stepper>     
+</mat-horizontal-stepper>
+</div>
+<div *ngIf="!dietsAvailable">
+<h3>Nie masz jeszcze przypisanej diety dla której można utworzyć menu.</h3>
+</div>     

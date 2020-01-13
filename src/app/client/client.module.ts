@@ -5,11 +5,12 @@ import { ClientRoutingModule } from './client-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { OrderListComponent } from './order-list/order-list.component';
 import { MenuViewComponent } from './menu-view/menu-view.component';
+import { MenuDetailsComponent } from './menu-details/menu-details.component';
 
 
 
 @NgModule({
-  declarations: [OrderComponent, OrderListComponent, MenuViewComponent],
+  declarations: [OrderComponent, OrderListComponent, MenuViewComponent, MenuDetailsComponent],
   imports: [
     ClientRoutingModule,
     SharedModule,

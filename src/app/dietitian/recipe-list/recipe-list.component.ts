@@ -4,6 +4,7 @@ import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { Router } from '@angular/router';
 import { RecipeService } from 'src/app/shared/service/RecipeService';
 import { Recipe } from 'src/app/shared/model/Recipe';
+
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
@@ -17,6 +18,8 @@ export class RecipeListComponent implements OnInit {
   recipesDataSource: MatTableDataSource<Recipe>;
   filterValue = '';
   display=false;
+
+  detailedRecipeName = '';
 
   detailedRecipeIngredients : string[] =[];
   detailedRecipeSteps: string[] = [];
@@ -55,17 +58,21 @@ export class RecipeListComponent implements OnInit {
 
   showRecipe(recipe: Recipe){
     
+    this.detailedRecipeName = recipe.name;
     this.detailedRecipeIngredients = [];
     this.detailedRecipeSteps = [];
+
+    recipe.ingredients.sort((i1,i2) => i2.value-i1.value);
     recipe.ingredients.forEach( i => {
       this.detailedRecipeIngredients.push(i.value.toString()+i.ingredient.unit+ ' '+ i.ingredient.name)
     });
 
+    recipe.recipeSteps.sort((r1,r2) => r1.stepNumber - r2.stepNumber);
     recipe.recipeSteps.forEach(s => {
       this.detailedRecipeSteps.push(s.stepNumber.toString() + '. ' + s.description);
     });
 
-    this.detailedRecipeSteps.reverse();
+    //this.detailedRecipeSteps.sort( (r1, r2) => r1.);
     this.display = true;
   }
 
