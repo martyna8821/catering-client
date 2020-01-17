@@ -27,6 +27,8 @@ export class CreateMenuComponent implements OnInit {
   dietsAvailable: boolean;
   dietsRetrieved = false;
 
+  createdMenus: Menu[] = [];
+
   menuToCreate: MenuInput = {menuDate: this.minDate, diet: new Diet(), caloricVersion: '',
     menuEntries: [{mealType: 'śniadanie', recipe: null, amount: 0, caloricValue: 0},
     {mealType: 'drugie śniadanie', recipe: null, amount: 0, caloricValue: 0},
@@ -58,6 +60,15 @@ export class CreateMenuComponent implements OnInit {
      .subscribe();
      
     
+  }
+
+  retrieveCreatedMenus(){
+    this.menuService.getAll().pipe(
+      map( menus => {
+          this.createdMenus = menus.filter( menu =>
+                 menu.diet.id === this.menuToCreate.diet.id)
+      })
+    ).subscribe();
   }
 
   addMenu(){
@@ -111,5 +122,22 @@ export class CreateMenuComponent implements OnInit {
     });
 
     return allChoosen;
+  }
+
+  filterCreated = (date: Date): boolean => {
+    var canCreate = true;
+    var dateString = date.getFullYear() + '-';
+    if(date.getMonth()<9)
+      dateString +='0'+(date.getUTCMonth()+1) + '-' + date.getDate();
+    else
+      dateString +=(date.getUTCMonth()+1) + '-' + date.getDate();
+    
+    this.createdMenus.forEach(menu => {
+      
+      if (menu.menuDate.toString() === dateString)
+      canCreate = false;
+    })
+    // Prevent Saturday and Sunday from being selected.
+    return canCreate;
   }
 }

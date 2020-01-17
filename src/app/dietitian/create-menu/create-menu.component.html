@@ -16,7 +16,7 @@
                         </mat-card-title>
                         <img  height="200px" width="150px" src="../../../assets/medina-catering-AdtqezIqv7c-unsplash.jpg"/>
                         <mat-card-actions>
-                             <mat-radio-button [value]="diet">
+                             <mat-radio-button (change)="retrieveCreatedMenus()" [value]="diet">
                                  Wybierz
                             </mat-radio-button>
                         </mat-card-actions>
@@ -43,8 +43,8 @@
                     <td>
                         <mat-form-field class="full-width">
                             <input matInput [matDatepicker]="picker" placeholder="Data dostawy"
-                            [(ngModel)]="menuToCreate.menuDate" [min]="minDate" >
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            [(ngModel)]="menuToCreate.menuDate" [min]="minDate" [matDatepickerFilter]="filterCreated" >
+                            <mat-datepicker-toggle  matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker [startAt]="minDate" ></mat-datepicker>
                         </mat-form-field>
                     </td>

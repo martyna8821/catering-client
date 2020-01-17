@@ -5,27 +5,27 @@
     </button>
     <span class="example-spacer"></span>
     <div  *ngIf="isLogged()"> 
-      <button color="primary" mat-button [matMenuTriggerFor]="menuClient" class="button-color" mat-mini-fab  
-              matTooltip="klient" *ngIf="hasRole('ROLE_CLIENT')">
-                K
+      <button color="primary" mat-button [matMenuTriggerFor]="menuClient" class="button-color" mat-raised-button  
+              matTooltip="menu klienta" *ngIf="hasRole('ROLE_CLIENT')">
+              <mat-icon>menu_open</mat-icon> klient
       </button>
       <mat-menu #menuClient="matMenu">
         <button (click)="navigate('/client/order')"  mat-menu-item>Złóż zamówienie</button>
         <button (click)="navigate('/client/order-list')"  mat-menu-item>Przeglądaj swoje zamówienia</button>
         <button (click)="navigate('/client/menu-list')"  mat-menu-item>Przeglądaj menu</button>
       </mat-menu>
-      <button color="primary" mat-button [matMenuTriggerFor]="menuDietitian" class="button-color" mat-mini-fab
-              matTooltip="dietetyk" *ngIf="hasRole('ROLE_DIETITIAN')"> 
-                D 
+      <button color="primary" mat-button [matMenuTriggerFor]="menuDietitian" class="button-color" mat-raised-button
+              matTooltip="menu dietetyka" *ngIf="hasRole('ROLE_DIETITIAN')"> 
+              <mat-icon>menu_open</mat-icon> dietetyk
       </button>
       <mat-menu #menuDietitian="matMenu">
         <button mat-menu-item (click)="navigate('/dietitian/create-menu')">Kreator menu</button>
         <button (click)="navigate('/dietitian/recipe-list')" mat-menu-item>Zarządzaj przepisami</button>
        <!-- <button mat-menu-item>Przeglądaj swoje manu</button>--> 
       </mat-menu>
-      <button color="primary" mat-button [matMenuTriggerFor]="menuAdmin" class="button-color" mat-mini-fab 
-              matTooltip="administrator"  *ngIf="hasRole('ROLE_ADMIN')"> 
-                A 
+      <button color="primary" mat-button [matMenuTriggerFor]="menuAdmin" class="button-color" mat-raised-button 
+              matTooltip="menu administratora"  *ngIf="hasRole('ROLE_ADMIN')"> 
+                <mat-icon>menu_open</mat-icon> administrator
       </button>
       <mat-menu #menuAdmin="matMenu">
         <button (click)="navigate('/admin/user-list')"  mat-menu-item>Zarządzaj użytkownikami</button>
