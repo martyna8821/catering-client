@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TokenStorageService } from '../../../security/service/token-storage.service';
-import { DietService } from '../../service/DietService';
-import { Diet } from '../../model/Diet';
+import { TokenStorageService } from '../../security/service/token-storage.service';
+import { DietService } from '../../shared/service/DietService';
+import { Diet } from '../../shared/model/Diet';
 import { DomSanitizer } from '@angular/platform-browser';
 import { map } from 'rxjs/operators';
 

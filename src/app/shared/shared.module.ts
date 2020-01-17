@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
 import { HttpClient } from 'selenium-webdriver/http';
 import { HttpClientModule } from '@angular/common/http';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from '../core/navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DietsListComponent } from './components/diets-list/diets-list.component';
 import { DietsCardComponent } from './components/diets-card/diets-card.component';
@@ -12,7 +12,7 @@ import { PrimeModule } from './primeng/prime/prime.module';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatNativeDateModule } from '@angular/material';
 import { MealTypeFilterPipe } from './pipes/MealTypeFilter';
-import { HomeComponent } from './components/home/home.component';
+import { HomeComponent } from '../core/home/home.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 
 
