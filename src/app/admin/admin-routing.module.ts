@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserListComponent } from './user-list/user-list.component';
-import { HomeComponent } from '../home/home.component';
+import { HomeComponent } from '../shared/components/home/home.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { CreateDietComponent } from './create-diet/create-diet.component';
 import { ManageDietComponent } from './manage-diet/manage-diet.component';

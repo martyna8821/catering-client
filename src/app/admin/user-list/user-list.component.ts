@@ -6,7 +6,6 @@ import { User } from 'src/app/shared/model/User';
 import { UserService } from 'src/app/shared/service/UserService';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ConfirmationComponent } from 'src/app/shared/components/confirmation/confirmation.component';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 

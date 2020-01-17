@@ -1,5 +1,5 @@
 import { Diet } from './Diet';
-import { Address } from 'src/app/authentication/model/Address';
+import { Address } from 'src/app/security/model/Address';
 import { User } from './User';
 import { Time } from '@angular/common';
 

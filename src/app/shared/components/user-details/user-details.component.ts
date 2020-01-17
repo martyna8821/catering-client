@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../shared/model/User';
-import { UserService } from '../shared/service/UserService';
-import { TokenStorageService } from '../authentication/service/token-storage.service';
-import { UserDTO } from '../shared/model/UserDTO';
+import { User } from '../../model/User';
+import { UserService } from '../../service/UserService';
+import { TokenStorageService } from '../../../security/service/token-storage.service';
+import { UserDTO } from '../../model/UserDTO';
 import { MatDialog } from '@angular/material/dialog';
-import { ChangePasswordComponent } from '../authentication/change-password/change-password.component';
-import { CloseScrollStrategyConfig } from '@angular/cdk/overlay/typings/scroll/close-scroll-strategy';
-
+import { ChangePasswordComponent } from '../../../security/change-password/change-password.component';
 
 export interface Tile {
   cols: number;

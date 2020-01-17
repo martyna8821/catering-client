@@ -8,7 +8,7 @@ import { startWith, map } from 'rxjs/operators';
 import { COMMA, ENTER} from '@angular/cdk/keycodes';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { TokenStorageService } from 'src/app/authentication/service/token-storage.service';
+import { TokenStorageService } from 'src/app/security/service/token-storage.service';
 import {MessageService} from 'primeng/api';
 import { UserService } from 'src/app/shared/service/UserService';
 import { User } from 'src/app/shared/model/User';

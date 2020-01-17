@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Recipe } from './model/Recipe';
+import { Recipe } from '../model/Recipe';
 
 @Pipe({name: 'mealTypeFilter'})
 export class MealTypeFilterPipe implements PipeTransform {

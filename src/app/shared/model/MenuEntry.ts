@@ -1,5 +1,5 @@
 import { Recipe } from './Recipe';
-import { MealTypeFilterPipe } from '../MealTypeFilter';
+import { MealTypeFilterPipe } from '../pipes/MealTypeFilter';
 import { MealType } from './MealType';
 
 export class MenuEntry{

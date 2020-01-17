@@ -1,4 +1,4 @@
-import { Address } from 'src/app/authentication/model/Address';
+import { Address } from 'src/app/security/model/Address';
 
 export class UserDTO{
     firstName: string;

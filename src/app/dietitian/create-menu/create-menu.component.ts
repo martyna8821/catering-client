@@ -1,7 +1,7 @@
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { Diet } from 'src/app/shared/model/Diet';
 import { DietService } from 'src/app/shared/service/DietService';
-import { TokenStorageService } from 'src/app/authentication/service/token-storage.service';
+import { TokenStorageService } from 'src/app/security/service/token-storage.service';
 import { map, tap } from 'rxjs/operators';
 import { Menu } from 'src/app/shared/model/Menu';
 import { MenuInput } from 'src/app/shared/model/MenuInput';

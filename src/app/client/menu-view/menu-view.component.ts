@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Menu } from 'src/app/shared/model/Menu';
 import { MenuService } from 'src/app/shared/service/MenuService';
-import { TokenStorageService } from 'src/app/authentication/service/token-storage.service';
+import { TokenStorageService } from 'src/app/security/service/token-storage.service';
 import { User } from 'src/app/shared/model/User';
 import { state, trigger, transition, style, animate } from '@angular/animations';
 

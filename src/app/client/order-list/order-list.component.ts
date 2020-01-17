@@ -3,7 +3,7 @@ import { Order } from 'src/app/shared/model/Order';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { OrderService } from 'src/app/shared/service/OrderService';
 import { TokenError } from '@angular/compiler/src/ml_parser/lexer';
-import { TokenStorageService } from 'src/app/authentication/service/token-storage.service';
+import { TokenStorageService } from 'src/app/security/service/token-storage.service';
 
 @Component({
   selector: 'app-order-list',

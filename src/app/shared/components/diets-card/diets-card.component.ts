@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Diet } from '../model/Diet';
-import { TokenStorageService } from 'src/app/authentication/service/token-storage.service';
+import { Diet } from '../../model/Diet';
+import { TokenStorageService } from 'src/app/security/service/token-storage.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
-import { DietService } from '../service/DietService';
+import { DietService } from '../../service/DietService';
 import { MatSnackBar } from '@angular/material';
 
 

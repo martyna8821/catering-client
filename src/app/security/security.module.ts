@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-import { AuthenticationRoutingModule } from './authentication-routing.module';
+import { SecurityRoutingModule } from './security-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { RegisterComponent } from './register/register.component';
 import { RetrievePasswordComponent } from './retrieve-password/retrieve-password.component';
@@ -14,7 +14,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 @NgModule({
   imports: [
 
-    AuthenticationRoutingModule,
+    SecurityRoutingModule,
     FormsModule,
     SharedModule
   ],
@@ -41,4 +41,4 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
     ]
 
   })
-export class AuthenticationModule { }
+export class SecurityModule { }

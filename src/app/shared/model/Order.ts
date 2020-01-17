@@ -1,6 +1,6 @@
 import { Diet } from './Diet';
 import { User } from './User';
-import { Address } from 'src/app/authentication/model/Address';
+import { Address } from 'src/app/security/model/Address';
 import { Time } from '@angular/common';
 
 export class Order{
