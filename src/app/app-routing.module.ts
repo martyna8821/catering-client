@@ -13,7 +13,6 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '', children: [
-    { path: '', loadChildren: './security/security.module#SecurityModule'},
     { path: 'client', loadChildren: './client/client.module#ClientModule', canActivate: [ClientGuard]},
     { path: 'dietitian', loadChildren: './dietitian/dietitian.module#DietitianModule', canActivate: [DietitianGuard]},
     { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canActivate: [AdminGuard]}]},

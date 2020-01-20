@@ -19,6 +19,7 @@ import { CoreModule } from './core/core.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule,
+    SecurityModule,
     SharedModule
   ],
   providers: [
