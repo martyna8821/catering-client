@@ -30,6 +30,7 @@ export class MenuViewComponent implements OnInit {
   loggedUserId: string;
   future = true;
   past = false;
+  expandedElement: Menu | null;
 
 
   displayedColumns = ['diet','caloricVersion', 'menuDate'];

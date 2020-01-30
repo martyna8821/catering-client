@@ -8,8 +8,7 @@
                 <mat-grid-tile class="scrollable"
                     *ngFor="let diet of diets"
                     [colspan]="1"
-                    [rowspan]="4"
-                    [style.background]="white">
+                    [rowspan]="4">
                     <mat-card>
                         <mat-card-title>{{diet.name}}  
                                <mat-icon matTooltip="{{diet.description}}" class="icon">info</mat-icon>
@@ -123,7 +122,7 @@
             <button mat-raised-button matStepperNext>Dalej</button>
         </div>
     </mat-step>    
-    <mat-step (selected)="xx()" >
+    <mat-step  >
         <ng-template matStepLabel>Podsumowanie</ng-template>
         <table>
             <tr class="spaceUnder">

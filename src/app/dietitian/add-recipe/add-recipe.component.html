@@ -79,16 +79,7 @@
      </tr>
   
     </div>   
-</table>
-
-<table cellspacing="0">
-  <tr>
-    <td *ngFor="let label of labels">
-      <mat-checkbox [(ngModel)]="label.checked">{{label.name}}</mat-checkbox>
-    </td>
-  </tr>
-</table>
-
+  </table>
 <mat-card-actions>
   <button mat-raised-button (click)="save()" >Zapisz</button>
 </mat-card-actions>

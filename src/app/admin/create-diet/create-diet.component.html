@@ -33,7 +33,7 @@
     </table>    
     </form>
   </mat-step>
-  <mat-step [stepControl]="dietDetails">
+  <mat-step>
         <ng-template matStepLabel>Szczegóły diety</ng-template>
         <table width="100%" cellspacing="0">
           <tr>
@@ -81,7 +81,7 @@
       <tr>
         <mat-form-field>
          
-          <mat-select [(value)]="dietToCreate.dietitian">
+          <mat-select [(value)]="dietToCreate.dietitianUsername">
             <mat-option *ngFor="let dietitian of dietitians" [value]="dietitian.username" >
               {{dietitian.username}}
             </mat-option>

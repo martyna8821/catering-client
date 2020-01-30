@@ -27,6 +27,7 @@ export class UserListComponent implements OnInit {
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
+  expandedElement: User | null;
   dataSource: MatTableDataSource<User>;
   filterValue = '';
   result = '';

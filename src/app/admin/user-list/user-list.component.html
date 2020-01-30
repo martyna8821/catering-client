@@ -6,11 +6,6 @@
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Szukaj">
     </mat-form-field>
   </div>
-  <div class="col-sm " *ngIf="false">
-    <mat-checkbox class="my-checkbox"  (change)="onCheckboxChange($event)" [(ngModel)]="showClients">Klienci</mat-checkbox>
-    <mat-checkbox class="my-checkbox" (change)="onCheckboxChange($event)" [(ngModel)]="showDietitians">Dietetycy</mat-checkbox>
-    <mat-checkbox class="my-checkbox" (change)="onCheckboxChange($event)" [(ngModel)]="showAdmins">Administratorzy</mat-checkbox>
-  </div>
 </div>
 <div class="mat-elevation-z8">
   <table mat-table class="full-width-table" [dataSource]="dataSource"
