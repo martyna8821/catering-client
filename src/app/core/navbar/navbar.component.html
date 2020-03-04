@@ -31,6 +31,7 @@
         <button (click)="navigate('/admin/user-list')"  mat-menu-item>Zarządzaj użytkownikami</button>
         <button (click)="navigate('/admin/manage-diet')"   mat-menu-item>Zarządzaj typami diet</button>
         <button (click)="navigate('/admin/create-diet')"   mat-menu-item>Utwórz nową dietę</button>
+        <button (click)="downloadKitchenReport()"   mat-menu-item>Generuj raport dla kuchni</button>
       </mat-menu>  
       <button color="primary" (click)="navigate('/user-details')" mat-mini-fab >
         <mat-icon>person</mat-icon>    
@@ -38,6 +39,7 @@
       <button color="primary" mat-mini-fab (click)="logOut()">
         <mat-icon>power_settings_new</mat-icon>    
       </button>
+
     </div>
   <div *ngIf="!isLogged()">
       <button color="primary" (click)="navigate('/register')"  mat-raised-button class=" button-color" >Zarejestruj się</button>

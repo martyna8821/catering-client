@@ -64,5 +64,9 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl(link);
   }
 
+  downloadKitchenReport(){
+    console.log("kitchen report");
+  }
+
 
 }
