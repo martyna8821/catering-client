@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from 'src/app/security/service/token-storage.service';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
+import { ReportService } from '../../shared/service/ReportService';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-navbar',
@@ -11,15 +13,16 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   constructor(private tokenStorage: TokenStorageService,
-    private router: Router) { }
+              private router: Router,
+              private reportService: ReportService) { }
   userRoles: string[];
+  kitchenReportDialogDisplay = false;
   ngOnInit() {
   
     this.userRoles  = this.tokenStorage.getAuthorities();
   }
 
   onLoggedIn($event){
-    console.log("refresh");
     this.userRoles  = this.tokenStorage.getAuthorities();
   }
 
@@ -65,7 +68,17 @@ export class NavbarComponent implements OnInit {
   }
 
   downloadKitchenReport(){
-    console.log("kitchen report");
+    this.reportService.getAll().subscribe(
+      (response) => {
+        var blob = new Blob([response]);
+        saveAs(blob, 'report.pdf');
+    }
+    );
+    this.kitchenReportDialogDisplay = false;
+  }
+
+  showKitcheReportDialog(){
+    this.kitchenReportDialogDisplay = true;
   }
 
 
