@@ -1,27 +1,24 @@
-# CateringClient
+# Catering app client
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.0.
+Client application of a system supporting catering company work. Allows to create menus for diets, place orders, generate reports, administrate users and available recipes. Backend application can be found in following [repository](https://github.com/martyna8821/catering-app)
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+* Authorization with RouteGuards 
 
-## Code scaffolding
+* Three user categories - each represented by separate module:
+    * administrator
+    * client
+    * dietitian   
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* Custom pipe for filtering recipes, example useage:
+```
+ let recipe of recipes | mealTypeFilter : menuEntry.mealType
+```
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Technologies 
+* Angular 8
+* TypeScript
+* Angular Material
+* PrimeNG 
